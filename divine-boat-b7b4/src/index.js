@@ -32,8 +32,47 @@
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Key',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Admin-Key',
 };
+
+// ─── JWT Helpers ───────────────────────────────────────────
+const b64url = (str) => btoa(str).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+const strToU8 = (str) => new TextEncoder().encode(str);
+const b64dec = (str) => {
+  str = str.replace(/-/g, '+').replace(/_/g, '/');
+  while (str.length % 4) str += '=';
+  return atob(str);
+};
+
+async function signJWT(payload, secret) {
+  const head64 = b64url(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+  const pay64 = b64url(JSON.stringify(payload));
+  const data = `${head64}.${pay64}`;
+  const key = await crypto.subtle.importKey(
+    'raw', strToU8(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+  );
+  const sig = await crypto.subtle.sign('HMAC', key, strToU8(data));
+  const sig64 = btoa(String.fromCharCode(...new Uint8Array(sig)))
+    .replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+  return `${data}.${sig64}`;
+}
+
+async function verifyJWT(token, secret) {
+  try {
+    const [head64, pay64, sig64] = token.split('.');
+    if (!head64 || !pay64 || !sig64) return false;
+    const data = `${head64}.${pay64}`;
+    const key = await crypto.subtle.importKey(
+      'raw', strToU8(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']
+    );
+    const sigU8 = new Uint8Array(b64dec(sig64).split('').map(c => c.charCodeAt(0)));
+    const isValid = await crypto.subtle.verify('HMAC', key, sigU8, strToU8(data));
+    if (!isValid) return false;
+    const payload = JSON.parse(b64dec(pay64));
+    if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) return false;
+    return payload;
+  } catch (e) { return false; }
+}
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -50,9 +89,13 @@ async function body(req) {
   try { return await req.json(); } catch { return null; }
 }
 
-function isAdmin(req, env) {
-  const key = req.headers.get('X-Admin-Key') || '';
-  return key === (env.ADMIN_KEY || 'local-admin-2024');
+async function isAdmin(req, env) {
+  const auth = req.headers.get('Authorization') || req.headers.get('X-Admin-Key'); // Fallback for transition
+  const token = auth?.startsWith('Bearer ') ? auth.substring(7) : auth;
+  if (!token) return false;
+  const secret = env.ADMIN_KEY || 'local-admin-2024';
+  const payload = await verifyJWT(token, secret);
+  return !!payload;
 }
 
 function match(pattern, actual) {
@@ -446,9 +489,20 @@ export default {
     }
 
     try {
+      // ── Admin Login ──────────────────────────────────────
+      if (path === '/api/admin/login' && method === 'POST') {
+        const b = await body(request);
+        const secret = env.ADMIN_KEY || 'local-admin-2024';
+        if (b?.key === secret) {
+          const token = await signJWT({ admin: true, exp: Math.floor(Date.now()/1000) + (60*60*24) }, secret);
+          return json({ token });
+        }
+        return err('Invalid credentials', 401);
+      }
+
       // ── Admin routes (/api/admin/*) ──────────────────────
       if (path.startsWith('/api/admin/')) {
-        if (!isAdmin(request, env)) return err('Unauthorized', 401);
+        if (!(await isAdmin(request, env))) return err('Unauthorized', 401);
 
         let p;
 

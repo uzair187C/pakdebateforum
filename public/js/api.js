@@ -5,22 +5,28 @@
 const API = {
   BASE: '/api',
 
-  _adminKey() { return sessionStorage.getItem('pdfAdminKey') || ''; },
+  _adminToken() { return sessionStorage.getItem('pdfAdminToken') || ''; },
 
   async _fetch(path, opts = {}) {
     const res = await fetch(this.BASE + path, opts);
     const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw Object.assign(new Error(data.error || `HTTP ${res.status}`), { status: res.status });
+    if (!res.ok) {
+      if (res.status === 401 && sessionStorage.getItem('pdfAdminToken')) {
+        sessionStorage.removeItem('pdfAdminToken');
+        location.reload();
+      }
+      throw Object.assign(new Error(data.error || `HTTP ${res.status}`), { status: res.status });
+    }
     return data;
   },
 
   get:  (path)       => API._fetch(path),
   post: (path, body) => API._fetch(path, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) }),
 
-  adminGet:    (path)       => API._fetch(path, { headers:{'X-Admin-Key': API._adminKey()} }),
-  adminPost:   (path, body) => API._fetch(path, { method:'POST',   headers:{'Content-Type':'application/json','X-Admin-Key': API._adminKey()}, body: JSON.stringify(body) }),
-  adminPut:    (path, body) => API._fetch(path, { method:'PUT',    headers:{'Content-Type':'application/json','X-Admin-Key': API._adminKey()}, body: JSON.stringify(body) }),
-  adminDelete: (path)       => API._fetch(path, { method:'DELETE', headers:{'X-Admin-Key': API._adminKey()} }),
+  adminGet:    (path)       => API._fetch(path, { headers:{'Authorization': `Bearer ${API._adminToken()}`} }),
+  adminPost:   (path, body) => API._fetch(path, { method:'POST',   headers:{'Content-Type':'application/json','Authorization': `Bearer ${API._adminToken()}`}, body: JSON.stringify(body) }),
+  adminPut:    (path, body) => API._fetch(path, { method:'PUT',    headers:{'Content-Type':'application/json','Authorization': `Bearer ${API._adminToken()}`}, body: JSON.stringify(body) }),
+  adminDelete: (path)       => API._fetch(path, { method:'DELETE', headers:{'Authorization': `Bearer ${API._adminToken()}`} }),
 
   programs:      { list: ()  => API.get('/programs'),       get: (id) => API.get(`/programs/${id}`) },
   coaches:       { list: ()  => API.get('/coaches') },

@@ -10,34 +10,49 @@ let _drawerId   = null;
 let _coachesList = [];
 
 // ── Auth ──────────────────────────────────────────────────
-function tryLogin() {
+async function tryLogin() {
   const key = document.getElementById('key-in').value.trim();
   if (!key) return;
-  sessionStorage.setItem('pdfAdminKey', key);
-  API.admin.stats.get().then(() => {
+  const btn = document.querySelector('#login-screen .btn');
+  const ogText = btn.textContent;
+  btn.textContent = 'Verifying...';
+  
+  try {
+    const res = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key })
+    });
+    if (!res.ok) throw new Error('Invalid key');
+    const { token } = await res.json();
+    
+    sessionStorage.setItem('pdfAdminToken', token);
+    document.getElementById('login-err').style.display = 'none';
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-shell').style.display  = 'grid';
     init();
-  }).catch(() => {
-    sessionStorage.removeItem('pdfAdminKey');
+  } catch (e) {
+    sessionStorage.removeItem('pdfAdminToken');
     document.getElementById('login-err').style.display = 'block';
-  });
+  } finally {
+    btn.textContent = ogText;
+  }
 }
 
 function logout() {
-  sessionStorage.removeItem('pdfAdminKey');
+  sessionStorage.removeItem('pdfAdminToken');
   location.reload();
 }
 
 document.getElementById('key-in').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
 
 // Auto-login if key exists
-if (sessionStorage.getItem('pdfAdminKey')) {
+if (sessionStorage.getItem('pdfAdminToken')) {
   API.admin.stats.get().then(() => {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-shell').style.display  = 'grid';
     init();
-  }).catch(() => sessionStorage.removeItem('pdfAdminKey'));
+  }).catch(() => sessionStorage.removeItem('pdfAdminToken'));
 }
 
 // ── Init ──────────────────────────────────────────────────
