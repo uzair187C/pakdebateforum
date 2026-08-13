@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program | Pak Debate Forum Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+</head>
+<body>
+  <header id="app-nav" class="nav"></header>
+  <div id="app-drawer" class="nav__drawer"></div>
+
+  <main id="main-content" style="padding-top:var(--nav-height);">
+    <div class="container" style="padding-block:var(--sp-12);">
+      <div id="root"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+  </main>
+
+  <footer id="app-footer" class="footer"></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/nav.js"></script>
+  <script>
+    const id = new URLSearchParams(location.search).get('id');
+
+    function levelBadge(level) {
+      const map = { beginner:'badge--green', intermediate:'badge--accent', advanced:'badge--blue', all:'' };
+      return `<span class="badge ${map[level]||''}">${level}</span>`;
+    }
+
+    async function init() {
+      if (!id) {
+        document.getElementById('root').innerHTML = '<div class="state-error">No program ID specified. <a href="/programs.html">Browse programs →</a></div>';
+        return;
+      }
+      try {
+        const { program: p } = await API.programs.get(id);
+        document.title = `${p.title} | Pak Debate Forum Academy`;
+
+        let curriculum = [];
+        try { curriculum = JSON.parse(p.curriculum || '[]'); } catch {}
+
+        document.getElementById('root').innerHTML = `
+          <a href="/programs.html" style="font-size:var(--text-sm);color:var(--c-text-muted);display:inline-flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-8);">← All Programs</a>
+
+          <div class="detail-layout">
+            <!-- Main -->
+            <div>
+              <p class="overline">${p.category.replace('_',' ')}</p>
+              <h1 style="font-family:var(--font-display);font-size:clamp(var(--text-4xl),5vw,var(--text-6xl));letter-spacing:var(--track-tight);margin-bottom:var(--sp-4);">${p.title}</h1>
+              <div style="display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-bottom:var(--sp-8);">
+                ${levelBadge(p.level)}
+                <span class="badge">${p.delivery_mode.replace('_',' ')}</span>
+                ${p.duration?`<span class="badge">${p.duration}</span>`:''}
+              </div>
+
+              <h2 style="font-size:var(--text-xl);font-weight:600;margin-bottom:var(--sp-4);">About this Programme</h2>
+              <p style="color:var(--c-text-muted);line-height:1.8;margin-bottom:var(--sp-10);">${p.description}</p>
+
+              ${curriculum.length ? `
+              <h2 style="font-size:var(--text-xl);font-weight:600;margin-bottom:var(--sp-4);">Curriculum</h2>
+              <ol class="curriculum-list" style="margin-bottom:var(--sp-10);">
+                ${curriculum.map(m=>`<li>${m}</li>`).join('')}
+              </ol>` : ''}
+
+              ${p.coach_name ? `
+              <h2 style="font-size:var(--text-xl);font-weight:600;margin-bottom:var(--sp-4);">Your Coach</h2>
+              <div class="sidebar-card" style="margin-bottom:var(--sp-10);">
+                <div style="font-weight:600;color:var(--c-text);margin-bottom:var(--sp-1);">${p.coach_name}</div>
+                <div style="font-size:var(--text-sm);color:var(--c-accent);margin-bottom:var(--sp-3);">${p.coach_title||''}</div>
+                ${p.coach_bio?`<p style="font-size:var(--text-sm);color:var(--c-text-muted);">${p.coach_bio}</p>`:''}
+              </div>` : ''}
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+              <div class="sidebar-card">
+                <h3 style="font-size:var(--text-lg);font-weight:600;margin-bottom:var(--sp-6);">Programme Details</h3>
+                <ul class="info-list">
+                  ${p.age_min||p.age_max?`<li><span class="info-label">Age Range</span><span class="info-val">${p.age_min||''}${p.age_max?'–'+p.age_max+' years':''}</span></li>`:''}
+                  ${p.duration?`<li><span class="info-label">Duration</span><span class="info-val">${p.duration}</span></li>`:''}
+                  ${p.schedule?`<li><span class="info-label">Schedule</span><span class="info-val">${p.schedule}</span></li>`:''}
+                  <li><span class="info-label">Delivery</span><span class="info-val">${p.delivery_mode.replace('_',' ')}</span></li>
+                  <li><span class="info-label">Level</span><span class="info-val">${p.level}</span></li>
+                  <li><span class="info-label">Fee</span><span class="info-val" style="color:var(--c-accent);">${p.price?'PKR '+p.price.toLocaleString():'Contact us for pricing'}</span></li>
+                </ul>
+                <div style="margin-top:var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-3);">
+                  <a href="/register.html?type=program&id=${p.id}&name=${encodeURIComponent(p.title)}" class="btn btn--primary">Apply for this Programme →</a>
+                  <a href="/contact.html" class="btn btn--ghost">Ask a Question</a>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      } catch(e) {
+        document.getElementById('root').innerHTML = `<div class="state-error">${e.message}. <a href="/programs.html">Browse programs →</a></div>`;
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

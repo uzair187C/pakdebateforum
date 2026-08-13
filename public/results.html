@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results | Pak Debate Forum Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+</head>
+<body>
+  <header id="app-nav" class="nav"></header>
+  <div id="app-drawer" class="nav__drawer"></div>
+
+  <main id="main-content" style="padding-top:var(--nav-height);">
+    <div class="container">
+      <div class="page-header">
+        <p class="overline">Honours &amp; Achievements</p>
+        <h1 class="page-title">Results</h1>
+        <p class="page-lead">Competition results, speaker rankings, and tournament honours for Pak Debate Forum Academy students.</p>
+      </div>
+
+      <!-- Stats bar -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--c-border);border-radius:var(--radius-xl);overflow:hidden;margin-bottom:var(--sp-16);">
+        <div class="stat-card"><span class="stat-card__value">80<span>+</span></span><span class="stat-card__label">Tournaments Won</span></div>
+        <div class="stat-card"><span class="stat-card__value">1,200<span>+</span></span><span class="stat-card__label">Students Trained</span></div>
+        <div class="stat-card"><span class="stat-card__value">12</span><span class="stat-card__label">Years Active</span></div>
+        <div class="stat-card" style="border-right:none;"><span class="stat-card__value">6</span><span class="stat-card__label">Expert Coaches</span></div>
+      </div>
+
+      <!-- Recent results (dummy — replace with DB-driven data in PASS 5+) -->
+      <section style="margin-bottom:var(--sp-16);">
+        <p class="overline">2025–2026 Season</p>
+        <h2 class="section-title" style="margin-bottom:var(--sp-8);">Recent Tournament Results</h2>
+        <div id="results-list"></div>
+      </section>
+
+      <!-- Resources link -->
+      <section style="margin-bottom:var(--sp-16);">
+        <div class="sidebar-card" style="display:flex;align-items:center;justify-content:space-between;gap:var(--sp-6);flex-wrap:wrap;">
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:var(--text-2xl);margin-bottom:var(--sp-2);">Official Ballots &amp; Result Sheets</h3>
+            <p style="color:var(--c-text-muted);font-size:var(--text-sm);">Downloadable results, speaker scorecards, and team rankings for past tournaments.</p>
+          </div>
+          <a href="/resources.html?category=results" class="btn btn--ghost" style="flex-shrink:0;">Browse Results Docs →</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="app-footer" class="footer"></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/nav.js"></script>
+  <script>
+    /* Dummy result entries — replace with DB query in PASS 5 */
+    const RESULTS = [
+      { tournament:'National Schools Debate Championship 2025', position:'Champions', category:'Senior Division (Grades 11–12)', students:'Zainab Mirza, Hamza Sheikh, Alia Farooq', city:'Lahore' },
+      { tournament:'Karachi Open — British Parliamentary 2025', position:'Best Speaker', category:'Open Category', students:'Hamza Sheikh', city:'Karachi' },
+      { tournament:'Islamabad Inter-School WS Tournament 2025', position:'Runners Up', category:'Junior Division', students:'Sara Iqbal, Ahmed Raza', city:'Islamabad' },
+      { tournament:'Punjab Regional Debate League 2024', position:'Champions', category:'University Category', students:'Bilal Naeem, Fatima Zaidi', city:'Lahore' },
+      { tournament:'National Schools Debate Championship 2024', position:'Semi-Finalists', category:'Senior Division', students:'Ali Hassan, Mariam Khan, Usman Tariq', city:'Karachi' },
+    ];
+
+    document.getElementById('results-list').innerHTML = RESULTS.map((r, i) => `
+      <div style="display:flex;align-items:flex-start;gap:var(--sp-6);padding:var(--sp-6);border:1px solid var(--c-border);border-radius:var(--radius-lg);background:var(--c-surface);margin-bottom:var(--sp-4);">
+        <div style="min-width:40px;text-align:center;">
+          <span style="font-family:var(--font-display);font-size:var(--text-3xl);font-weight:700;color:var(--c-accent);">🏆</span>
+        </div>
+        <div style="flex:1;">
+          <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-2);">
+            <h3 style="font-weight:600;color:var(--c-text);">${r.tournament}</h3>
+            <span class="badge badge--accent">${r.position}</span>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--c-text-muted);margin-bottom:var(--sp-1);">${r.category} · ${r.city}</p>
+          <p style="font-size:var(--text-sm);color:var(--c-text-sub);">Students: ${r.students}</p>
+        </div>
+      </div>`).join('');
+  </script>
+</body>
+</html>

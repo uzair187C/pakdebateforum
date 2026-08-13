@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs | Pak Debate Forum Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+  <style>
+    .filter-bar { display:flex; gap:var(--sp-2); flex-wrap:wrap; margin-bottom:var(--sp-8); }
+    .filter-btn { padding:var(--sp-2) var(--sp-5); border:1px solid var(--c-border-2); border-radius:var(--radius-full); font-size:var(--text-sm); color:var(--c-text-muted); cursor:pointer; background:none; transition:all var(--dur-fast); }
+    .filter-btn.is-active,.filter-btn:hover { border-color:var(--c-accent-border); color:var(--c-accent); background:var(--c-accent-bg); }
+  </style>
+</head>
+<body>
+  <header id="app-nav" class="nav"></header>
+  <div id="app-drawer" class="nav__drawer"></div>
+
+  <main id="main-content" style="padding-top:var(--nav-height);">
+    <div class="container">
+      <div class="page-header">
+        <p class="overline">Academy Programs</p>
+        <h1 class="page-title">All Programs</h1>
+        <p class="page-lead">Structured training from beginner to advanced — in-person, online, and hybrid. Find the programme that matches your goals.</p>
+      </div>
+
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn is-active" data-cat="all">All</button>
+        <button class="filter-btn" data-cat="debate">Debate</button>
+        <button class="filter-btn" data-cat="public_speaking">Public Speaking</button>
+        <button class="filter-btn" data-cat="writing">Writing</button>
+        <button class="filter-btn" data-cat="workshop">Workshops</button>
+      </div>
+
+      <div id="programs-grid" class="grid-3"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+  </main>
+
+  <footer id="app-footer" class="footer"></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/nav.js"></script>
+  <script>
+    let allPrograms = [];
+    let activeFilter = 'all';
+
+    function levelBadge(level) {
+      const map = { beginner:'badge--green', intermediate:'badge--accent', advanced:'badge--blue', all:'' };
+      return `<span class="badge ${map[level]||''}">${level}</span>`;
+    }
+
+    function renderGrid(programs) {
+      const el = document.getElementById('programs-grid');
+      if (!programs.length) { el.innerHTML = '<div class="state-empty">No programs found.</div>'; return; }
+      el.innerHTML = programs.map(p => `
+        <article class="card card--accent">
+          <div class="card__body">
+            <p class="card__label">${p.category.replace('_',' ')}</p>
+            <h2 class="card__title">${p.title}</h2>
+            <p class="card__description">${p.description.substring(0,150)}…</p>
+            <div style="display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-bottom:var(--sp-2);">
+              ${levelBadge(p.level)}
+              <span class="badge">${p.delivery_mode.replace('_',' ')}</span>
+              ${p.duration?`<span class="badge">${p.duration}</span>`:''}
+            </div>
+          </div>
+          <div class="card__footer">
+            <div>
+              <div style="font-size:var(--text-xs);color:var(--c-text-sub);">
+                ${p.age_min||''}${p.age_max?'–'+p.age_max+' yrs':''}
+                ${p.coach_name?'· Coach: '+p.coach_name:''}
+              </div>
+              <div style="font-size:var(--text-sm);color:var(--c-accent);margin-top:2px;">
+                ${p.price?'PKR '+p.price.toLocaleString():'Contact for pricing'}
+              </div>
+            </div>
+            <a href="/program.html?id=${p.id}" class="btn btn--primary btn--sm">View →</a>
+          </div>
+        </article>`).join('');
+    }
+
+    async function init() {
+      try {
+        const { programs } = await API.programs.list();
+        allPrograms = programs;
+        renderGrid(programs);
+      } catch(e) {
+        document.getElementById('programs-grid').innerHTML = `<div class="state-error">${e.message}</div>`;
+      }
+    }
+
+    document.getElementById('filter-bar').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      activeFilter = btn.dataset.cat;
+      const filtered = activeFilter === 'all' ? allPrograms : allPrograms.filter(p => p.category === activeFilter);
+      renderGrid(filtered);
+    });
+
+    init();
+  </script>
+</body>
+</html>

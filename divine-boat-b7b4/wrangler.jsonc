@@ -1,0 +1,27 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "divine-boat-b7b4",
+	"main": "src/index.js",
+	"compatibility_date": "2025-12-05",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"directory": "../public",
+		"binding": "ASSETS"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "pakdebate-db",
+			"database_id": "00000000-0000-0000-0000-000000000001"
+		}
+	],
+	"vars": {
+		"ADMIN_KEY": "local-admin-2024"
+	},
+	"observability": {
+		"enabled": true
+	}
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events | Pak Debate Forum Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+  <style>
+    .filter-bar { display:flex; gap:var(--sp-2); flex-wrap:wrap; margin-bottom:var(--sp-8); }
+    .filter-btn { padding:var(--sp-2) var(--sp-5); border:1px solid var(--c-border-2); border-radius:var(--radius-full); font-size:var(--text-sm); color:var(--c-text-muted); cursor:pointer; background:none; transition:all var(--dur-fast); }
+    .filter-btn.is-active,.filter-btn:hover { border-color:var(--c-accent-border); color:var(--c-accent); background:var(--c-accent-bg); }
+    .event-row { display:flex; align-items:center; justify-content:space-between; gap:var(--sp-6); padding:var(--sp-6); border:1px solid var(--c-border); border-radius:var(--radius-lg); background:var(--c-surface); margin-bottom:var(--sp-4); transition:border-color var(--dur-fast),transform var(--dur-fast); flex-wrap:wrap; }
+    .event-row:hover { border-color:var(--c-border-3); transform:translateY(-2px); }
+    .event-date-box { min-width:64px; text-align:center; background:var(--c-surface-2); border:1px solid var(--c-border-2); border-radius:var(--radius-md); padding:var(--sp-3) var(--sp-4); }
+    .event-date-box .day  { font-family:var(--font-display); font-size:var(--text-3xl); font-weight:700; line-height:1; color:var(--c-text); }
+    .event-date-box .month{ font-size:var(--text-xs); letter-spacing:var(--track-wider); text-transform:uppercase; color:var(--c-text-muted); }
+    .event-info { flex:1; min-width:200px; }
+  </style>
+</head>
+<body>
+  <header id="app-nav" class="nav"></header>
+  <div id="app-drawer" class="nav__drawer"></div>
+
+  <main id="main-content" style="padding-top:var(--nav-height);">
+    <div class="container">
+      <div class="page-header">
+        <p class="overline">Calendar</p>
+        <h1 class="page-title">Events &amp; Tournaments</h1>
+        <p class="page-lead">Upcoming tournaments, workshops, training camps, and seminars. Register early — seats are limited.</p>
+      </div>
+
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn is-active" data-type="all">All</button>
+        <button class="filter-btn" data-type="tournament">Tournaments</button>
+        <button class="filter-btn" data-type="workshop">Workshops</button>
+        <button class="filter-btn" data-type="camp">Camps</button>
+        <button class="filter-btn" data-type="seminar">Seminars</button>
+      </div>
+
+      <div id="events-list"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+  </main>
+
+  <footer id="app-footer" class="footer"></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/nav.js"></script>
+  <script>
+    let allEvents = [];
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const STATUS_BADGE = { upcoming:'badge', open:'badge--green', closed:'badge--red', completed:'badge--blue' };
+
+    function parseDate(s) {
+      const d = new Date(s);
+      return { day: d.getDate(), month: MONTHS[d.getMonth()], year: d.getFullYear() };
+    }
+
+    function render(events) {
+      const el = document.getElementById('events-list');
+      if (!events.length) { el.innerHTML = '<div class="state-empty">No events found.</div>'; return; }
+      el.innerHTML = events.map(ev => {
+        const d = parseDate(ev.date_start);
+        return `
+          <div class="event-row">
+            <div class="event-date-box">
+              <div class="day">${d.day}</div>
+              <div class="month">${d.month}</div>
+            </div>
+            <div class="event-info">
+              <div style="display:flex;gap:var(--sp-2);align-items:center;margin-bottom:var(--sp-2);flex-wrap:wrap;">
+                <span class="badge badge--accent">${ev.type}</span>
+                <span class="badge ${STATUS_BADGE[ev.status]||'badge'}">${ev.status}</span>
+                ${ev.fee===0?'<span class="badge badge--green">Free</span>':''}
+              </div>
+              <h2 style="font-size:var(--text-xl);font-weight:600;margin-bottom:var(--sp-1);">${ev.title}</h2>
+              <p style="font-size:var(--text-sm);color:var(--c-text-muted);">
+                ${ev.city||''}${ev.venue?' · '+ev.venue:''} 
+                ${ev.date_end && ev.date_end!==ev.date_start?' — '+ev.date_end:''}
+              </p>
+              ${ev.registration_deadline?`<p style="font-size:var(--text-xs);color:var(--c-text-sub);margin-top:var(--sp-1);">Registration deadline: ${ev.registration_deadline}</p>`:''}
+            </div>
+            <div style="display:flex;flex-direction:column;gap:var(--sp-2);align-items:flex-end;">
+              <div style="font-size:var(--text-sm);color:var(--c-accent);font-weight:600;">${ev.fee===0?'Free':'PKR '+ev.fee.toLocaleString()}</div>
+              <a href="/event.html?id=${ev.id}" class="btn btn--ghost btn--sm">Details</a>
+              ${ev.status==='open'?`<a href="/register.html?type=event&id=${ev.id}&name=${encodeURIComponent(ev.title)}" class="btn btn--primary btn--sm">Register</a>`:''}
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    async function init() {
+      try {
+        const { events } = await API.events.list('upcoming,open,closed,completed');
+        allEvents = events;
+        render(events);
+      } catch(e) {
+        document.getElementById('events-list').innerHTML = `<div class="state-error">${e.message}</div>`;
+      }
+    }
+
+    document.getElementById('filter-bar').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const type = btn.dataset.type;
+      render(type === 'all' ? allEvents : allEvents.filter(ev => ev.type === type));
+    });
+
+    init();
+  </script>
+</body>
+</html>

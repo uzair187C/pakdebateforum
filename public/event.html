@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event | Pak Debate Forum Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+</head>
+<body>
+  <header id="app-nav" class="nav"></header>
+  <div id="app-drawer" class="nav__drawer"></div>
+
+  <main id="main-content" style="padding-top:var(--nav-height);">
+    <div class="container" style="padding-block:var(--sp-12);">
+      <div id="root"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+  </main>
+
+  <footer id="app-footer" class="footer"></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/nav.js"></script>
+  <script>
+    const id = new URLSearchParams(location.search).get('id');
+    const STATUS_BADGE = { upcoming:'badge', open:'badge--green', closed:'badge--red', completed:'badge--blue' };
+
+    async function init() {
+      if (!id) {
+        document.getElementById('root').innerHTML = '<div class="state-error">No event ID. <a href="/events.html">Browse events →</a></div>';
+        return;
+      }
+      try {
+        const { event: ev } = await API.events.get(id);
+        document.title = `${ev.title} | Pak Debate Forum Academy`;
+        const canRegister = ev.status === 'open';
+
+        document.getElementById('root').innerHTML = `
+          <a href="/events.html" style="font-size:var(--text-sm);color:var(--c-text-muted);display:inline-flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-8);">← All Events</a>
+
+          <div class="detail-layout">
+            <!-- Main -->
+            <div>
+              <div style="display:flex;gap:var(--sp-2);align-items:center;margin-bottom:var(--sp-5);flex-wrap:wrap;">
+                <span class="badge badge--accent">${ev.type}</span>
+                <span class="badge ${STATUS_BADGE[ev.status]||'badge'}">${ev.status}</span>
+                ${ev.fee===0?'<span class="badge badge--green">Free</span>':''}
+              </div>
+              <h1 style="font-family:var(--font-display);font-size:clamp(var(--text-3xl),5vw,var(--text-6xl));letter-spacing:var(--track-tight);margin-bottom:var(--sp-8);">${ev.title}</h1>
+              <p style="color:var(--c-text-muted);line-height:1.8;margin-bottom:var(--sp-8);">${ev.description||'No description available.'}</p>
+
+              ${ev.program_title?`
+              <div class="sidebar-card" style="margin-bottom:var(--sp-6);">
+                <p style="font-size:var(--text-xs);color:var(--c-text-sub);letter-spacing:var(--track-wide);text-transform:uppercase;margin-bottom:var(--sp-2);">Related Programme</p>
+                <p style="color:var(--c-text);">${ev.program_title}</p>
+              </div>`:''}
+
+              ${!canRegister && ev.status!=='upcoming'?`
+              <div class="alert alert--info">
+                Registration for this event is currently <strong>${ev.status}</strong>.
+                ${ev.status==='upcoming'?'Registration opens soon.':''}
+              </div>`:''}
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+              <div class="sidebar-card">
+                <h3 style="font-size:var(--text-lg);font-weight:600;margin-bottom:var(--sp-6);">Event Details</h3>
+                <ul class="info-list">
+                  <li><span class="info-label">Date</span><span class="info-val">${ev.date_start}${ev.date_end&&ev.date_end!==ev.date_start?' — '+ev.date_end:''}</span></li>
+                  ${ev.venue?`<li><span class="info-label">Venue</span><span class="info-val">${ev.venue}</span></li>`:''}
+                  ${ev.city?`<li><span class="info-label">City</span><span class="info-val">${ev.city}</span></li>`:''}
+                  ${ev.registration_deadline?`<li><span class="info-label">Deadline</span><span class="info-val" style="color:#e57373;">${ev.registration_deadline}</span></li>`:''}
+                  ${ev.max_participants?`<li><span class="info-label">Capacity</span><span class="info-val">${ev.max_participants} participants${ev.registration_count?' ('+ev.registration_count+' registered)':''}</span></li>`:''}
+                  <li><span class="info-label">Entry Fee</span><span class="info-val" style="color:var(--c-accent);">${ev.fee===0?'Free':'PKR '+ev.fee.toLocaleString()}</span></li>
+                  <li><span class="info-label">Status</span><span class="info-val">${ev.status}</span></li>
+                </ul>
+
+                <div style="margin-top:var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-3);">
+                  ${canRegister
+                    ? `<a href="/register.html?type=event&id=${ev.id}&name=${encodeURIComponent(ev.title)}" class="btn btn--primary">Register Now →</a>`
+                    : `<button class="btn btn--ghost" disabled style="opacity:.5;cursor:not-allowed;">Registration ${ev.status==='upcoming'?'Not Open Yet':'Closed'}</button>`}
+                  <a href="/contact.html" class="btn btn--ghost">Contact Us</a>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      } catch(e) {
+        document.getElementById('root').innerHTML = `<div class="state-error">${e.message}. <a href="/events.html">Browse events →</a></div>`;
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

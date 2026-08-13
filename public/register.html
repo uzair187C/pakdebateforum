@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | Pak Debate Forum Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+</head>
+<body>
+  <header id="app-nav" class="nav"></header>
+  <div id="app-drawer" class="nav__drawer"></div>
+
+  <main id="main-content" style="padding-top:var(--nav-height);">
+    <div class="container" style="padding-block:var(--sp-12);max-width:720px;">
+
+      <a href="javascript:history.back()" style="font-size:var(--text-sm);color:var(--c-text-muted);display:inline-flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-8);">← Back</a>
+
+      <div class="page-header" style="margin-bottom:var(--sp-8);">
+        <p class="overline" id="reg-type-label">Registration</p>
+        <h1 class="page-title" id="reg-title">Apply</h1>
+        <p class="page-lead" id="reg-subtitle">Complete the form below to submit your registration.</p>
+      </div>
+
+      <div id="alert-area"></div>
+
+      <div id="success-view" style="display:none;">
+        <div class="alert alert--success" style="padding:var(--sp-8);text-align:center;">
+          <div style="font-size:var(--text-2xl);margin-bottom:var(--sp-3);">✓</div>
+          <h2 style="font-size:var(--text-2xl);margin-bottom:var(--sp-3);">Registration Submitted!</h2>
+          <p id="success-msg" style="margin-bottom:var(--sp-6);">Your registration has been received. We will be in touch shortly.</p>
+          <div style="display:flex;gap:var(--sp-3);justify-content:center;flex-wrap:wrap;">
+            <a href="/events.html"   class="btn btn--ghost btn--sm">View Events</a>
+            <a href="/programs.html" class="btn btn--ghost btn--sm">View Programs</a>
+          </div>
+        </div>
+      </div>
+
+      <form id="reg-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="full_name">Full Name <span class="req">*</span></label>
+            <input class="form-input" id="full_name" name="full_name" type="text" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address <span class="req">*</span></label>
+            <input class="form-input" id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number</label>
+            <input class="form-input" id="phone" name="phone" type="tel" placeholder="+92 300 0000000" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="age">Age</label>
+            <input class="form-input" id="age" name="age" type="number" min="8" max="99" placeholder="Your age" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="institution">School / University / Institution</label>
+          <input class="form-input" id="institution" name="institution" type="text" placeholder="Where do you study?" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="experience_level">Debate Experience Level</label>
+          <select class="form-select" id="experience_level" name="experience_level">
+            <option value="">— Select —</option>
+            <option value="beginner">Beginner (little or no experience)</option>
+            <option value="intermediate">Intermediate (some competitions)</option>
+            <option value="advanced">Advanced (regular competitor)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="notes">Additional Notes or Questions</label>
+          <textarea class="form-textarea" id="notes" name="notes" placeholder="Anything we should know about your registration?"></textarea>
+        </div>
+
+        <div style="margin-top:var(--sp-8);display:flex;gap:var(--sp-4);align-items:center;flex-wrap:wrap;">
+          <button type="submit" class="btn btn--primary btn--lg" id="submit-btn">
+            Submit Registration →
+          </button>
+          <span id="submit-status" style="font-size:var(--text-sm);color:var(--c-text-muted);"></span>
+        </div>
+      </form>
+
+    </div>
+  </main>
+
+  <footer id="app-footer" class="footer"></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/nav.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const type = params.get('type') || 'program';   // event | program
+    const refId = params.get('id');
+    const name  = params.get('name') || 'this item';
+
+    // Pre-fill page labels
+    document.getElementById('reg-type-label').textContent = type === 'event' ? 'Event Registration' : 'Programme Application';
+    document.getElementById('reg-title').textContent = name;
+    document.getElementById('reg-subtitle').textContent =
+      type === 'event'
+        ? 'Complete the form to register for this event. You will receive a confirmation email.'
+        : 'Complete the form to apply for this programme. Our team will follow up within 2 business days.';
+
+    if (!refId) {
+      document.getElementById('alert-area').innerHTML = '<div class="alert alert--error">Missing registration target. Please return and try again.</div>';
+      document.getElementById('reg-form').style.display = 'none';
+    }
+
+    document.getElementById('reg-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const status = document.getElementById('submit-status');
+
+      // Basic validation
+      const fullName = document.getElementById('full_name').value.trim();
+      const email    = document.getElementById('email').value.trim();
+      if (!fullName || !email) {
+        document.getElementById('alert-area').innerHTML = '<div class="alert alert--error">Please fill in all required fields.</div>';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      status.textContent = '';
+      document.getElementById('alert-area').innerHTML = '';
+
+      const payload = {
+        type,
+        reference_id: parseInt(refId),
+        full_name:         fullName,
+        email,
+        phone:             document.getElementById('phone').value.trim() || null,
+        age:               parseInt(document.getElementById('age').value) || null,
+        institution:       document.getElementById('institution').value.trim() || null,
+        experience_level:  document.getElementById('experience_level').value || null,
+        notes:             document.getElementById('notes').value.trim() || null,
+      };
+
+      try {
+        const res = await API.registrations.create(payload);
+        document.getElementById('reg-form').style.display = 'none';
+        document.getElementById('success-view').style.display = 'block';
+        document.getElementById('success-msg').textContent =
+          `Your registration has been received (ID: ${res.id}). We will contact you at ${email} shortly.`;
+      } catch(err) {
+        document.getElementById('alert-area').innerHTML = `<div class="alert alert--error">${err.message}</div>`;
+        btn.disabled = false;
+        btn.textContent = 'Submit Registration →';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+/**
+ * PAK DEBATE FORUM — ACADEMY
+ * Animations  |  PASS 1 — Foundation
+ * Keyframes · Scroll reveals · Parallax utilities
+ */
+
+/* ════ KEYFRAMES ══════════════════════════════════════════ */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes line-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes number-count {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ════ HERO ENTRY ANIMATIONS ══════════════════════════════ */
+
+.hero__eyebrow {
+  animation: fade-up var(--dur-slower) var(--ease-out) 200ms both;
+}
+.hero__title {
+  animation: fade-up var(--dur-slower) var(--ease-out) 380ms both;
+}
+.hero__subtitle {
+  animation: fade-up var(--dur-slower) var(--ease-out) 520ms both;
+}
+.hero__actions {
+  animation: fade-up var(--dur-slower) var(--ease-out) 640ms both;
+}
+.hero__scroll {
+  animation: fade-in var(--dur-slower) var(--ease-out) 900ms both;
+}
+
+
+/* ════ SCROLL REVEAL SYSTEM ═══════════════════════════════ */
+
+/*
+ * Usage:
+ *   <element data-reveal>             — default: fade-up
+ *   <element data-reveal="fade-in">
+ *   <element data-reveal="slide-left">
+ *   <element data-reveal="slide-right">
+ *   <element data-reveal="scale">
+ *   <div data-reveal-stagger>         — children stagger automatically
+ *
+ * JS adds .is-visible when element enters viewport.
+ */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur-slower) var(--ease-out),
+    transform var(--dur-slower) var(--ease-out);
+}
+
+[data-reveal="fade-in"] {
+  transform: none;
+}
+
+[data-reveal="slide-left"] {
+  transform: translateX(-28px);
+}
+
+[data-reveal="slide-right"] {
+  transform: translateX(28px);
+}
+
+[data-reveal="scale"] {
+  transform: scale(0.94);
+}
+
+/* Visible state — added by IntersectionObserver */
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* Stagger container — children animate in sequence */
+[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--dur-slower) var(--ease-out),
+    transform var(--dur-slower) var(--ease-out);
+}
+
+[data-reveal-stagger].is-visible > *:nth-child(1)  { transition-delay:  60ms; }
+[data-reveal-stagger].is-visible > *:nth-child(2)  { transition-delay: 130ms; }
+[data-reveal-stagger].is-visible > *:nth-child(3)  { transition-delay: 200ms; }
+[data-reveal-stagger].is-visible > *:nth-child(4)  { transition-delay: 270ms; }
+[data-reveal-stagger].is-visible > *:nth-child(5)  { transition-delay: 340ms; }
+[data-reveal-stagger].is-visible > *:nth-child(6)  { transition-delay: 410ms; }
+[data-reveal-stagger].is-visible > *:nth-child(n+7){ transition-delay: 480ms; }
+
+[data-reveal-stagger].is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ════ SECTION TRANSITION LINES ═══════════════════════════ */
+
+.reveal-line {
+  display: block;
+  height: 1px;
+  background: var(--c-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform var(--dur-slower) var(--ease-out);
+}
+
+.reveal-line.is-visible {
+  transform: scaleX(1);
+}
+
+
+/* ════ HOVER STATES ═══════════════════════════════════════ */
+
+/* Lift on hover — apply to any element */
+.hover-lift {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.hover-lift:hover { transform: translateY(-4px); }
+
+/* Glow on hover */
+.hover-glow:hover {
+  box-shadow: 0 0 0 1px var(--c-accent-border), var(--shadow-accent);
+}
+
+
+/* ════ LOADING STATES ═════════════════════════════════════ */
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--c-surface) 25%,
+    var(--c-surface-2) 50%,
+    var(--c-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+
+/* ════ REDUCED MOTION ═════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal-stagger] > *,
+  .reveal-line {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .hero__eyebrow,
+  .hero__title,
+  .hero__subtitle,
+  .hero__actions,
+  .hero__scroll {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero__scroll-line {
+    animation: none !important;
+  }
+}

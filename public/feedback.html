@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback | Pak Debate Forum Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+</head>
+<body>
+  <header id="app-nav" class="nav"></header>
+  <div id="app-drawer" class="nav__drawer"></div>
+
+  <main id="main-content" style="padding-top:var(--nav-height);">
+    <div class="container" style="padding-block:var(--sp-12);max-width:640px;">
+      <div class="page-header">
+        <p class="overline">We're Listening</p>
+        <h1 class="page-title">Share Your Feedback</h1>
+        <p class="page-lead">Your feedback helps us improve our programmes, events, and coaching. All submissions are read by the Academy team.</p>
+      </div>
+
+      <div id="alert-area"></div>
+
+      <div id="success-view" style="display:none;">
+        <div class="alert alert--success" style="padding:var(--sp-8);text-align:center;">
+          <div style="font-size:var(--text-2xl);margin-bottom:var(--sp-3);">✓</div>
+          <h2 style="font-size:var(--text-2xl);margin-bottom:var(--sp-3);">Thank you!</h2>
+          <p>Your feedback has been received. We appreciate you taking the time.</p>
+          <div style="margin-top:var(--sp-6);"><a href="/" class="btn btn--ghost btn--sm">Back to Home</a></div>
+        </div>
+      </div>
+
+      <form id="feedback-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="name">Your Name <span class="req">*</span></label>
+            <input class="form-input" id="name" type="text" placeholder="Full name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address <span class="req">*</span></label>
+            <input class="form-input" id="email" type="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="category">Feedback Category <span class="req">*</span></label>
+          <select class="form-select" id="category" required>
+            <option value="">— Select a category —</option>
+            <option value="general">General</option>
+            <option value="program">Programme Feedback</option>
+            <option value="event">Event Feedback</option>
+            <option value="coach">Coach Feedback</option>
+            <option value="website">Website Feedback</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Your Message <span class="req">*</span></label>
+          <textarea class="form-textarea" id="message" placeholder="Share your thoughts, suggestions, or concerns…" style="min-height:160px;" required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--lg" id="submit-btn">Submit Feedback →</button>
+      </form>
+    </div>
+  </main>
+
+  <footer id="app-footer" class="footer"></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/nav.js"></script>
+  <script>
+    document.getElementById('feedback-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const name     = document.getElementById('name').value.trim();
+      const email    = document.getElementById('email').value.trim();
+      const category = document.getElementById('category').value;
+      const message  = document.getElementById('message').value.trim();
+
+      if (!name || !email || !category || !message) {
+        document.getElementById('alert-area').innerHTML = '<div class="alert alert--error">Please fill in all required fields.</div>';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      document.getElementById('alert-area').innerHTML = '';
+
+      try {
+        await API.feedback.create({ name, email, category, message });
+        document.getElementById('feedback-form').style.display = 'none';
+        document.getElementById('success-view').style.display  = 'block';
+      } catch(err) {
+        document.getElementById('alert-area').innerHTML = `<div class="alert alert--error">${err.message}</div>`;
+        btn.disabled = false;
+        btn.textContent = 'Submit Feedback →';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources | Pak Debate Forum Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+  <style>
+    .filter-bar { display:flex; gap:var(--sp-2); flex-wrap:wrap; margin-bottom:var(--sp-8); }
+    .filter-btn { padding:var(--sp-2) var(--sp-5); border:1px solid var(--c-border-2); border-radius:var(--radius-full); font-size:var(--text-sm); color:var(--c-text-muted); cursor:pointer; background:none; transition:all var(--dur-fast); }
+    .filter-btn.is-active,.filter-btn:hover { border-color:var(--c-accent-border); color:var(--c-accent); background:var(--c-accent-bg); }
+    .resource-item { display:flex; align-items:flex-start; gap:var(--sp-5); padding:var(--sp-5) var(--sp-6); border:1px solid var(--c-border); border-radius:var(--radius-lg); background:var(--c-surface); margin-bottom:var(--sp-4); transition:border-color var(--dur-fast); }
+    .resource-item:hover { border-color:var(--c-border-3); }
+    .resource-icon { width:44px; height:44px; border-radius:var(--radius-md); background:var(--c-accent-bg); border:1px solid var(--c-accent-border); display:flex; align-items:center; justify-content:center; font-size:var(--text-lg); flex-shrink:0; }
+    .resource-title { font-weight:600; color:var(--c-text); margin-bottom:var(--sp-1); }
+    .resource-desc  { font-size:var(--text-sm); color:var(--c-text-muted); }
+  </style>
+</head>
+<body>
+  <header id="app-nav" class="nav"></header>
+  <div id="app-drawer" class="nav__drawer"></div>
+
+  <main id="main-content" style="padding-top:var(--nav-height);">
+    <div class="container">
+      <div class="page-header">
+        <p class="overline">Learning Materials</p>
+        <h1 class="page-title">Resources</h1>
+        <p class="page-lead">Guides, motion packs, format handbooks, video sessions, and competition results — all in one place.</p>
+      </div>
+
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn is-active" data-cat="">All</button>
+        <button class="filter-btn" data-cat="formats">Formats</button>
+        <button class="filter-btn" data-cat="motions">Motions</button>
+        <button class="filter-btn" data-cat="guides">Guides</button>
+        <button class="filter-btn" data-cat="videos">Videos</button>
+        <button class="filter-btn" data-cat="results">Results</button>
+      </div>
+
+      <div id="resources-list"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+  </main>
+
+  <footer id="app-footer" class="footer"></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/nav.js"></script>
+  <script>
+    const ICONS = { pdf:'📄', video:'🎬', link:'🔗', doc:'📝' };
+
+    function render(resources) {
+      const el = document.getElementById('resources-list');
+      if (!resources.length) { el.innerHTML = '<div class="state-empty">No resources in this category yet.</div>'; return; }
+      el.innerHTML = resources.map(r => `
+        <div class="resource-item">
+          <div class="resource-icon">${ICONS[r.file_type]||'🔗'}</div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:var(--sp-4);flex-wrap:wrap;">
+              <div>
+                <p class="resource-title">${r.title}</p>
+                ${r.description?`<p class="resource-desc">${r.description}</p>`:''}
+              </div>
+              <div style="display:flex;gap:var(--sp-2);align-items:center;flex-shrink:0;">
+                <span class="badge">${r.category}</span>
+                <span class="badge">${r.file_type}</span>
+              </div>
+            </div>
+          </div>
+          <a href="${r.url}" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" style="flex-shrink:0;">Open →</a>
+        </div>`).join('');
+    }
+
+    async function load(cat) {
+      document.getElementById('resources-list').innerHTML = '<div class="state-loading"><div class="spinner"></div></div>';
+      try {
+        const { resources } = await API.resources.list(cat);
+        render(resources);
+      } catch(e) {
+        document.getElementById('resources-list').innerHTML = `<div class="state-error">${e.message}</div>`;
+      }
+    }
+
+    document.getElementById('filter-bar').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      load(btn.dataset.cat);
+    });
+
+    load('');
+  </script>
+</body>
+</html>

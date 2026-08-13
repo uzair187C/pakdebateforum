@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | Pak Debate Forum Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/page.css" />
+  <style>
+    body { background:var(--c-base); }
+    .admin-shell { display:grid; grid-template-columns:220px 1fr; min-height:100vh; }
+    .admin-sidebar { background:var(--c-surface); border-right:1px solid var(--c-border); padding:var(--sp-8) var(--sp-4); position:sticky; top:0; height:100vh; overflow-y:auto; }
+    .admin-logo { font-family:var(--font-display); font-size:var(--text-lg); font-weight:700; color:var(--c-text); margin-bottom:var(--sp-2); padding:0 var(--sp-2); }
+    .admin-logo span { font-family:var(--font-body); font-size:var(--text-xs); color:var(--c-accent); letter-spacing:.1em; text-transform:uppercase; display:block; margin-top:2px; }
+    .admin-nav { display:flex; flex-direction:column; gap:var(--sp-1); margin-top:var(--sp-8); }
+    .admin-nav-btn { text-align:left; padding:var(--sp-3) var(--sp-4); border-radius:var(--radius-md); font-size:var(--text-sm); font-weight:var(--w-medium); color:var(--c-text-muted); background:none; border:none; cursor:pointer; transition:background var(--dur-fast),color var(--dur-fast); width:100%; }
+    .admin-nav-btn:hover { background:var(--c-surface-2); color:var(--c-text); }
+    .admin-nav-btn.is-active { background:var(--c-accent-bg); color:var(--c-accent); border:1px solid var(--c-accent-border); }
+    .admin-main { padding:var(--sp-8) var(--sp-10); overflow-y:auto; }
+    .admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--sp-8); flex-wrap:wrap; gap:var(--sp-4); }
+    .panel { display:none; } .panel.is-active { display:block; }
+    .section-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--sp-6); flex-wrap:wrap; gap:var(--sp-4); }
+    .section-bar h2 { font-family:var(--font-display); font-size:var(--text-3xl); font-weight:700; }
+    .form-inline { display:flex; gap:var(--sp-3); flex-wrap:wrap; align-items:flex-end; margin-bottom:var(--sp-6); }
+    .form-inline .form-group { margin:0; }
+    .form-inline .form-input,.form-inline .form-select { min-width:180px; }
+    .create-form { background:var(--c-surface); border:1px solid var(--c-border); border-radius:var(--radius-lg); padding:var(--sp-8); margin-bottom:var(--sp-8); display:none; }
+    .create-form.is-open { display:block; }
+    @media(max-width:768px){
+      .admin-shell { grid-template-columns:1fr; }
+      .admin-sidebar { position:relative; height:auto; }
+      .admin-main { padding:var(--sp-6); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="login-screen" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:var(--sp-8);">
+  <div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-xl);padding:var(--sp-10);width:100%;max-width:400px;">
+    <p style="font-family:var(--font-display);font-size:var(--text-3xl);font-weight:700;margin-bottom:var(--sp-2);">Admin Access</p>
+    <p style="color:var(--c-text-muted);font-size:var(--text-sm);margin-bottom:var(--sp-8);">Pak Debate Forum Academy</p>
+    <div id="login-error" class="alert alert--error" style="display:none;margin-bottom:var(--sp-4);">Invalid admin key.</div>
+    <div class="form-group">
+      <label class="form-label" for="admin-key-input">Admin Key</label>
+      <input class="form-input" id="admin-key-input" type="password" placeholder="Enter admin key" />
+    </div>
+    <button class="btn btn--primary" style="width:100%;margin-top:var(--sp-4);" onclick="tryLogin()">Enter Dashboard →</button>
+  </div>
+</div>
+
+<div id="admin-shell" class="admin-shell" style="display:none;">
+  <aside class="admin-sidebar">
+    <div class="admin-logo">Pak Debate<span>Admin</span></div>
+    <nav class="admin-nav">
+      <button class="admin-nav-btn is-active" data-panel="events">📅 Events</button>
+      <button class="admin-nav-btn" data-panel="programs">📚 Programs</button>
+      <button class="admin-nav-btn" data-panel="registrations">📋 Registrations</button>
+      <button class="admin-nav-btn" data-panel="feedback">💬 Feedback</button>
+      <button class="admin-nav-btn" data-panel="resources">📁 Resources</button>
+      <button class="admin-nav-btn" data-panel="coaches">👤 Coaches</button>
+    </nav>
+    <div style="margin-top:auto;padding-top:var(--sp-8);">
+      <button onclick="logout()" style="font-size:var(--text-xs);color:var(--c-text-sub);background:none;border:none;cursor:pointer;">Sign Out</button>
+      <div><a href="/" style="font-size:var(--text-xs);color:var(--c-text-sub);">← Public Site</a></div>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+
+    <!-- EVENTS -->
+    <div id="panel-events" class="panel is-active">
+      <div class="section-bar">
+        <h2>Events</h2>
+        <button class="btn btn--primary btn--sm" onclick="toggleForm('events-form')">+ New Event</button>
+      </div>
+      <div id="events-form" class="create-form">
+        <h3 style="font-weight:600;margin-bottom:var(--sp-6);">Create Event</h3>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Slug *</label><input class="form-input" id="ev-slug" placeholder="e.g. nsdc-2027" /></div>
+          <div class="form-group"><label class="form-label">Title *</label><input class="form-input" id="ev-title" placeholder="Event title" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Type *</label>
+            <select class="form-select" id="ev-type"><option value="tournament">Tournament</option><option value="workshop">Workshop</option><option value="camp">Camp</option><option value="seminar">Seminar</option></select></div>
+          <div class="form-group"><label class="form-label">Status</label>
+            <select class="form-select" id="ev-status"><option value="upcoming">Upcoming</option><option value="open">Open</option><option value="closed">Closed</option><option value="completed">Completed</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Start Date *</label><input class="form-input" id="ev-date-start" type="date" /></div>
+          <div class="form-group"><label class="form-label">End Date</label><input class="form-input" id="ev-date-end" type="date" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Venue</label><input class="form-input" id="ev-venue" placeholder="Venue name" /></div>
+          <div class="form-group"><label class="form-label">City</label><input class="form-input" id="ev-city" placeholder="City" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Registration Deadline</label><input class="form-input" id="ev-deadline" type="date" /></div>
+          <div class="form-group"><label class="form-label">Max Participants</label><input class="form-input" id="ev-max" type="number" placeholder="0 = unlimited" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Fee (PKR)</label><input class="form-input" id="ev-fee" type="number" value="0" /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="ev-desc" placeholder="Event description"></textarea></div>
+        <div style="display:flex;gap:var(--sp-3);margin-top:var(--sp-4);">
+          <button class="btn btn--primary" onclick="createEvent()">Create Event</button>
+          <button class="btn btn--ghost" onclick="toggleForm('events-form')">Cancel</button>
+        </div>
+        <div id="ev-result" style="margin-top:var(--sp-4);"></div>
+      </div>
+      <div id="events-table" class="table-wrap"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+
+    <!-- PROGRAMS -->
+    <div id="panel-programs" class="panel">
+      <div class="section-bar"><h2>Programs</h2></div>
+      <div id="programs-table" class="table-wrap"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+
+    <!-- REGISTRATIONS -->
+    <div id="panel-registrations" class="panel">
+      <div class="section-bar"><h2>Registrations</h2></div>
+      <div class="form-inline">
+        <div class="form-group">
+          <label class="form-label">Filter by Type</label>
+          <select class="form-select" id="reg-type-filter" onchange="loadRegistrations()">
+            <option value="">All</option><option value="event">Event</option><option value="program">Program</option>
+          </select>
+        </div>
+        <button class="btn btn--ghost btn--sm" onclick="loadRegistrations()">Refresh</button>
+      </div>
+      <div id="registrations-table" class="table-wrap"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div id="panel-feedback" class="panel">
+      <div class="section-bar"><h2>Feedback</h2></div>
+      <div id="feedback-table" class="table-wrap"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+
+    <!-- RESOURCES -->
+    <div id="panel-resources" class="panel">
+      <div class="section-bar">
+        <h2>Resources</h2>
+        <button class="btn btn--primary btn--sm" onclick="toggleForm('resources-form')">+ Add Resource</button>
+      </div>
+      <div id="resources-form" class="create-form">
+        <h3 style="font-weight:600;margin-bottom:var(--sp-6);">Add Resource</h3>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Title *</label><input class="form-input" id="res-title" placeholder="Resource title" /></div>
+          <div class="form-group"><label class="form-label">URL *</label><input class="form-input" id="res-url" type="url" placeholder="https://…" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Category *</label>
+            <select class="form-select" id="res-category"><option value="formats">Formats</option><option value="motions">Motions</option><option value="guides">Guides</option><option value="videos">Videos</option><option value="results">Results</option></select></div>
+          <div class="form-group"><label class="form-label">File Type</label>
+            <select class="form-select" id="res-type"><option value="link">Link</option><option value="pdf">PDF</option><option value="video">Video</option><option value="doc">Doc</option></select></div>
+        </div>
+        <div class="form-group"><label class="form-label">Description</label><input class="form-input" id="res-desc" placeholder="Brief description" /></div>
+        <div style="display:flex;gap:var(--sp-3);margin-top:var(--sp-4);">
+          <button class="btn btn--primary" onclick="createResource()">Add Resource</button>
+          <button class="btn btn--ghost" onclick="toggleForm('resources-form')">Cancel</button>
+        </div>
+        <div id="res-result" style="margin-top:var(--sp-4);"></div>
+      </div>
+      <div id="resources-table" class="table-wrap"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+
+    <!-- COACHES -->
+    <div id="panel-coaches" class="panel">
+      <div class="section-bar">
+        <h2>Coaches</h2>
+        <button class="btn btn--primary btn--sm" onclick="toggleForm('coaches-form')">+ Add Coach</button>
+      </div>
+      <div id="coaches-form" class="create-form">
+        <h3 style="font-weight:600;margin-bottom:var(--sp-6);">Add Coach</h3>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Name *</label><input class="form-input" id="co-name" placeholder="Full name" /></div>
+          <div class="form-group"><label class="form-label">Title *</label><input class="form-input" id="co-title" placeholder="e.g. Head Coach" /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Bio</label><textarea class="form-textarea" id="co-bio" placeholder="Coach biography"></textarea></div>
+        <div class="form-group"><label class="form-label">Expertise (comma-separated)</label><input class="form-input" id="co-expertise" placeholder='e.g. World Schools, British Parliamentary' /></div>
+        <div style="display:flex;gap:var(--sp-3);margin-top:var(--sp-4);">
+          <button class="btn btn--primary" onclick="createCoach()">Add Coach</button>
+          <button class="btn btn--ghost" onclick="toggleForm('coaches-form')">Cancel</button>
+        </div>
+        <div id="co-result" style="margin-top:var(--sp-4);"></div>
+      </div>
+      <div id="coaches-table" class="table-wrap"><div class="state-loading"><div class="spinner"></div></div></div>
+    </div>
+
+  </main>
+</div>
+
+<script src="/js/api.js"></script>
+<script>
+  // ── Auth ──────────────────────────────────────────────────
+  function tryLogin() {
+    const key = document.getElementById('admin-key-input').value.trim();
+    if (!key) return;
+    sessionStorage.setItem('pdfAdminKey', key);
+    // Test the key
+    API.adminGet('/admin/events').then(() => {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-shell').style.display = 'grid';
+      loadAll();
+    }).catch(e => {
+      sessionStorage.removeItem('pdfAdminKey');
+      document.getElementById('login-error').style.display = 'block';
+    });
+  }
+
+  function logout() {
+    sessionStorage.removeItem('pdfAdminKey');
+    location.reload();
+  }
+
+  // Auto-login if key stored
+  if (sessionStorage.getItem('pdfAdminKey')) {
+    API.adminGet('/admin/events').then(() => {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-shell').style.display = 'grid';
+      loadAll();
+    }).catch(() => sessionStorage.removeItem('pdfAdminKey'));
+  }
+
+  // ── Panel switching ────────────────────────────────────────
+  document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('is-active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      document.getElementById('panel-' + btn.dataset.panel).classList.add('is-active');
+    });
+  });
+
+  function toggleForm(id) {
+    document.getElementById(id).classList.toggle('is-open');
+  }
+
+  // ── Table helpers ─────────────────────────────────────────
+  function table(headers, rows) {
+    if (!rows.length) return '<div class="state-empty">No records found.</div>';
+    return `<table class="data-table"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table>`;
+  }
+
+  function statusSelect(id, current, type) {
+    const opts = type === 'registration'
+      ? ['pending','confirmed','rejected']
+      : type === 'feedback'
+        ? ['new','read','responded']
+        : ['upcoming','open','closed','completed'];
+    return `<select onchange="updateStatus('${type}','${id}',this.value)" style="background:var(--c-surface-2);border:1px solid var(--c-border-2);color:var(--c-text-muted);border-radius:var(--radius-sm);padding:2px 6px;font-size:var(--text-xs);">
+      ${opts.map(o=>`<option ${o===current?'selected':''}>${o}</option>`).join('')}
+    </select>`;
+  }
+
+  function shortDate(s) { return s ? s.substring(0,10) : '—'; }
+  function trunc(s, n=60) { return s && s.length>n ? s.substring(0,n)+'…' : (s||'—'); }
+
+  // ── Update status ─────────────────────────────────────────
+  async function updateStatus(type, id, status) {
+    try {
+      if (type === 'event')        await API.admin.events.update(id, { status });
+      if (type === 'registration') await API.admin.registrations.update(id, { status });
+      if (type === 'feedback')     await API.admin.feedback.update(id, { status });
+    } catch(e) { alert('Error: ' + e.message); }
+  }
+
+  // ── Load data ─────────────────────────────────────────────
+  async function loadEvents() {
+    try {
+      const { events } = await API.admin.events.list();
+      document.getElementById('events-table').innerHTML = table(
+        ['ID','Title','Type','City','Date','Status','Regs?'],
+        events.map(ev => `<tr>
+          <td>${ev.id}</td>
+          <td><strong>${ev.title}</strong></td>
+          <td><span class="badge">${ev.type}</span></td>
+          <td>${ev.city||'—'}</td>
+          <td>${shortDate(ev.date_start)}</td>
+          <td>${statusSelect(ev.id, ev.status, 'event')}</td>
+          <td><a href="#" class="action-btn" onclick="filterRegsByEvent(${ev.id});return false;">View</a></td>
+        </tr>`)
+      );
+    } catch(e) { document.getElementById('events-table').innerHTML = `<div class="state-error">${e.message}</div>`; }
+  }
+
+  async function loadPrograms() {
+    try {
+      const { programs } = await API.admin.programs.list();
+      document.getElementById('programs-table').innerHTML = table(
+        ['ID','Title','Category','Level','Mode','Coach','Price','Active'],
+        programs.map(p => `<tr>
+          <td>${p.id}</td>
+          <td><strong>${p.title}</strong></td>
+          <td>${p.category}</td>
+          <td>${p.level}</td>
+          <td>${p.delivery_mode}</td>
+          <td>${p.coach_name||'—'}</td>
+          <td>${p.price?'PKR '+p.price.toLocaleString():'—'}</td>
+          <td>${p.active?'✓':'✗'}</td>
+        </tr>`)
+      );
+    } catch(e) { document.getElementById('programs-table').innerHTML = `<div class="state-error">${e.message}</div>`; }
+  }
+
+  async function loadRegistrations() {
+    const type = document.getElementById('reg-type-filter')?.value || '';
+    const q = type ? `?type=${type}` : '';
+    try {
+      const { registrations } = await API.admin.registrations.list(q);
+      document.getElementById('registrations-table').innerHTML = table(
+        ['ID','Type','Ref','Name','Email','Institution','Level','Status','Date'],
+        registrations.map(r => `<tr>
+          <td>${r.id}</td>
+          <td><span class="badge">${r.type}</span></td>
+          <td>${r.reference_id}</td>
+          <td><strong>${r.full_name}</strong></td>
+          <td>${r.email}</td>
+          <td>${r.institution||'—'}</td>
+          <td>${r.experience_level||'—'}</td>
+          <td>${statusSelect(r.id, r.status, 'registration')}</td>
+          <td>${shortDate(r.created_at)}</td>
+        </tr>`)
+      );
+    } catch(e) { document.getElementById('registrations-table').innerHTML = `<div class="state-error">${e.message}</div>`; }
+  }
+
+  async function loadFeedback() {
+    try {
+      const { feedback } = await API.admin.feedback.list();
+      document.getElementById('feedback-table').innerHTML = table(
+        ['ID','Name','Email','Category','Message','Status','Date'],
+        feedback.map(f => `<tr>
+          <td>${f.id}</td>
+          <td><strong>${f.name}</strong></td>
+          <td>${f.email}</td>
+          <td><span class="badge">${f.category}</span></td>
+          <td title="${f.message}">${trunc(f.message)}</td>
+          <td>${statusSelect(f.id, f.status, 'feedback')}</td>
+          <td>${shortDate(f.created_at)}</td>
+        </tr>`)
+      );
+    } catch(e) { document.getElementById('feedback-table').innerHTML = `<div class="state-error">${e.message}</div>`; }
+  }
+
+  async function loadResources() {
+    try {
+      const { resources } = await API.admin.resources.list();
+      document.getElementById('resources-table').innerHTML = table(
+        ['ID','Title','Category','Type','URL'],
+        resources.map(r => `<tr>
+          <td>${r.id}</td>
+          <td><strong>${r.title}</strong></td>
+          <td>${r.category}</td>
+          <td>${r.file_type}</td>
+          <td><a href="${r.url}" target="_blank" style="color:var(--c-accent);font-size:var(--text-xs);">Open ↗</a></td>
+        </tr>`)
+      );
+    } catch(e) { document.getElementById('resources-table').innerHTML = `<div class="state-error">${e.message}</div>`; }
+  }
+
+  async function loadCoaches() {
+    try {
+      const { coaches } = await API.admin.coaches.list();
+      document.getElementById('coaches-table').innerHTML = table(
+        ['ID','Name','Title','Active'],
+        coaches.map(c => `<tr>
+          <td>${c.id}</td>
+          <td><strong>${c.name}</strong></td>
+          <td>${c.title}</td>
+          <td>${c.active?'✓':'✗'}</td>
+        </tr>`)
+      );
+    } catch(e) { document.getElementById('coaches-table').innerHTML = `<div class="state-error">${e.message}</div>`; }
+  }
+
+  function loadAll() {
+    loadEvents();
+    loadPrograms();
+    loadRegistrations();
+    loadFeedback();
+    loadResources();
+    loadCoaches();
+  }
+
+  // ── Create helpers ────────────────────────────────────────
+  function g(id) { return document.getElementById(id).value.trim(); }
+
+  async function createEvent() {
+    const data = {
+      slug: g('ev-slug'), title: g('ev-title'), type: g('ev-type'),
+      status: g('ev-status'), date_start: g('ev-date-start'), date_end: g('ev-date-end')||null,
+      venue: g('ev-venue')||null, city: g('ev-city')||null, description: g('ev-desc')||null,
+      registration_deadline: g('ev-deadline')||null,
+      max_participants: parseInt(g('ev-max'))||null, fee: parseInt(g('ev-fee'))||0,
+    };
+    const el = document.getElementById('ev-result');
+    try {
+      const r = await API.admin.events.create(data);
+      el.innerHTML = `<div class="alert alert--success">Created! ID: ${r.id}</div>`;
+      loadEvents();
+    } catch(e) { el.innerHTML = `<div class="alert alert--error">${e.message}</div>`; }
+  }
+
+  async function createResource() {
+    const data = { title:g('res-title'), url:g('res-url'), category:g('res-category'), file_type:g('res-type'), description:g('res-desc')||null };
+    const el = document.getElementById('res-result');
+    try {
+      const r = await API.admin.resources.create(data);
+      el.innerHTML = `<div class="alert alert--success">Added! ID: ${r.id}</div>`;
+      loadResources();
+    } catch(e) { el.innerHTML = `<div class="alert alert--error">${e.message}</div>`; }
+  }
+
+  async function createCoach() {
+    const exp = g('co-expertise');
+    const expArr = exp ? JSON.stringify(exp.split(',').map(s=>s.trim())) : '[]';
+    const data = { name:g('co-name'), title:g('co-title'), bio:g('co-bio')||null, expertise:expArr };
+    const el = document.getElementById('co-result');
+    try {
+      const r = await API.admin.coaches.create(data);
+      el.innerHTML = `<div class="alert alert--success">Added! ID: ${r.id}</div>`;
+      loadCoaches();
+    } catch(e) { el.innerHTML = `<div class="alert alert--error">${e.message}</div>`; }
+  }
+
+  function filterRegsByEvent(id) {
+    document.querySelector('[data-panel="registrations"]').click();
+    setTimeout(() => {
+      document.getElementById('reg-type-filter').value = 'event';
+      loadRegistrations();
+    }, 100);
+  }
+
+  document.getElementById('admin-key-input')?.addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
+</script>
+</body>
+</html>

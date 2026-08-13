@@ -1,0 +1,8 @@
+node_modules/
+.wrangler/
+.DS_Store
+*.sqlite3
+*.db
+.env
+.vscode/
+package-lock.json
