@@ -20,20 +20,21 @@
   overflow: hidden;
   background-color: #030404;
   background-image:
-    /* Dark center, lighter edges — image peeks through on sides */
+    /* Deep dark center for maximum text prominence, fading smoothly toward side edges */
     radial-gradient(
-      ellipse 60% 55% at 50% 50%,
-      rgba(3, 4, 4, 0.88) 0%,
-      rgba(3, 4, 4, 0.72) 55%,
-      rgba(3, 4, 4, 0.4) 100%
+      ellipse 65% 60% at 50% 50%,
+      rgba(3, 4, 4, 0.96) 0%,
+      rgba(3, 4, 4, 0.92) 40%,
+      rgba(3, 4, 4, 0.78) 70%,
+      rgba(3, 4, 4, 0.45) 100%
     ),
     /* Top/bottom edge darkening for clean boundaries */
     linear-gradient(
       180deg,
-      rgba(3, 4, 4, 0.8) 0%,
+      rgba(3, 4, 4, 0.85) 0%,
       transparent 18%,
       transparent 82%,
-      rgba(3, 4, 4, 0.85) 100%
+      rgba(3, 4, 4, 0.9) 100%
     ),
     url('/assets/home/homepagebgpic.png');
   background-size: cover, cover, cover;
@@ -71,7 +72,7 @@
   height: 50%;
   background: radial-gradient(
     ellipse 55% 45% at 50% 50%,
-    rgba(201, 162, 74, 0.1) 0%,
+    rgba(201, 162, 74, 0.12) 0%,
     rgba(201, 162, 74, 0.04) 45%,
     transparent 75%
   );
@@ -98,6 +99,7 @@
   text-transform: uppercase;
   color: var(--color-accent-gold);
   margin-bottom: var(--sp-6);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .hero__eyebrow::before,
@@ -117,11 +119,13 @@
   letter-spacing: -0.02em;
   color: var(--color-text-primary);
   margin-bottom: var(--sp-6);
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.9);
 }
 
 /* Gold emphasis on a single word/phrase (#02 §12) */
 .hero__title .text-accent {
   color: var(--color-accent-gold);
+  text-shadow: 0 0 24px rgba(201, 162, 74, 0.35);
 }
 
 .hero__subtitle {
@@ -133,6 +137,7 @@
   max-width: 50ch;
   margin-inline: auto;
   margin-bottom: var(--sp-8);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
 }
 
 .hero__actions {
