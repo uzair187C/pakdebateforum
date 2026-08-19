@@ -23,17 +23,19 @@ async function tryLogin() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ key })
     });
-    if (!res.ok) throw new Error('Invalid key');
+    if (!res.ok) throw new Error('Invalid admin key');
     const { token } = await res.json();
     
     sessionStorage.setItem('pdfAdminToken', token);
     document.getElementById('login-err').style.display = 'none';
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-shell').style.display  = 'grid';
+    if (window.showToast) window.showToast('Successfully signed into Admin Panel', 'success');
     init();
   } catch (e) {
     sessionStorage.removeItem('pdfAdminToken');
     document.getElementById('login-err').style.display = 'block';
+    if (window.showToast) window.showToast('Invalid admin key. Try again.', 'error');
   } finally {
     btn.textContent = ogText;
   }
@@ -58,7 +60,7 @@ if (sessionStorage.getItem('pdfAdminToken')) {
 // ── Init ──────────────────────────────────────────────────
 function init() {
   // Cache coaches for dropdowns
-  API.admin.coaches.list().then(d => { _coachesList = d.coaches; });
+  API.admin.coaches.list().then(d => { _coachesList = d.coaches || []; });
   loadDashboard();
   loadEvents();
   loadPrograms();
@@ -80,9 +82,19 @@ document.querySelectorAll('.nav-btn[data-p]').forEach(btn => {
 
 // ── Helpers ───────────────────────────────────────────────
 const $ = id => document.getElementById(id);
-const sd = s => s ? s.substring(0, 10) : '—';
-const tr = (s, n = 70) => s && s.length > n ? s.substring(0, n) + '…' : (s || '—');
-const bx = (t, cls = '') => `<span class="bx ${cls}">${t}</span>`;
+const sd = s => s ? String(s).substring(0, 10) : '—';
+const tr = (s, n = 70) => s && String(s).length > n ? String(s).substring(0, n) + '…' : (s || '—');
+const bx = (t, cls = '') => `<span class="bx ${cls}">${escapeHtml(t)}</span>`;
+
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
 
 function stBadge(s, type) {
   const cls = (type === 'registration')
@@ -119,7 +131,12 @@ async function updateStatus(type, id, status) {
     if (type === 'event')        await API.admin.events.update(id, { status });
     if (type === 'registration') await API.admin.registrations.update(id, { status });
     if (type === 'feedback')     await API.admin.feedback.update(id, { status });
-  } catch(e) { showMsg('drawer-msg', e.message, true); }
+    if (window.showToast) window.showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} #${id} status updated to '${status}'`, 'success');
+    loadDashboard();
+  } catch(e) {
+    if (window.showToast) window.showToast(e.message, 'error');
+    else showMsg('drawer-msg', e.message, true);
+  }
 }
 
 async function del(type, id) {
@@ -131,14 +148,18 @@ async function del(type, id) {
     if (type === 'feedback')     { await API.admin.feedback.delete(id);      loadFeedback(); }
     if (type === 'resource')     { await API.admin.resources.delete(id);     loadResources(); }
     if (type === 'coach')        { await API.admin.coaches.delete(id);       loadCoaches(); }
+    if (window.showToast) window.showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} #${id} deleted successfully.`, 'info');
     loadDashboard();
-  } catch(e) { alert('Error: ' + e.message); }
+  } catch(e) {
+    if (window.showToast) window.showToast('Error: ' + e.message, 'error');
+    else alert('Error: ' + e.message);
+  }
 }
 
 function showMsg(elId, msg, isErr = false) {
   const el = $(elId);
   if (!el) return;
-  el.innerHTML = `<div class="alert-banner ${isErr?'err':'ok'}" style="margin-top:.75rem">${msg}</div>`;
+  el.innerHTML = `<div class="alert-banner ${isErr?'err':'ok'}" style="margin-top:.75rem">${escapeHtml(msg)}</div>`;
   setTimeout(() => el.innerHTML = '', 4000);
 }
 
@@ -182,7 +203,7 @@ async function loadDashboard() {
     dotEl('dot-fb',   s.new_feedback);
     dotEl('dot-events', s.open_events);
   } catch(e) {
-    $('stats-grid').innerHTML = `<div class="empty">Could not load stats: ${e.message}</div>`;
+    $('stats-grid').innerHTML = `<div class="empty">Could not load stats: ${escapeHtml(e.message)}</div>`;
   }
 }
 
@@ -192,15 +213,15 @@ async function loadEvents() {
     const { events } = await API.admin.events.list();
     setRows('events-body', events.map(e => `<tr>
       <td>${e.id}</td>
-      <td><strong>${e.title}</strong></td>
+      <td><strong>${escapeHtml(e.title)}</strong></td>
       <td>${bx(e.type)}</td>
-      <td>${e.city||'—'}</td>
+      <td>${escapeHtml(e.city||'—')}</td>
       <td>${sd(e.date_start)}</td>
       <td>${e.reg_count||0}</td>
       <td>${stSelect(e.id, e.status, 'event')}</td>
       <td>${actionBtns('event', e.id, 'editEvent')}</td>
     </tr>`).join(''));
-  } catch(e) { setRows('events-body', `<tr><td colspan="8" class="empty">${e.message}</td></tr>`); }
+  } catch(e) { setRows('events-body', `<tr><td colspan="8" class="empty">${escapeHtml(e.message)}</td></tr>`); }
 }
 
 function editEvent(id) {
@@ -217,16 +238,16 @@ async function loadPrograms() {
     const { programs } = await API.admin.programs.list();
     setRows('programs-body', programs.map(p => `<tr>
       <td>${p.id}</td>
-      <td><strong>${p.title}</strong></td>
+      <td><strong>${escapeHtml(p.title)}</strong></td>
       <td>${bx(p.category)}</td>
-      <td>${p.level}</td>
-      <td>${p.delivery_mode}</td>
-      <td>${p.coach_name||'—'}</td>
+      <td>${escapeHtml(p.level)}</td>
+      <td>${escapeHtml(p.delivery_mode)}</td>
+      <td>${escapeHtml(p.coach_name||'—')}</td>
       <td>${p.price ? 'PKR '+p.price.toLocaleString() : '—'}</td>
       <td>${p.reg_count||0}</td>
       <td>${actionBtns('program', p.id, 'editProgram')}</td>
     </tr>`).join(''));
-  } catch(e) { setRows('programs-body', `<tr><td colspan="9" class="empty">${e.message}</td></tr>`); }
+  } catch(e) { setRows('programs-body', `<tr><td colspan="9" class="empty">${escapeHtml(e.message)}</td></tr>`); }
 }
 
 function editProgram(id) {
@@ -253,16 +274,16 @@ async function loadRegistrations() {
     setRows('regs-body', registrations.map(r => `<tr>
       <td>${r.id}</td>
       <td>${bx(r.type)}</td>
-      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.ref_title||''}">${tr(r.ref_title,30)}</td>
-      <td><strong>${r.full_name}</strong></td>
-      <td>${r.email}</td>
-      <td>${r.institution||'—'}</td>
-      <td>${r.experience_level||'—'}</td>
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escapeHtml(r.ref_title||'')}">${escapeHtml(tr(r.ref_title,30))}</td>
+      <td><strong>${escapeHtml(r.full_name)}</strong></td>
+      <td>${escapeHtml(r.email)}</td>
+      <td>${escapeHtml(r.institution||'—')}</td>
+      <td>${escapeHtml(r.experience_level||'—')}</td>
       <td>${stSelect(r.id, r.status, 'registration')}</td>
       <td>${sd(r.created_at)}</td>
       <td>${actionBtns('registration', r.id, null)}</td>
     </tr>`).join(''));
-  } catch(e) { setRows('regs-body', `<tr><td colspan="10" class="empty">${e.message}</td></tr>`); }
+  } catch(e) { setRows('regs-body', `<tr><td colspan="10" class="empty">${escapeHtml(e.message)}</td></tr>`); }
 }
 
 // ── Feedback ──────────────────────────────────────────────
@@ -277,15 +298,15 @@ async function loadFeedback() {
     const { feedback } = await API.admin.feedback.list(q);
     setRows('fb-body', feedback.map(f => `<tr>
       <td>${f.id}</td>
-      <td><strong>${f.name}</strong></td>
-      <td>${f.email}</td>
+      <td><strong>${escapeHtml(f.name)}</strong></td>
+      <td>${escapeHtml(f.email)}</td>
       <td>${bx(f.category)}</td>
-      <td title="${f.message}">${tr(f.message)}</td>
+      <td title="${escapeHtml(f.message)}">${escapeHtml(tr(f.message))}</td>
       <td>${stSelect(f.id, f.status, 'feedback')}</td>
       <td>${sd(f.created_at)}</td>
       <td>${actionBtns('feedback', f.id, null)}</td>
     </tr>`).join(''));
-  } catch(e) { setRows('fb-body', `<tr><td colspan="8" class="empty">${e.message}</td></tr>`); }
+  } catch(e) { setRows('fb-body', `<tr><td colspan="8" class="empty">${escapeHtml(e.message)}</td></tr>`); }
 }
 
 // ── Resources ─────────────────────────────────────────────
@@ -294,33 +315,41 @@ async function loadResources() {
     const { resources } = await API.admin.resources.list();
     setRows('res-body', resources.map(r => `<tr>
       <td>${r.id}</td>
-      <td><strong>${r.title}</strong></td>
+      <td><strong>${escapeHtml(r.title)}</strong></td>
       <td>${bx(r.category)}</td>
-      <td>${r.file_type}</td>
-      <td><a href="${r.url}" target="_blank" style="color:var(--c-accent);font-size:.8rem">Open ↗</a></td>
-      <td>${actionBtns('resource', r.id, null)}</td>
+      <td>${escapeHtml(r.file_type)}</td>
+      <td><a href="${escapeHtml(r.url)}" target="_blank" rel="noopener" style="color:var(--c-accent);font-size:.8rem">Open ↗</a></td>
+      <td>${actionBtns('resource', r.id, 'editResource')}</td>
     </tr>`).join(''));
-  } catch(e) { setRows('res-body', `<tr><td colspan="6" class="empty">${e.message}</td></tr>`); }
+  } catch(e) { setRows('res-body', `<tr><td colspan="6" class="empty">${escapeHtml(e.message)}</td></tr>`); }
+}
+
+function editResource(id) {
+  API.admin.resources.list().then(({ resources }) => {
+    const res = resources.find(r => r.id === id);
+    if (!res) return;
+    openDrawer('resource', res);
+  });
 }
 
 // ── Coaches ───────────────────────────────────────────────
 async function loadCoaches() {
   try {
     const { coaches } = await API.admin.coaches.list();
-    _coachesList = coaches;
+    _coachesList = coaches || [];
     setRows('coaches-body', coaches.map(c => {
       let exp = '—';
       try { const a = JSON.parse(c.expertise); exp = Array.isArray(a) ? a.join(', ') : (c.expertise||'—'); } catch { exp = c.expertise||'—'; }
       return `<tr>
         <td>${c.id}</td>
-        <td><strong>${c.name}</strong></td>
-        <td>${c.title}</td>
-        <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${exp}</td>
+        <td><strong>${escapeHtml(c.name)}</strong></td>
+        <td>${escapeHtml(c.title)}</td>
+        <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(exp)}</td>
         <td>${c.active ? bx('Active','green') : bx('Inactive','red')}</td>
         <td>${actionBtns('coach', c.id, 'editCoach')}</td>
       </tr>`;
     }).join(''));
-  } catch(e) { setRows('coaches-body', `<tr><td colspan="6" class="empty">${e.message}</td></tr>`); }
+  } catch(e) { setRows('coaches-body', `<tr><td colspan="6" class="empty">${escapeHtml(e.message)}</td></tr>`); }
 }
 
 function editCoach(id) {
@@ -330,13 +359,13 @@ function editCoach(id) {
 
 // ── Drawer ────────────────────────────────────────────────
 const coachOpts = () => `<option value="">— No coach —</option>` +
-  _coachesList.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  _coachesList.map(c => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
 
 const FORMS = {
   event: (d) => `
     <div class="drow">
-      <div class="fg"><label>Slug *</label><input id="d-slug" value="${d?.slug||''}" placeholder="e.g. nsdc-2027"/></div>
-      <div class="fg"><label>Title *</label><input id="d-title" value="${d?.title||''}" placeholder="Event title"/></div>
+      <div class="fg"><label>Slug *</label><input id="d-slug" value="${escapeHtml(d?.slug||'')}" placeholder="e.g. nsdc-2027"/></div>
+      <div class="fg"><label>Title *</label><input id="d-title" value="${escapeHtml(d?.title||'')}" placeholder="Event title"/></div>
     </div>
     <div class="drow">
       <div class="fg"><label>Type *</label><select id="d-type">
@@ -347,24 +376,24 @@ const FORMS = {
       </select></div>
     </div>
     <div class="drow">
-      <div class="fg"><label>Start Date *</label><input id="d-date-start" type="date" value="${d?.date_start||''}"/></div>
-      <div class="fg"><label>End Date</label><input id="d-date-end" type="date" value="${d?.date_end||''}"/></div>
+      <div class="fg"><label>Start Date *</label><input id="d-date-start" type="date" value="${escapeHtml(d?.date_start||'')}"/></div>
+      <div class="fg"><label>End Date</label><input id="d-date-end" type="date" value="${escapeHtml(d?.date_end||'')}"/></div>
     </div>
     <div class="drow">
-      <div class="fg"><label>Venue</label><input id="d-venue" value="${d?.venue||''}" placeholder="Venue name"/></div>
-      <div class="fg"><label>City</label><input id="d-city" value="${d?.city||''}" placeholder="City"/></div>
+      <div class="fg"><label>Venue</label><input id="d-venue" value="${escapeHtml(d?.venue||'')}" placeholder="Venue name"/></div>
+      <div class="fg"><label>City</label><input id="d-city" value="${escapeHtml(d?.city||'')}" placeholder="City"/></div>
     </div>
     <div class="drow">
-      <div class="fg"><label>Reg Deadline</label><input id="d-deadline" type="date" value="${d?.registration_deadline||''}"/></div>
+      <div class="fg"><label>Reg Deadline</label><input id="d-deadline" type="date" value="${escapeHtml(d?.registration_deadline||'')}"/></div>
       <div class="fg"><label>Max Participants</label><input id="d-max" type="number" value="${d?.max_participants||''}" placeholder="0 = unlimited"/></div>
     </div>
     <div class="fg"><label>Fee (PKR)</label><input id="d-fee" type="number" value="${d?.fee||0}"/></div>
-    <div class="fg"><label>Description</label><textarea id="d-desc">${d?.description||''}</textarea></div>`,
+    <div class="fg"><label>Description</label><textarea id="d-desc">${escapeHtml(d?.description||'')}</textarea></div>`,
 
   program: (d) => `
     <div class="drow">
-      <div class="fg"><label>Slug *</label><input id="d-slug" value="${d?.slug||''}" placeholder="e.g. beginner-debate"/></div>
-      <div class="fg"><label>Title *</label><input id="d-title" value="${d?.title||''}" placeholder="Program title"/></div>
+      <div class="fg"><label>Slug *</label><input id="d-slug" value="${escapeHtml(d?.slug||'')}" placeholder="e.g. beginner-debate"/></div>
+      <div class="fg"><label>Title *</label><input id="d-title" value="${escapeHtml(d?.title||'')}" placeholder="Program title"/></div>
     </div>
     <div class="drow">
       <div class="fg"><label>Category *</label><select id="d-category">
@@ -381,15 +410,15 @@ const FORMS = {
       <div class="fg"><label>Coach</label><select id="d-coach">${coachOpts()}</select></div>
     </div>
     <div class="drow">
-      <div class="fg"><label>Duration</label><input id="d-duration" value="${d?.duration||''}" placeholder="e.g. 10 weeks"/></div>
+      <div class="fg"><label>Duration</label><input id="d-duration" value="${escapeHtml(d?.duration||'')}" placeholder="e.g. 10 weeks"/></div>
       <div class="fg"><label>Price (PKR)</label><input id="d-price" type="number" value="${d?.price||''}"/></div>
     </div>
-    <div class="fg"><label>Schedule</label><input id="d-schedule" value="${d?.schedule||''}" placeholder="e.g. Saturdays 10am–12pm"/></div>
-    <div class="fg"><label>Description *</label><textarea id="d-desc">${d?.description||''}</textarea></div>`,
+    <div class="fg"><label>Schedule</label><input id="d-schedule" value="${escapeHtml(d?.schedule||'')}" placeholder="e.g. Saturdays 10am–12pm"/></div>
+    <div class="fg"><label>Description *</label><textarea id="d-desc">${escapeHtml(d?.description||'')}</textarea></div>`,
 
   resource: (d) => `
-    <div class="fg"><label>Title *</label><input id="d-title" value="${d?.title||''}" placeholder="Resource title"/></div>
-    <div class="fg"><label>URL *</label><input id="d-url" type="url" value="${d?.url||''}" placeholder="https://…"/></div>
+    <div class="fg"><label>Title *</label><input id="d-title" value="${escapeHtml(d?.title||'')}" placeholder="Resource title"/></div>
+    <div class="fg"><label>URL *</label><input id="d-url" type="url" value="${escapeHtml(d?.url||'')}" placeholder="https://…"/></div>
     <div class="drow">
       <div class="fg"><label>Category *</label><select id="d-category">
         ${['formats','motions','guides','videos','results'].map(c=>`<option ${d?.category===c?'selected':''}>${c}</option>`).join('')}
@@ -398,16 +427,16 @@ const FORMS = {
         ${['link','pdf','video','doc'].map(t=>`<option ${d?.file_type===t?'selected':''}>${t}</option>`).join('')}
       </select></div>
     </div>
-    <div class="fg"><label>Description</label><input id="d-desc" value="${d?.description||''}" placeholder="Brief description"/></div>`,
+    <div class="fg"><label>Description</label><input id="d-desc" value="${escapeHtml(d?.description||'')}" placeholder="Brief description"/></div>`,
 
   coach: (d) => `
     <div class="drow">
-      <div class="fg"><label>Name *</label><input id="d-name" value="${d?.name||''}" placeholder="Full name"/></div>
-      <div class="fg"><label>Title *</label><input id="d-title" value="${d?.title||''}" placeholder="e.g. Head Coach"/></div>
+      <div class="fg"><label>Name *</label><input id="d-name" value="${escapeHtml(d?.name||'')}" placeholder="Full name"/></div>
+      <div class="fg"><label>Title *</label><input id="d-title" value="${escapeHtml(d?.title||'')}" placeholder="e.g. Head Coach"/></div>
     </div>
-    <div class="fg"><label>Expertise (comma-separated)</label><input id="d-expertise" value="${(() => { try { const a=JSON.parse(d?.expertise||'[]'); return Array.isArray(a)?a.join(', '):''; } catch { return d?.expertise||''; }})()}" placeholder="World Schools, British Parliamentary"/></div>
-    <div class="fg"><label>Bio</label><textarea id="d-bio">${d?.bio||''}</textarea></div>
-    <div class="fg"><label>Image URL</label><input id="d-img" value="${d?.image_url||''}" placeholder="https://…"/></div>
+    <div class="fg"><label>Expertise (comma-separated)</label><input id="d-expertise" value="${(() => { try { const a=JSON.parse(d?.expertise||'[]'); return escapeHtml(Array.isArray(a)?a.join(', '):''); } catch { return escapeHtml(d?.expertise||''); }})()}" placeholder="World Schools, British Parliamentary"/></div>
+    <div class="fg"><label>Bio</label><textarea id="d-bio">${escapeHtml(d?.bio||'')}</textarea></div>
+    <div class="fg"><label>Image URL</label><input id="d-img" value="${escapeHtml(d?.image_url||'')}" placeholder="https://…"/></div>
     <div class="fg"><label>Active</label><select id="d-active">
       <option value="1" ${d?.active!==0?'selected':''}>Active</option>
       <option value="0" ${d?.active===0?'selected':''}>Inactive</option>
@@ -434,6 +463,12 @@ function closeDrawer() {
   $('drawer').classList.remove('open');
   _drawerType = null; _drawerId = null;
 }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('drawer')?.classList.contains('open')) {
+    closeDrawer();
+  }
+});
 
 function g(id) { const el = $(id); return el ? el.value.trim() : ''; }
 
@@ -468,7 +503,7 @@ async function saveDrawer() {
     }
     else if (_drawerType === 'resource') {
       const d = { title: g('d-title'), url: g('d-url'), category: g('d-category'), file_type: g('d-filetype'), description: g('d-desc')||null };
-      await API.admin.resources.create(d);
+      _drawerId ? await API.admin.resources.update(_drawerId, d) : await API.admin.resources.create(d);
       loadResources();
     }
     else if (_drawerType === 'coach') {
@@ -478,10 +513,12 @@ async function saveDrawer() {
       _drawerId ? await API.admin.coaches.update(_drawerId, d) : await API.admin.coaches.create(d);
       loadCoaches();
     }
+    if (window.showToast) window.showToast(`${_drawerType.charAt(0).toUpperCase() + _drawerType.slice(1)} saved successfully.`, 'success');
     loadDashboard();
     closeDrawer();
   } catch(e) {
-    showMsg('drawer-msg', e.message, true);
+    if (window.showToast) window.showToast(e.message, 'error');
+    else showMsg('drawer-msg', e.message, true);
   } finally {
     btn.disabled = false; btn.textContent = 'Save';
   }

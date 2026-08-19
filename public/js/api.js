@@ -34,6 +34,7 @@ const API = {
   resources:     { list: (c) => API.get(`/resources${c?`?category=${c}`:''}`) },
   registrations: { create: (d) => API.post('/registrations', d) },
   feedback:      { create: (d) => API.post('/feedback', d) },
+  search:        (q) => API.get(`/search?q=${encodeURIComponent(q)}`),
 
   admin: {
     stats:         { get: ()        => API.adminGet('/admin/stats') },
@@ -53,6 +54,7 @@ const API = {
                      delete:(id)    => API.adminDelete(`/admin/feedback/${id}`) },
     resources:     { list: ()       => API.adminGet('/admin/resources'),
                      create:(d)     => API.adminPost('/admin/resources', d),
+                     update:(id, d) => API.adminPut(`/admin/resources/${id}`, d),
                      delete:(id)    => API.adminDelete(`/admin/resources/${id}`) },
     coaches:       { list: ()       => API.adminGet('/admin/coaches'),
                      create:(d)     => API.adminPost('/admin/coaches', d),

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — Pak Debate Forum</title>
+  <meta name="description" content="Search Pak Debate Forum programs, upcoming competitions, educational resources, and world-class coaches.">
+  <link rel="canonical" href="https://pakdebateforum.org/search.html">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Search — Pak Debate Forum">
+  <meta property="og:description" content="Find programs, events, resources, and expert coaches across Pak Debate Forum.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pakdebateforum.org/search.html">
+  <meta property="og:image" content="https://pakdebateforum.org/assets/brand/pdf-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/page.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+  <!-- Header Nav -->
+  <header id="app-nav"></header>
+  <div id="app-drawer"></div>
+
+  <main id="main-content" class="page-search">
+    <!-- Hero / Search Bar -->
+    <section class="section section--hero bg-surface-base">
+      <div class="container container--narrow">
+        <div class="search-hero text-center" data-reveal="fade-up">
+          <p class="hero__eyebrow">Search Intelligence</p>
+          <h1 class="hero__title">Search <span class="text-gold">Pak Debate Forum</span></h1>
+          <p class="hero__lead">Find training programs, debate competitions, educational materials, and faculty.</p>
+
+          <div class="search-box-wrap margin-top-6">
+            <div class="search-box">
+              <svg class="search-box__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" id="search-input" class="search-box__input" placeholder="Type to search (e.g. World Schools, WSDC, Coaching, Motion)..." autofocus autocomplete="off">
+              <button id="search-clear" class="search-box__clear" style="display: none;" aria-label="Clear search">&times;</button>
+            </div>
+
+            <div class="filter-pills margin-top-4" id="search-tabs">
+              <button class="filter-pill is-active" data-category="all">All Results</button>
+              <button class="filter-pill" data-category="programs">Programs</button>
+              <button class="filter-pill" data-category="events">Events</button>
+              <button class="filter-pill" data-category="resources">Resources</button>
+              <button class="filter-pill" data-category="coaches">Coaches</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Results Section -->
+    <section class="section">
+      <div class="container">
+        <div id="search-results-meta" class="margin-bottom-6" style="display: none;">
+          <p class="text-muted text-sm" id="search-count-text"></p>
+        </div>
+
+        <div id="search-loading" class="state-loading" style="display: none;">
+          <div class="spinner"></div>
+          <p class="text-muted text-sm margin-top-3">Searching platform records...</p>
+        </div>
+
+        <div id="search-empty" class="state-empty" style="display: none;">
+          <h3 class="heading-md margin-bottom-2 text-gold">No Results Found</h3>
+          <p class="text-muted">We couldn't find any matches for your query. Try broadening your keywords.</p>
+        </div>
+
+        <div id="search-initial" class="state-initial text-center padding-8">
+          <p class="text-muted">Enter a search query above to explore the Pak Debate Forum archive.</p>
+        </div>
+
+        <div id="search-results-grid" class="search-results-grid" style="display: none;"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="app-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/toast.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/search.js"></script>
+</body>
+</html>

@@ -1,43 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coaches | Pak Debate Forum Academy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Meet the expert coaches behind Pak Debate Forum's programmes — national champions and international circuit veterans." />
+  <meta name="theme-color" content="#050505" />
+  <title>Coaches — Pak Debate Forum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
-  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
   <link rel="stylesheet" href="/css/page.css" />
-  <style>
-    .coach-card { background:var(--c-surface); border:1px solid var(--c-border); border-radius:var(--radius-lg); padding:var(--sp-8); transition:border-color var(--dur-base),transform var(--dur-base); }
-    .coach-card:hover { border-color:var(--c-border-3); transform:translateY(-3px); }
-    .coach-avatar { width:72px; height:72px; border-radius:50%; background:var(--c-surface-2); border:2px solid var(--c-accent-border); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:var(--text-2xl); color:var(--c-accent); margin-bottom:var(--sp-5); }
-    .coach-name  { font-family:var(--font-display); font-size:var(--text-2xl); font-weight:700; letter-spacing:var(--track-tight); margin-bottom:var(--sp-1); }
-    .coach-title { font-size:var(--text-sm); color:var(--c-accent); margin-bottom:var(--sp-4); }
-    .coach-bio   { font-size:var(--text-sm); color:var(--c-text-muted); line-height:1.7; margin-bottom:var(--sp-5); }
-    .coach-tags  { display:flex; gap:var(--sp-2); flex-wrap:wrap; }
-  </style>
+  <link rel="stylesheet" href="/css/animations.css" />
 </head>
 <body>
-  <header id="app-nav" class="nav"></header>
-  <div id="app-drawer" class="nav__drawer"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="app-nav"></header>
+  <div id="app-drawer"></div>
 
-  <main id="main-content" style="padding-top:var(--nav-height);">
-    <div class="container">
-      <div class="page-header">
-        <p class="overline">Our Team</p>
-        <h1 class="page-title">Meet the Coaches</h1>
-        <p class="page-lead">Our coaches bring national and international competitive experience. Every programme is designed and delivered by practitioners, not theorists.</p>
+  <main id="main-content">
+
+    <section class="page-hero">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <p class="eyebrow">Our Team</p>
+          <h1 class="section-title" style="font-size: var(--text-display-lg);">Meet the Coaches</h1>
+          <p class="section-subtitle">Our coaches bring national and international competitive experience. Every programme is designed and delivered by practitioners, not theorists.</p>
+        </div>
       </div>
-      <div id="coaches-grid" class="grid-3"><div class="state-loading"><div class="spinner"></div></div></div>
-    </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="coaches-grid" class="grid-3">
+          <div class="state-loading"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer id="app-footer" class="footer"></footer>
+  <footer id="app-footer"></footer>
 
   <script src="/js/api.js"></script>
   <script src="/js/nav.js"></script>
+  <script src="/js/main.js"></script>
   <script>
     async function init() {
       try {
@@ -47,16 +56,17 @@
         el.innerHTML = coaches.map(c => {
           let tags = [];
           try { tags = JSON.parse(c.expertise || '[]'); } catch {}
-          const initials = c.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+          const initials = c.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
           return `
-            <div class="coach-card">
-              <div class="coach-avatar">${initials}</div>
-              <h2 class="coach-name">${c.name}</h2>
-              <p class="coach-title">${c.title}</p>
-              ${c.bio ? `<p class="coach-bio">${c.bio}</p>` : ''}
-              ${tags.length ? `<div class="coach-tags">${tags.map(t=>`<span class="badge badge--accent">${t}</span>`).join('')}</div>` : ''}
+            <div class="card card--person" data-reveal>
+              <div class="card__avatar" style="width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: var(--text-heading-lg); color: var(--color-accent-gold); background: var(--color-bg-section); border: 2px solid rgba(201, 162, 74, 0.2);">${initials}</div>
+              <h2 class="card__name">${c.name}</h2>
+              <p class="card__role">${c.title}</p>
+              ${c.bio ? `<p class="card__bio">${c.bio}</p>` : ''}
+              ${tags.length ? `<div style="display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: center; margin-top: var(--sp-4);">${tags.map(t => `<span class="badge badge--accent">${t}</span>`).join('')}</div>` : ''}
             </div>`;
         }).join('');
+        if (window.initReveals) window.initReveals(el);
       } catch(e) {
         document.getElementById('coaches-grid').innerHTML = `<div class="state-error">${e.message}</div>`;
       }

@@ -1,104 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Academy | Pak Debate Forum Academy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pak Debate Forum Academy — structured debate education, competitive training, and intellectual development for Pakistan's next generation." />
+  <meta name="theme-color" content="#050505" />
+  <title>Academy — Pak Debate Forum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/tokens.css" />
   <link rel="stylesheet" href="/css/base.css" />
   <link rel="stylesheet" href="/css/components.css" />
-  <link rel="stylesheet" href="/css/animations.css" />
   <link rel="stylesheet" href="/css/page.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
 </head>
 <body>
-  <header id="app-nav" class="nav"></header>
-  <div id="app-drawer" class="nav__drawer"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="app-nav"></header>
+  <div id="app-drawer"></div>
 
-  <main id="main-content" style="padding-top:var(--nav-height);">
-    <div class="container">
-      <div class="page-header">
-        <p class="overline">Our Academy</p>
-        <h1 class="page-title">Pak Debate Forum Academy</h1>
-        <p class="page-lead">Pakistan's home for structured debate education, competitive training, and intellectual development. We exist to build the next generation of articulate, confident, and critical thinkers.</p>
-      </div>
+  <main id="main-content">
 
-      <!-- Mission -->
-      <section style="margin-bottom:var(--sp-16);">
-        <div class="grid-2" style="align-items:center;">
-          <div>
-            <p class="overline">Our Mission</p>
-            <h2 class="section-title" style="margin-bottom:var(--sp-6);">Why we exist</h2>
-            <p style="margin-bottom:var(--sp-4);">Pak Debate Forum Academy was founded on a simple belief: every young Pakistani deserves access to world-class training in the skills that shape leaders — argument, communication, research, and the courage to speak.</p>
-            <p>We provide structured, progressive programmes from beginner to advanced level, delivered by coaches with national and international competitive experience.</p>
+    <!-- ─── PAGE HERO — Academy + Podium (#29 §6–10) ─────── -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="academy-hero">
+          <div class="academy-hero__content" data-reveal>
+            <p class="eyebrow">Our Academy</p>
+            <h1 class="section-title" style="font-size: var(--text-display-lg);">Pak Debate Forum Academy</h1>
+            <p class="section-subtitle">
+              Pakistan's home for structured debate education, competitive training, and intellectual development. We build the next generation of articulate, confident, and critical thinkers.
+            </p>
+            <div style="margin-top: var(--sp-8);">
+              <a href="/programs.html" class="btn btn--primary btn--lg">Explore Programs</a>
+            </div>
           </div>
-          <div id="stats-grid" class="grid-2" style="gap:var(--sp-4);">
-            <!-- populated by JS -->
+          <div class="academy-hero__podium hero-podium-entrance">
+            <div class="podium-stage">
+              <div class="podium-stage__light" aria-hidden="true"></div>
+              <div class="podium-stage__pedestal" aria-hidden="true"></div>
+              <img src="/assets/podium/podium.png" alt="The debate podium — where voices are forged" width="540" height="400" loading="lazy">
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Featured programs -->
-      <section style="margin-bottom:var(--sp-16);">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:var(--sp-8);flex-wrap:wrap;gap:var(--sp-4);">
+    <!-- ─── INTRODUCTION (#29 §12–13) ─────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <div class="split" data-reveal>
+          <div class="split__content">
+            <p class="eyebrow">Why Choose PDF Academy</p>
+            <h2 class="section-title">Why We Exist</h2>
+            <p style="margin-top: var(--sp-5); color: var(--color-text-supporting); line-height: var(--lh-body);">
+              Pak Debate Forum Academy was founded on a simple belief: every young Pakistani deserves access to world-class training in the skills that shape leaders — argument, communication, research, and the courage to speak.
+            </p>
+            <p style="margin-top: var(--sp-4); color: var(--color-text-supporting); line-height: var(--lh-body);">
+              We provide structured, progressive programmes from beginner to advanced level, delivered by coaches with national and international competitive experience.
+            </p>
+          </div>
+          <div class="split__media">
+            <div id="stats-grid" class="grid-2" style="gap: var(--sp-4);" data-reveal-stagger>
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PROGRAMS (#29 §20–28) ─────────────────────────── -->
+    <section class="section section--alt">
+      <div class="container">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: var(--sp-8); flex-wrap: wrap; gap: var(--sp-4);" data-reveal>
           <div>
-            <p class="overline">What We Offer</p>
+            <p class="eyebrow">What We Offer</p>
             <h2 class="section-title">Academy Programs</h2>
           </div>
           <a href="/programs.html" class="btn btn--ghost">View All Programs →</a>
         </div>
-        <div id="programs-grid" class="grid-3"><div class="state-loading"><div class="spinner"></div></div></div>
-      </section>
+        <div id="programs-grid" class="grid-3" data-reveal-stagger>
+          <div class="state-loading"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </section>
 
-      <!-- Upcoming events -->
-      <section style="margin-bottom:var(--sp-16);">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:var(--sp-8);flex-wrap:wrap;gap:var(--sp-4);">
+    <!-- ─── UPCOMING EVENTS ───────────────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: var(--sp-8); flex-wrap: wrap; gap: var(--sp-4);" data-reveal>
           <div>
-            <p class="overline">What's Coming Up</p>
+            <p class="eyebrow">What's Coming Up</p>
             <h2 class="section-title">Upcoming Events</h2>
           </div>
           <a href="/events.html" class="btn btn--ghost">All Events →</a>
         </div>
-        <div id="events-list" class="grid-2"><div class="state-loading"><div class="spinner"></div></div></div>
-      </section>
-
-      <!-- CTA -->
-      <section style="margin-bottom:var(--sp-16);">
-        <div class="sidebar-card" style="text-align:center;padding:var(--sp-12);">
-          <h2 style="font-family:var(--font-display);font-size:var(--text-4xl);margin-bottom:var(--sp-4);">Ready to start?</h2>
-          <p style="color:var(--c-text-muted);margin-bottom:var(--sp-8);">Applications are open for the next Academy intake. Limited seats per cohort.</p>
-          <div style="display:flex;gap:var(--sp-4);justify-content:center;flex-wrap:wrap;">
-            <a href="/register.html" class="btn btn--primary btn--lg">Apply to the Academy →</a>
-            <a href="/contact.html"  class="btn btn--ghost  btn--lg">Contact Us</a>
-          </div>
+        <div id="events-list" class="grid-2" data-reveal-stagger>
+          <div class="state-loading"><div class="spinner"></div></div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+
+    <!-- ─── CTA (#29 §5) ──────────────────────────────────── -->
+    <section class="cta-block">
+      <div class="container" data-reveal>
+        <h2 class="cta-block__title">Ready to Start?</h2>
+        <p class="cta-block__text">
+          Applications are open for the next Academy intake. Limited seats per cohort.
+        </p>
+        <div class="cta-block__actions">
+          <a href="/register.html" class="btn btn--primary btn--lg">Apply to the Academy →</a>
+          <a href="/contact.html" class="btn btn--secondary btn--lg">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer id="app-footer" class="footer"></footer>
+  <footer id="app-footer"></footer>
 
   <script src="/js/api.js"></script>
   <script src="/js/nav.js"></script>
+  <script src="/js/main.js"></script>
   <script>
     const STATS = [
-      { value:'1,200+', label:'Students Trained' },
-      { value:'80+',    label:'Tournaments Won' },
-      { value:'12',     label:'Years of Excellence' },
-      { value:'6',      label:'Expert Coaches' },
+      { value: '500+', label: 'Students Trained' },
+      { value: '50+',  label: 'Tournaments' },
+      { value: '15+',  label: 'Programs' },
+      { value: '25+',  label: 'Cities Reached' },
     ];
 
     function levelBadge(level) {
-      const map = { beginner:'badge--green', intermediate:'badge--accent', advanced:'badge--blue', all:'badge' };
-      return `<span class="badge ${map[level]||'badge'}">${level}</span>`;
+      const map = { beginner: 'badge--green', intermediate: 'badge--accent', advanced: 'badge--blue', all: 'badge--muted' };
+      return `<span class="badge ${map[level] || 'badge--muted'}">${level}</span>`;
     }
 
     function renderStats() {
       document.getElementById('stats-grid').innerHTML = STATS.map(s => `
-        <div class="sidebar-card" style="text-align:center;">
-          <div style="font-family:var(--font-display);font-size:var(--text-4xl);font-weight:700;color:var(--c-accent);">${s.value}</div>
-          <div style="font-size:var(--text-sm);color:var(--c-text-muted);margin-top:var(--sp-1);">${s.label}</div>
+        <div class="sidebar-card" style="text-align: center;">
+          <div style="font-family: var(--font-display); font-size: var(--text-display-sm); font-weight: var(--w-bold); color: var(--color-accent-gold);">${s.value}</div>
+          <div style="font-size: var(--text-body-sm); color: var(--color-text-muted); margin-top: var(--sp-1);">${s.label}</div>
         </div>`).join('');
     }
 
@@ -106,23 +148,24 @@
       try {
         const { programs } = await API.programs.list();
         const el = document.getElementById('programs-grid');
-        const featured = programs.slice(0,3);
+        const featured = programs.slice(0, 3);
         el.innerHTML = featured.map(p => `
-          <article class="card card--accent">
+          <article class="card card--interactive">
             <div class="card__body">
-              <p class="card__label">${p.category.replace('_',' ')}</p>
+              <p class="card__eyebrow">${p.category.replace('_', ' ')}</p>
               <h3 class="card__title">${p.title}</h3>
-              <p class="card__description" style="font-size:var(--text-sm);">${p.description.substring(0,120)}…</p>
-              <div style="display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-bottom:var(--sp-4);">
+              <p class="card__description">${p.description.substring(0, 120)}…</p>
+              <div style="display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-top: var(--sp-4);">
                 ${levelBadge(p.level)}
-                <span class="badge">${p.delivery_mode.replace('_',' ')}</span>
+                <span class="badge badge--muted">${p.delivery_mode.replace('_', ' ')}</span>
               </div>
             </div>
             <div class="card__footer">
-              <span style="font-size:var(--text-xs);color:var(--c-text-sub);">${p.age_min||''}${p.age_max?'–'+p.age_max:''} yrs</span>
-              <a href="/program.html?id=${p.id}" class="btn btn--text btn--sm">View Program →</a>
+              <span style="font-size: var(--text-meta); color: var(--color-text-tertiary);">${p.age_min || ''}${p.age_max ? '–' + p.age_max : ''} yrs</span>
+              <a href="/program.html?id=${p.id}" class="btn btn--ghost btn--sm">View Program →</a>
             </div>
           </article>`).join('');
+        if (window.initReveals) window.initReveals(el);
       } catch(e) {
         document.getElementById('programs-grid').innerHTML = `<div class="state-error">${e.message}</div>`;
       }
@@ -132,23 +175,24 @@
       try {
         const { events } = await API.events.list('upcoming,open');
         const el = document.getElementById('events-list');
-        const upcoming = events.slice(0,4);
+        const upcoming = events.slice(0, 4);
         if (!upcoming.length) { el.innerHTML = '<div class="state-empty">No upcoming events.</div>'; return; }
         el.innerHTML = upcoming.map(ev => `
-          <article class="card">
+          <article class="card card--interactive">
             <div class="card__body">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:var(--sp-4);margin-bottom:var(--sp-3);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--sp-4); margin-bottom: var(--sp-3);">
                 <span class="badge badge--accent">${ev.type}</span>
-                <span style="font-size:var(--text-xs);color:var(--c-text-sub);">${ev.date_start}</span>
+                <span style="font-size: var(--text-meta); color: var(--color-text-tertiary);">${ev.date_start}</span>
               </div>
-              <h3 class="card__title" style="font-size:var(--text-xl);">${ev.title}</h3>
-              <p style="font-size:var(--text-sm);color:var(--c-text-muted);">${ev.city||''}${ev.venue?' · '+ev.venue:''}</p>
+              <h3 class="card__title">${ev.title}</h3>
+              <p style="font-size: var(--text-body-sm); color: var(--color-text-supporting);">${ev.city || ''}${ev.venue ? ' · ' + ev.venue : ''}</p>
             </div>
             <div class="card__footer">
-              <span style="font-size:var(--text-xs);color:var(--c-accent);">${ev.fee===0?'Free':'PKR '+ev.fee.toLocaleString()}</span>
-              <a href="/event.html?id=${ev.id}" class="btn btn--text btn--sm">Details →</a>
+              <span style="font-size: var(--text-meta); color: var(--color-accent-gold);">${ev.fee === 0 ? 'Free' : 'PKR ' + ev.fee.toLocaleString()}</span>
+              <a href="/event.html?id=${ev.id}" class="btn btn--ghost btn--sm">Details →</a>
             </div>
           </article>`).join('');
+        if (window.initReveals) window.initReveals(el);
       } catch(e) {
         document.getElementById('events-list').innerHTML = `<div class="state-error">${e.message}</div>`;
       }

@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "divine-boat-b7b4",
+	"name": "pakdebateforumn-worker",
 	"main": "src/index.js",
 	"compatibility_date": "2025-12-05",
 	"compatibility_flags": [
@@ -15,7 +15,7 @@
 		{
 			"binding": "DB",
 			"database_name": "pakdebate-db",
-			"database_id": "00000000-0000-0000-0000-000000000001"
+			"database_id": "04bedff1-fec6-424a-a66b-a6913aa1885f"
 		}
 	],
 	"vars": {

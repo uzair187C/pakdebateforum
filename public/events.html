@@ -1,117 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Events | Pak Debate Forum Academy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Discover upcoming Pak Debate Forum events — tournaments, workshops, training sessions, and community gatherings across Pakistan." />
+  <meta name="theme-color" content="#050505" />
+  <title>Events — Pak Debate Forum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
-  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
   <link rel="stylesheet" href="/css/page.css" />
-  <style>
-    .filter-bar { display:flex; gap:var(--sp-2); flex-wrap:wrap; margin-bottom:var(--sp-8); }
-    .filter-btn { padding:var(--sp-2) var(--sp-5); border:1px solid var(--c-border-2); border-radius:var(--radius-full); font-size:var(--text-sm); color:var(--c-text-muted); cursor:pointer; background:none; transition:all var(--dur-fast); }
-    .filter-btn.is-active,.filter-btn:hover { border-color:var(--c-accent-border); color:var(--c-accent); background:var(--c-accent-bg); }
-    .event-row { display:flex; align-items:center; justify-content:space-between; gap:var(--sp-6); padding:var(--sp-6); border:1px solid var(--c-border); border-radius:var(--radius-lg); background:var(--c-surface); margin-bottom:var(--sp-4); transition:border-color var(--dur-fast),transform var(--dur-fast); flex-wrap:wrap; }
-    .event-row:hover { border-color:var(--c-border-3); transform:translateY(-2px); }
-    .event-date-box { min-width:64px; text-align:center; background:var(--c-surface-2); border:1px solid var(--c-border-2); border-radius:var(--radius-md); padding:var(--sp-3) var(--sp-4); }
-    .event-date-box .day  { font-family:var(--font-display); font-size:var(--text-3xl); font-weight:700; line-height:1; color:var(--c-text); }
-    .event-date-box .month{ font-size:var(--text-xs); letter-spacing:var(--track-wider); text-transform:uppercase; color:var(--c-text-muted); }
-    .event-info { flex:1; min-width:200px; }
-  </style>
+  <link rel="stylesheet" href="/css/animations.css" />
 </head>
 <body>
-  <header id="app-nav" class="nav"></header>
-  <div id="app-drawer" class="nav__drawer"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="app-nav"></header>
+  <div id="app-drawer"></div>
 
-  <main id="main-content" style="padding-top:var(--nav-height);">
-    <div class="container">
-      <div class="page-header">
-        <p class="overline">Calendar</p>
-        <h1 class="page-title">Events &amp; Tournaments</h1>
-        <p class="page-lead">Upcoming tournaments, workshops, training camps, and seminars. Register early — seats are limited.</p>
+  <main id="main-content">
+
+    <!-- ─── EVENTS HERO (#28 §5–8) ────────────────────────── -->
+    <section class="events-hero">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <p class="eyebrow">Participate &amp; Compete</p>
+          <h1 class="section-title" style="font-size: var(--text-display-lg);">Events</h1>
+          <p class="section-subtitle">
+            Tournaments, workshops, training sessions, and community gatherings — find your next opportunity.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <div class="filter-bar" id="filter-bar">
-        <button class="filter-btn is-active" data-type="all">All</button>
-        <button class="filter-btn" data-type="tournament">Tournaments</button>
-        <button class="filter-btn" data-type="workshop">Workshops</button>
-        <button class="filter-btn" data-type="camp">Camps</button>
-        <button class="filter-btn" data-type="seminar">Seminars</button>
+    <!-- ─── DISCOVERY (#28 §9–18) ─────────────────────────── -->
+    <section class="section">
+      <div class="container">
+
+        <div class="filter-bar" id="filter-bar" data-reveal>
+          <button class="filter-btn is-active" data-status="">All Events</button>
+          <button class="filter-btn" data-status="upcoming">Upcoming</button>
+          <button class="filter-btn" data-status="open">Open Registration</button>
+          <button class="filter-btn" data-status="completed">Completed</button>
+        </div>
+
+        <div id="events-collection">
+          <div class="state-loading"><div class="spinner"></div></div>
+        </div>
+
       </div>
+    </section>
 
-      <div id="events-list"><div class="state-loading"><div class="spinner"></div></div></div>
-    </div>
+    <!-- ─── CTA ───────────────────────────────────────────── -->
+    <section class="cta-block">
+      <div class="container" data-reveal>
+        <h2 class="cta-block__title">Want to Host an Event?</h2>
+        <p class="cta-block__text">Partner with Pak Debate Forum for your next tournament, workshop, or training event.</p>
+        <div class="cta-block__actions">
+          <a href="/contact.html" class="btn btn--primary btn--lg">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer id="app-footer" class="footer"></footer>
+  <footer id="app-footer"></footer>
 
   <script src="/js/api.js"></script>
   <script src="/js/nav.js"></script>
+  <script src="/js/main.js"></script>
   <script>
-    let allEvents = [];
-    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const STATUS_BADGE = { upcoming:'badge', open:'badge--green', closed:'badge--red', completed:'badge--blue' };
-
-    function parseDate(s) {
-      const d = new Date(s);
-      return { day: d.getDate(), month: MONTHS[d.getMonth()], year: d.getFullYear() };
+    function statusBadge(status) {
+      const map = {
+        upcoming: 'badge--accent',
+        open:     'badge--green',
+        completed:'badge--muted',
+        cancelled:'badge--red',
+      };
+      return `<span class="badge ${map[status] || 'badge--muted'}">${status}</span>`;
     }
 
-    function render(events) {
-      const el = document.getElementById('events-list');
-      if (!events.length) { el.innerHTML = '<div class="state-empty">No events found.</div>'; return; }
-      el.innerHTML = events.map(ev => {
-        const d = parseDate(ev.date_start);
-        return `
-          <div class="event-row">
-            <div class="event-date-box">
-              <div class="day">${d.day}</div>
-              <div class="month">${d.month}</div>
-            </div>
-            <div class="event-info">
-              <div style="display:flex;gap:var(--sp-2);align-items:center;margin-bottom:var(--sp-2);flex-wrap:wrap;">
-                <span class="badge badge--accent">${ev.type}</span>
-                <span class="badge ${STATUS_BADGE[ev.status]||'badge'}">${ev.status}</span>
-                ${ev.fee===0?'<span class="badge badge--green">Free</span>':''}
-              </div>
-              <h2 style="font-size:var(--text-xl);font-weight:600;margin-bottom:var(--sp-1);">${ev.title}</h2>
-              <p style="font-size:var(--text-sm);color:var(--c-text-muted);">
-                ${ev.city||''}${ev.venue?' · '+ev.venue:''} 
-                ${ev.date_end && ev.date_end!==ev.date_start?' — '+ev.date_end:''}
-              </p>
-              ${ev.registration_deadline?`<p style="font-size:var(--text-xs);color:var(--c-text-sub);margin-top:var(--sp-1);">Registration deadline: ${ev.registration_deadline}</p>`:''}
-            </div>
-            <div style="display:flex;flex-direction:column;gap:var(--sp-2);align-items:flex-end;">
-              <div style="font-size:var(--text-sm);color:var(--c-accent);font-weight:600;">${ev.fee===0?'Free':'PKR '+ev.fee.toLocaleString()}</div>
-              <a href="/event.html?id=${ev.id}" class="btn btn--ghost btn--sm">Details</a>
-              ${ev.status==='open'?`<a href="/register.html?type=event&id=${ev.id}&name=${encodeURIComponent(ev.title)}" class="btn btn--primary btn--sm">Register</a>`:''}
-            </div>
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      if (isNaN(d)) return dateStr;
+      const day = d.getDate();
+      const month = d.toLocaleString('en', { month: 'short' }).toUpperCase();
+      const year = d.getFullYear();
+      return { day, month, full: `${day} ${month} ${year}` };
+    }
+
+    function renderEvents(events) {
+      const el = document.getElementById('events-collection');
+      if (!events.length) {
+        el.innerHTML = `
+          <div class="state-message">
+            <div class="state-message__icon">📅</div>
+            <p class="state-message__title">No Events Found</p>
+            <p class="state-message__text">There are no events matching this filter right now. Check back soon.</p>
           </div>`;
+        return;
+      }
+      el.innerHTML = events.map(ev => {
+        const dt = formatDate(ev.date_start);
+        return `
+        <article class="event-row" data-reveal>
+          ${dt ? `
+          <div class="event-date-box">
+            <div class="day">${dt.day}</div>
+            <div class="month">${dt.month}</div>
+          </div>` : ''}
+          <div class="event-info">
+            <div style="display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin-bottom: var(--sp-2);">
+              <h2 style="font-family: var(--font-display); font-size: var(--text-heading-sm); font-weight: var(--w-semibold); color: var(--color-text-primary);">${ev.title}</h2>
+              ${statusBadge(ev.status)}
+            </div>
+            <p style="font-size: var(--text-body-sm); color: var(--color-text-supporting); line-height: var(--lh-body); margin-bottom: var(--sp-3);">
+              ${ev.description ? ev.description.substring(0, 180) + '…' : ''}
+            </p>
+            <div style="display: flex; gap: var(--sp-4); flex-wrap: wrap; font-size: var(--text-meta); color: var(--color-text-muted);">
+              ${ev.city ? `<span>📍 ${ev.city}${ev.venue ? ', ' + ev.venue : ''}</span>` : ''}
+              <span class="badge badge--muted">${ev.type}</span>
+              <span>${ev.fee === 0 ? 'Free' : 'PKR ' + (ev.fee || 0).toLocaleString()}</span>
+            </div>
+          </div>
+          <a href="/event.html?id=${ev.id}" class="btn btn--secondary btn--sm" style="flex-shrink: 0;">View Details →</a>
+        </article>`;
       }).join('');
+      if (window.initReveals) window.initReveals(el);
     }
 
-    async function init() {
+    function applyFilter(st, pushHistory = true) {
+      const targetStatus = st || '';
+      const btn = document.querySelector(`.filter-btn[data-status="${targetStatus}"]`) || document.querySelector(`.filter-btn[data-status=""]`);
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+      const activeStatus = btn ? btn.dataset.status : '';
+      if (btn) btn.classList.add('is-active');
+
+      if (pushHistory) {
+        const url = new URL(window.location.href);
+        if (activeStatus) {
+          url.searchParams.set('status', activeStatus);
+        } else {
+          url.searchParams.delete('status');
+        }
+        window.history.pushState({}, '', url.toString());
+      }
+
+      load(activeStatus);
+    }
+
+    async function load(status) {
+      document.getElementById('events-collection').innerHTML = '<div class="state-loading"><div class="spinner"></div></div>';
       try {
-        const { events } = await API.events.list('upcoming,open,closed,completed');
-        allEvents = events;
-        render(events);
+        const { events } = await API.events.list(status);
+        renderEvents(events);
       } catch(e) {
-        document.getElementById('events-list').innerHTML = `<div class="state-error">${e.message}</div>`;
+        document.getElementById('events-collection').innerHTML = `<div class="state-error">${e.message}</div>`;
       }
     }
 
     document.getElementById('filter-bar').addEventListener('click', e => {
       const btn = e.target.closest('.filter-btn');
       if (!btn) return;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      const type = btn.dataset.type;
-      render(type === 'all' ? allEvents : allEvents.filter(ev => ev.type === type));
+      applyFilter(btn.dataset.status, true);
     });
 
-    init();
+    window.addEventListener('popstate', () => {
+      const params = new URLSearchParams(window.location.search);
+      applyFilter(params.get('status') || '', false);
+    });
+
+    const initialStatus = new URLSearchParams(window.location.search).get('status') || '';
+    applyFilter(initialStatus, false);
   </script>
 </body>
 </html>

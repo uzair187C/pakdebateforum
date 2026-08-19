@@ -3,473 +3,317 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Pak Debate Forum Academy — Train your voice. Sharpen your mind. Compete with purpose. World-class debate, public speaking, and critical thinking training for Pakistan's next generation." />
-  <meta name="theme-color" content="#08080E" />
+  <meta name="description" content="Pak Debate Forum — Pakistan's premier institution for competitive debate, public speaking, and critical thinking. Train your voice. Sharpen your mind. Compete with purpose." />
+  <meta name="theme-color" content="#050505" />
   <meta name="robots" content="index, follow" />
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
-  <meta property="og:site_name"   content="Pak Debate Forum Academy" />
-  <meta property="og:title"       content="Pak Debate Forum Academy — Train Your Voice. Compete with Purpose." />
-  <meta property="og:description" content="World-class debate training for Pakistan's next generation of thinkers and speakers." />
-  <meta property="og:url"         content="https://pakdebate.com/" />
+  <meta property="og:site_name"   content="Pak Debate Forum" />
+  <meta property="og:title"       content="Pak Debate Forum — Train Your Voice. Compete with Purpose." />
+  <meta property="og:description" content="Pakistan's premier institution for competitive debate, public speaking, and critical thinking training." />
+  <meta property="og:url"         content="https://pakdebateforum.com/" />
 
   <!-- Twitter -->
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Pak Debate Forum Academy" />
+  <meta name="twitter:title"       content="Pak Debate Forum" />
   <meta name="twitter:description" content="Train your voice. Sharpen your mind. Compete with purpose." />
 
-  <title>Pak Debate Forum Academy — Train Your Voice. Compete with Purpose.</title>
+  <title>Pak Debate Forum — Train Your Voice. Compete with Purpose.</title>
 
-  <!-- Preconnect fonts -->
+  <!-- Preconnect fonts (#03 §2: Cormorant Garamond + Manrope) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Design system -->
   <link rel="stylesheet" href="/css/tokens.css" />
   <link rel="stylesheet" href="/css/base.css" />
   <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/page.css" />
   <link rel="stylesheet" href="/css/animations.css" />
 </head>
 <body>
 
-  <!-- Skip to content (accessibility) -->
+  <!-- Skip to content (#33 §37) -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- ═══════════════════════════════════════════════════════
-       NAVIGATION
-       ═══════════════════════════════════════════════════ -->
-  <header id="nav" class="nav" role="banner">
-    <div class="nav__inner container">
+  <!-- ═══ GLOBAL HEADER ═══════════════════════════════════════ -->
+  <header id="app-nav"></header>
+  <div id="app-drawer"></div>
 
-      <!-- Logo -->
-      <a href="/" class="nav__logo" aria-label="Pak Debate Forum Academy — Home">
-        <span class="nav__logo-mark">Pak Debate Forum</span>
-        <span class="nav__logo-badge">Academy</span>
-      </a>
-
-      <!-- Desktop links -->
-      <nav aria-label="Primary navigation">
-        <ul class="nav__links" role="list">
-          <li><a href="/"           class="nav__link is-active">Home</a></li>
-          <li><a href="/about.html" class="nav__link">About</a></li>
-          <li><a href="#"           class="nav__link">Academy</a></li>
-          <li><a href="#"           class="nav__link">Programs</a></li>
-          <li><a href="/events.html" class="nav__link">Events</a></li>
-          <li><a href="/resources.html" class="nav__link">Resources</a></li>
-          <li><a href="#"           class="nav__link">Results</a></li>
-          <li><a href="#"           class="nav__link">Contact</a></li>
-        </ul>
-      </nav>
-
-      <!-- CTA + Hamburger -->
-      <div class="nav__actions">
-        <a href="#" class="btn btn--primary btn--sm">
-          Join the Academy
-        </a>
-        <button
-          id="hamburger"
-          class="nav__hamburger"
-          aria-label="Toggle menu"
-          aria-expanded="false"
-          aria-controls="nav-drawer"
-        >
-          <span class="nav__hamburger-line"></span>
-          <span class="nav__hamburger-line"></span>
-          <span class="nav__hamburger-line"></span>
-        </button>
-      </div>
-
-    </div>
-  </header>
-
-  <!-- Mobile Drawer -->
-  <div id="nav-drawer" class="nav__drawer" role="dialog" aria-label="Mobile navigation" aria-modal="true">
-    <nav>
-      <ul class="nav__drawer-links" role="list">
-        <li><a href="/"           class="nav__drawer-link">Home</a></li>
-        <li><a href="/about.html" class="nav__drawer-link">About</a></li>
-        <li><a href="#"           class="nav__drawer-link">Academy</a></li>
-        <li><a href="#"           class="nav__drawer-link">Programs</a></li>
-        <li><a href="/events.html" class="nav__drawer-link">Events</a></li>
-        <li><a href="/resources.html" class="nav__drawer-link">Resources</a></li>
-        <li><a href="#"           class="nav__drawer-link">Results</a></li>
-        <li><a href="#"           class="nav__drawer-link">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="nav__drawer-cta">
-      <a href="#" class="btn btn--primary btn--lg">Join the Academy</a>
-      <a href="#" class="btn btn--ghost btn--lg">Explore Programs</a>
-    </div>
-  </div>
-
-
-  <!-- ═══════════════════════════════════════════════════════
-       MAIN CONTENT
-       ═══════════════════════════════════════════════════ -->
+  <!-- ═══ MAIN CONTENT ════════════════════════════════════════ -->
   <main id="main-content">
 
-    <!-- ── HERO ────────────────────────────────────────── -->
-    <section class="hero" id="hero" aria-label="Hero — Pak Debate Forum Academy">
+    <!-- ─── HERO ──────────────────────────────────────────── -->
+    <section class="hero" id="hero">
+      <div class="hero__content hero-entrance">
+        <p class="hero__eyebrow">Pak Debate Forum</p>
 
-      <!-- Podium background image -->
-      <div class="hero__bg" aria-hidden="true">
-        <img
-          class="hero__img"
-          src="/img/hero-podium.png"
-          alt="Cinematic debate podium representing Pak Debate Forum Academy"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </div>
+        <h1 class="hero__title">
+          Master the<br>Art of <span class="text-accent">Debate.</span>
+        </h1>
 
-      <!-- Overlay gradients -->
-      <div class="hero__overlay" aria-hidden="true"></div>
-      <div class="hero__vignette" aria-hidden="true"></div>
+        <p class="hero__subtitle">
+          Pakistan's premier institution for competitive debate, public speaking, and critical thinking. We build the next generation of thinkers, speakers, and leaders.
+        </p>
 
-      <!-- Hero content -->
-      <div class="container" style="position:relative; z-index:3; width:100%;">
-        <div class="hero__content">
-
-          <!-- Eyebrow -->
-          <div class="hero__eyebrow" aria-hidden="true">
-            <span class="hero__eyebrow-line"></span>
-            <span class="hero__eyebrow-text">Pak Debate Forum Academy</span>
-          </div>
-
-          <!-- Headline -->
-          <h1 class="hero__title">
-            Train your voice.<br />
-            <em>Sharpen your mind.</em>
-          </h1>
-
-          <!-- Subtitle -->
-          <p class="hero__subtitle">
-            World-class debate, public speaking, and critical thinking training —
-            designed to build the next generation of Pakistani debaters
-            who compete with confidence on every stage.
-          </p>
-
-          <!-- CTAs -->
-          <div class="hero__actions">
-            <a href="#" class="btn btn--primary btn--xl">
-              Apply to the Academy
-              <span class="btn__arrow" aria-hidden="true">→</span>
-            </a>
-            <a href="#" class="btn btn--ghost btn--xl">
-              Explore Programs
-            </a>
-          </div>
-
+        <div class="hero__actions">
+          <a href="/academy.html" class="btn btn--primary btn--lg">Explore Academy</a>
+          <a href="/events.html" class="btn btn--secondary btn--lg">View Events</a>
         </div>
+
       </div>
 
-      <!-- Scroll indicator -->
       <div class="hero__scroll" aria-hidden="true">
         <span>Scroll</span>
-        <span class="hero__scroll-line"></span>
+        <div class="hero__scroll-line"></div>
       </div>
-
     </section>
 
 
-    <!-- ── TEASER / PLACEHOLDER ───────────────────────── -->
-    <!-- Sections below will be built in PASS 3 onwards. -->
-    <!-- These are structural placeholders only.          -->
-
-    <section class="section section--ruled" id="about-teaser" aria-label="About teaser">
+    <!-- ─── PROVEN NUMBERS ──────────────────────────────────── -->
+    <section class="section--sm stats-section" aria-label="PDF by the numbers">
       <div class="container">
-        <div style="
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: clamp(3rem, 6vw, 6rem);
-          align-items: center;
-        ">
-
-          <div>
-            <p class="overline" data-reveal>Established for Excellence</p>
-            <h2 class="section-title" data-reveal style="margin-bottom: var(--sp-6);">
-              Pakistan's premier<br /><em class="text-accent italic">debate academy.</em>
-            </h2>
-            <p class="section-subtitle" data-reveal style="margin-bottom: var(--sp-8);">
-              Pak Debate Forum has been at the forefront of competitive debate in Pakistan for over a decade.
-              The Academy is our flagship training programme — structured, rigorous, and built
-              around the skills that matter at every level of competition.
-            </p>
-            <a href="#" class="btn btn--ghost" data-reveal>
-              Learn About Us
-              <span class="btn__arrow" aria-hidden="true">→</span>
-            </a>
+        <p class="stats-eyebrow" data-reveal>By the Numbers</p>
+        <div class="stats-row stats-row--editorial" data-reveal-stagger>
+          <div class="stat stat--editorial">
+            <p class="stat__number stat__number--display" data-count="500" data-suffix="+">0</p>
+            <p class="stat__label">Students Trained</p>
           </div>
-
-          <div data-reveal-stagger style="
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border: 1px solid var(--c-border);
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-          ">
-            <div class="stat-card">
-              <span class="stat-card__value">
-                <span data-count="1200" data-suffix="+">0+</span>
-              </span>
-              <span class="stat-card__label">Students Trained</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-card__value">
-                <span data-count="80" data-suffix="+">0+</span>
-              </span>
-              <span class="stat-card__label">Tournaments Won</span>
-            </div>
-            <div class="stat-card" style="border-right:none; border-top:1px solid var(--c-border);">
-              <span class="stat-card__value">
-                <span data-count="12" data-suffix="">0</span>
-              </span>
-              <span class="stat-card__label">Years of Excellence</span>
-            </div>
-            <div class="stat-card" style="border-right:none; border-top:1px solid var(--c-border);">
-              <span class="stat-card__value">
-                <span data-count="6" data-suffix="">0</span>
-              </span>
-              <span class="stat-card__label">Expert Coaches</span>
-            </div>
+          <div class="stat__divider" aria-hidden="true"></div>
+          <div class="stat stat--editorial">
+            <p class="stat__number stat__number--display" data-count="50" data-suffix="+">0</p>
+            <p class="stat__label">Tournaments</p>
           </div>
+          <div class="stat__divider" aria-hidden="true"></div>
+          <div class="stat stat--editorial">
+            <p class="stat__number stat__number--display" data-count="15" data-suffix="+">0</p>
+            <p class="stat__label">Programs</p>
+          </div>
+          <div class="stat__divider" aria-hidden="true"></div>
+          <div class="stat stat--editorial">
+            <p class="stat__number stat__number--display" data-count="25" data-suffix="+">0</p>
+            <p class="stat__label">Cities Reached</p>
+          </div>
+        </div>
+        <p class="stats-credibility" data-reveal>Training debaters since 2020</p>
+      </div>
+    </section>
 
+
+    <!-- ─── WHAT WE OFFER (Features) ─────────────────────── -->
+    <section class="section section--alt" id="features">
+      <div class="container">
+        <div class="section-header section-header--center" data-reveal>
+          <p class="eyebrow" style="justify-content: center;">What We Offer</p>
+          <h2 class="section-title">Everything You Need to Excel</h2>
+          <p class="section-subtitle">
+            From beginner workshops to advanced tournament preparation — our programs cover every dimension of competitive debate and public speaking.
+          </p>
+        </div>
+
+        <div class="feature-grid" data-reveal-stagger>
+          <div class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/><circle cx="12" cy="12" r="6"/></svg>
+            </div>
+            <h3 class="feature-card__title">Competitive Debate</h3>
+            <p class="feature-card__text">British Parliamentary, Asian Parliamentary, World Schools — master the formats that matter on the global stage.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+            </div>
+            <h3 class="feature-card__title">Public Speaking</h3>
+            <p class="feature-card__text">Develop commanding presence, persuasive delivery, and the confidence to hold any audience's attention.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/></svg>
+            </div>
+            <h3 class="feature-card__title">Critical Thinking</h3>
+            <p class="feature-card__text">Sharpen your analytical skills with structured argument training, evidence evaluation, and logical reasoning.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+            </div>
+            <h3 class="feature-card__title">Tournaments</h3>
+            <p class="feature-card__text">Compete in national and international tournaments. Test your skills against the best debaters in Pakistan and beyond.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/></svg>
+            </div>
+            <h3 class="feature-card__title">Resources</h3>
+            <p class="feature-card__text">Access motion databases, adjudication guides, training materials, and curated content to accelerate your growth.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="feature-card__title">Community</h3>
+            <p class="feature-card__text">Join a network of debaters, coaches, and alumni across Pakistan who share your passion for reasoned discourse.</p>
+          </div>
         </div>
       </div>
     </section>
 
 
-    <!-- ── PROGRAMS TEASER ────────────────────────────── -->
-    <section class="section section--ruled" id="programs-teaser" aria-label="Programs teaser">
+    <!-- ─── PROGRAMS PREVIEW ──────────────────────────────── -->
+    <section class="section" id="programs-preview">
       <div class="container">
-
-        <div style="
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          gap: var(--sp-8);
-          margin-bottom: clamp(2.5rem, 4vw, 4rem);
-          flex-wrap: wrap;
-        ">
-          <div>
-            <p class="overline" data-reveal>What We Offer</p>
-            <h2 class="section-title" data-reveal>
-              Academy Programs
-            </h2>
-          </div>
-          <a href="#" class="btn btn--ghost" data-reveal style="flex-shrink:0;">
-            View All Programs
-            <span class="btn__arrow" aria-hidden="true">→</span>
-          </a>
+        <div class="section-header" data-reveal>
+          <p class="eyebrow">Academy Programs</p>
+          <h2 class="section-title">Find Your Path</h2>
+          <p class="section-subtitle">
+            Structured programs for every level — from first-time speakers to competitive veterans preparing for international circuits.
+          </p>
         </div>
 
-        <div data-reveal-stagger style="
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: var(--sp-6);
-        ">
-
-          <!-- Program Card 1 -->
-          <article class="card card--accent">
+        <div class="card-grid card-grid--3" id="homepage-programs" data-reveal-stagger>
+          <!-- Populated dynamically from API, or static fallback -->
+          <div class="card card--interactive">
             <div class="card__body">
-              <p class="card__label">Foundation</p>
-              <h3 class="card__title">Beginner Debate Training</h3>
-              <p class="card__description">
-                Perfect for students new to competitive debate. Build the foundations of argument construction,
-                rebuttal, and delivery across World Schools and British Parliamentary formats.
-              </p>
+              <p class="card__eyebrow">Beginner</p>
+              <h3 class="card__title">Introduction to Debate</h3>
+              <p class="card__description">Build your foundation. Learn argument structure, refutation techniques, and confident delivery from the ground up.</p>
+              <div class="card__meta">
+                <span>10 Weeks</span>
+                <span>Online</span>
+              </div>
             </div>
             <div class="card__footer">
-              <span style="font-size:var(--text-xs); color:var(--c-text-sub); letter-spacing:var(--track-wide); text-transform:uppercase; font-weight:var(--w-semibold);">Ages 12 – 16</span>
-              <a href="#" class="btn--text btn btn--sm">Learn more →</a>
+              <a href="/programs.html" class="btn btn--ghost btn--sm">View Program →</a>
             </div>
-          </article>
+          </div>
 
-          <!-- Program Card 2 -->
-          <article class="card card--accent">
+          <div class="card card--interactive">
             <div class="card__body">
-              <p class="card__label">Competitive</p>
-              <h3 class="card__title">Advanced Competitive Track</h3>
-              <p class="card__description">
-                Intensive coaching for debaters ready to compete at regional and national level.
-                Focus on strategy, research fluency, POI technique, and adjudication exposure.
-              </p>
+              <p class="card__eyebrow">Intermediate</p>
+              <h3 class="card__title">Competitive Debate Training</h3>
+              <p class="card__description">Advance your skills with tournament-focused training. Master BP, AP, and World Schools formats under expert coaching.</p>
+              <div class="card__meta">
+                <span>12 Weeks</span>
+                <span>Hybrid</span>
+              </div>
             </div>
             <div class="card__footer">
-              <span style="font-size:var(--text-xs); color:var(--c-text-sub); letter-spacing:var(--track-wide); text-transform:uppercase; font-weight:var(--w-semibold);">Ages 15 – 22</span>
-              <a href="#" class="btn--text btn btn--sm">Learn more →</a>
+              <a href="/programs.html" class="btn btn--ghost btn--sm">View Program →</a>
             </div>
-          </article>
+          </div>
 
-          <!-- Program Card 3 -->
-          <article class="card card--accent">
+          <div class="card card--interactive">
             <div class="card__body">
-              <p class="card__label">Public Speaking</p>
-              <h3 class="card__title">Confidence & Oratory</h3>
-              <p class="card__description">
-                For students who want to build presence, clarity, and persuasion in public forums,
-                MUNs, presentations, interviews, and everyday leadership contexts.
-              </p>
+              <p class="card__eyebrow">Advanced</p>
+              <h3 class="card__title">Public Speaking Masterclass</h3>
+              <p class="card__description">Elevate your oratory. Advanced rhetorical techniques, persuasion frameworks, and high-stakes presentation skills.</p>
+              <div class="card__meta">
+                <span>8 Weeks</span>
+                <span>In Person</span>
+              </div>
             </div>
             <div class="card__footer">
-              <span style="font-size:var(--text-xs); color:var(--c-text-sub); letter-spacing:var(--track-wide); text-transform:uppercase; font-weight:var(--w-semibold);">All Ages</span>
-              <a href="#" class="btn--text btn btn--sm">Learn more →</a>
+              <a href="/programs.html" class="btn btn--ghost btn--sm">View Program →</a>
             </div>
-          </article>
+          </div>
+        </div>
 
+        <div style="text-align: center; margin-top: var(--sp-10);" data-reveal>
+          <a href="/programs.html" class="btn btn--secondary">Explore All Programs</a>
         </div>
       </div>
     </section>
 
 
-    <!-- ── CTA BAND ────────────────────────────────────── -->
-    <section class="section--sm" id="cta-band" aria-label="Call to action">
+    <!-- ─── UPCOMING EVENTS ───────────────────────────────── -->
+    <section class="section section--alt" id="events-preview">
       <div class="container">
-        <div data-reveal style="
-          padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
-          border: 1px solid var(--c-border-2);
-          border-radius: var(--radius-2xl);
-          background: var(--c-surface);
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: var(--sp-8);
-          flex-wrap: wrap;
-          position: relative;
-          overflow: hidden;
-        ">
-          <!-- Decorative glow -->
-          <div aria-hidden="true" style="
-            position: absolute;
-            top: -60px; left: -60px;
-            width: 300px; height: 300px;
-            border-radius: 50%;
-            background: var(--c-accent-glow);
-            filter: blur(60px);
-            pointer-events: none;
-          "></div>
+        <div class="section-header" data-reveal>
+          <p class="eyebrow">Events</p>
+          <h2 class="section-title">Upcoming Events</h2>
+          <p class="section-subtitle">
+            Tournaments, workshops, and seminars designed to challenge and inspire.
+          </p>
+        </div>
 
-          <div style="position:relative; z-index:1;">
-            <h2 style="
-              font-family: var(--font-display);
-              font-size: clamp(var(--text-3xl), 4vw, var(--text-5xl));
-              font-weight: var(--w-bold);
-              letter-spacing: var(--track-tight);
-              line-height: var(--lead-tight);
-              color: var(--c-text);
-              margin-bottom: var(--sp-3);
-            ">Ready to compete with purpose?</h2>
-            <p style="font-size:var(--text-lg); color:var(--c-text-muted); max-width:52ch;">
-              Applications are open for the next Academy intake. Limited seats available.
-            </p>
+        <div class="card-grid" id="homepage-events" data-reveal-stagger>
+          <!-- Populated dynamically from API -->
+          <div class="state-message" id="events-loading">
+            <div class="skeleton" style="height: 200px; width: 100%;"></div>
           </div>
+        </div>
 
-          <div style="display:flex; gap:var(--sp-4); flex-wrap:wrap; flex-shrink:0; position:relative; z-index:1;">
-            <a href="#" class="btn btn--primary btn--lg">
-              Apply Now
-              <span class="btn__arrow" aria-hidden="true">→</span>
-            </a>
-            <a href="#" class="btn btn--ghost btn--lg">Free Consultation</a>
-          </div>
+        <div style="text-align: center; margin-top: var(--sp-10);" data-reveal>
+          <a href="/events.html" class="btn btn--secondary">View All Events</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── FINAL CTA ─────────────────────────────────────── -->
+    <section class="cta-block" id="join">
+      <div class="container" data-reveal>
+        <h2 class="cta-block__title">Ready to Find Your Voice?</h2>
+        <p class="cta-block__text">
+          Join hundreds of students who have transformed their communication, critical thinking, and competitive debate skills through Pak Debate Forum.
+        </p>
+        <div class="cta-block__actions">
+          <a href="/register.html" class="btn btn--primary btn--lg">Join PDF Today</a>
+          <a href="/contact.html" class="btn btn--secondary btn--lg">Get in Touch</a>
         </div>
       </div>
     </section>
 
   </main>
 
+  <!-- ═══ GLOBAL FOOTER ═══════════════════════════════════════ -->
+  <footer id="app-footer"></footer>
 
-  <!-- ═══════════════════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════════════ -->
-  <footer class="footer" id="footer" role="contentinfo">
-    <div class="container">
-
-      <div class="footer__main">
-
-        <!-- Brand column -->
-        <div>
-          <p class="footer__brand-name">Pak Debate Forum</p>
-          <p class="footer__brand-badge">Academy</p>
-          <p class="footer__tagline">
-            Train your voice. Sharpen your mind.<br />
-            Compete with purpose.
-          </p>
-          <!-- Social (icons as text glyphs — replace with SVGs in PASS 6) -->
-          <div class="footer__social" aria-label="Social media links">
-            <a href="#" class="footer__social-link" aria-label="Instagram">&#x1F4F7;</a>
-            <a href="#" class="footer__social-link" aria-label="Twitter / X">&#x1D54F;</a>
-            <a href="#" class="footer__social-link" aria-label="LinkedIn">in</a>
-            <a href="#" class="footer__social-link" aria-label="YouTube">&#x25B6;</a>
-          </div>
-        </div>
-
-        <!-- Programs -->
-        <div>
-          <p class="footer__col-heading">Programs</p>
-          <ul class="footer__links" role="list">
-            <li><a href="#" class="footer__link">Beginner Debate</a></li>
-            <li><a href="#" class="footer__link">Advanced Track</a></li>
-            <li><a href="#" class="footer__link">Public Speaking</a></li>
-            <li><a href="#" class="footer__link">Summer Intensive</a></li>
-            <li><a href="#" class="footer__link">Online Coaching</a></li>
-          </ul>
-        </div>
-
-        <!-- Organisation -->
-        <div>
-          <p class="footer__col-heading">Organisation</p>
-          <ul class="footer__links" role="list">
-            <li><a href="/about.html"     class="footer__link">About Us</a></li>
-            <li><a href="#"               class="footer__link">Our Coaches</a></li>
-            <li><a href="#"               class="footer__link">Results &amp; Honours</a></li>
-            <li><a href="/events.html"    class="footer__link">Events &amp; Tournaments</a></li>
-            <li><a href="/resources.html" class="footer__link">Resources</a></li>
-          </ul>
-        </div>
-
-        <!-- Connect -->
-        <div>
-          <p class="footer__col-heading">Connect</p>
-          <ul class="footer__links" role="list">
-            <li><a href="#" class="footer__link">Contact Us</a></li>
-            <li><a href="#" class="footer__link">Apply to Academy</a></li>
-            <li><a href="#" class="footer__link">Host a Tournament</a></li>
-            <li><a href="#" class="footer__link">Partner with Us</a></li>
-            <li><a href="#" class="footer__link">Press &amp; Media</a></li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Bottom bar -->
-      <div class="footer__bottom">
-        <p class="footer__copy">
-          &copy; <span id="footer-year"></span> Pak Debate Forum. All rights reserved.
-        </p>
-        <nav aria-label="Legal links">
-          <ul class="footer__legal" role="list">
-            <li><a href="#" class="footer__legal-link">Privacy Policy</a></li>
-            <li><a href="#" class="footer__legal-link">Terms of Use</a></li>
-            <li><a href="#" class="footer__legal-link">Code of Conduct</a></li>
-          </ul>
-        </nav>
-      </div>
-
-    </div>
-  </footer>
-
-
-  <!-- ═══════════════════════════════════════════════════════
-       SCRIPTS
-       ═══════════════════════════════════════════════════ -->
+  <!-- Scripts -->
+  <script src="/js/nav.js"></script>
+  <script src="/js/main.js"></script>
   <script>
-    // Dynamic year in footer
-    document.getElementById('footer-year').textContent = new Date().getFullYear();
+    // Fetch upcoming events for homepage preview
+    (async function() {
+      try {
+        const res = await fetch('/api/events?status=upcoming');
+        const data = await res.json();
+        const container = document.getElementById('homepage-events');
+        if (!container) return;
+
+        if (!data.events || data.events.length === 0) {
+          container.innerHTML = `
+            <div class="state-message" style="grid-column: 1 / -1;">
+              <p class="state-message__title">No upcoming events</p>
+              <p class="state-message__text">Check back soon for new tournaments, workshops, and seminars.</p>
+            </div>`;
+          return;
+        }
+
+        container.innerHTML = data.events.slice(0, 4).map(e => `
+          <div class="card card--interactive">
+            <div class="card__body">
+              <p class="card__eyebrow">${e.type || 'Event'}</p>
+              <h3 class="card__title">${e.title}</h3>
+              <p class="card__description">${e.description || ''}</p>
+              <div class="card__meta">
+                ${e.date_start ? `<span>${new Date(e.date_start).toLocaleDateString('en-PK', { day: 'numeric', month: 'short', year: 'numeric' })}</span>` : ''}
+                ${e.venue ? `<span>${e.venue}</span>` : ''}
+                ${e.city ? `<span>${e.city}</span>` : ''}
+              </div>
+            </div>
+            <div class="card__footer">
+              <span class="badge badge--${e.status === 'open' ? 'green' : 'gold'}">${e.status}</span>
+              <a href="/event.html?id=${e.id}" class="btn btn--ghost btn--sm">View Details →</a>
+            </div>
+          </div>`).join('');
+      } catch (err) {
+        console.warn('Events fetch:', err);
+      }
+    })();
   </script>
-  <script src="/js/main.js" defer></script>
 
 </body>
 </html>

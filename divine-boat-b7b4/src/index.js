@@ -217,6 +217,38 @@ async function createFeedback(env, req) {
   return json({ success: true, id: r.meta.last_row_id }, 201);
 }
 
+async function globalSearch(env, url) {
+  try {
+    const q = (url.searchParams.get('q') || '').trim();
+    if (!q || q.length < 2) {
+      return json({ query: q, results: { programs: [], events: [], resources: [], coaches: [] } });
+    }
+    const safeQuery = q.slice(0, 100);
+    const escapedQuery = safeQuery.replace(/[%_\\]/g, '\\$&');
+    const term = `%${escapedQuery}%`;
+
+    const [programs, events, resources, coaches] = await Promise.all([
+      env.DB.prepare("SELECT id, title, category, level, description FROM programs WHERE active=1 AND (title LIKE ? ESCAPE '\\' OR description LIKE ? ESCAPE '\\' OR category LIKE ? ESCAPE '\\') LIMIT 10").bind(term, term, term).all(),
+      env.DB.prepare("SELECT id, title, type, venue, city, description FROM events WHERE (title LIKE ? ESCAPE '\\' OR description LIKE ? ESCAPE '\\' OR city LIKE ? ESCAPE '\\') LIMIT 10").bind(term, term, term).all(),
+      env.DB.prepare("SELECT id, title, category, description, url, file_type FROM resources WHERE active=1 AND (title LIKE ? ESCAPE '\\' OR description LIKE ? ESCAPE '\\' OR category LIKE ? ESCAPE '\\') LIMIT 10").bind(term, term, term).all(),
+      env.DB.prepare("SELECT id, name, title, expertise, bio FROM coaches WHERE active=1 AND (name LIKE ? ESCAPE '\\' OR bio LIKE ? ESCAPE '\\' OR expertise LIKE ? ESCAPE '\\') LIMIT 10").bind(term, term, term).all(),
+    ]);
+
+    return json({
+      query: safeQuery,
+      results: {
+        programs: programs.results || [],
+        events: events.results || [],
+        resources: resources.results || [],
+        coaches: coaches.results || []
+      }
+    });
+  } catch (e) {
+    console.error('Search query error:', e);
+    return json({ query: '', results: { programs: [], events: [], resources: [], coaches: [] } }, 500);
+  }
+}
+
 // ─── Admin: Stats ──────────────────────────────────────────
 
 async function adminStats(env) {
@@ -430,6 +462,18 @@ async function adminCreateResource(env, req) {
   return json({ success: true, id: r.meta.last_row_id }, 201);
 }
 
+async function adminUpdateResource(env, id, req) {
+  const b = await body(req);
+  if (!b) return err('Invalid JSON');
+  await env.DB.prepare(`
+    UPDATE resources SET
+      title=COALESCE(?,title), category=COALESCE(?,category),
+      description=?, url=COALESCE(?,url), file_type=COALESCE(?,file_type)
+    WHERE id=?
+  `).bind(b.title||null, b.category||null, b.description||null, b.url||null, b.file_type||null, id).run();
+  return json({ success: true });
+}
+
 async function adminDeleteResource(env, id) {
   await env.DB.prepare('DELETE FROM resources WHERE id=?').bind(id).run();
   return json({ success: true });
@@ -553,6 +597,7 @@ export default {
           if (method === 'POST') return await adminCreateResource(env, request);
         }
         if ((p = match('/api/admin/resources/:id', path))) {
+          if (method === 'PUT')    return await adminUpdateResource(env, p.id, request);
           if (method === 'DELETE') return await adminDeleteResource(env, p.id);
         }
 
@@ -570,6 +615,8 @@ export default {
       }
 
       // ── Public routes (/api/*) ───────────────────────────
+
+      if (path === '/api/search' && method === 'GET') return await globalSearch(env, url);
 
       if (path === '/api/programs' && method === 'GET') return await listPrograms(env);
       let p;
@@ -591,7 +638,7 @@ export default {
 
     } catch (e) {
       console.error('Worker error:', e);
-      return err(e.message || 'Internal server error', 500);
+      return err('Internal server error', 500);
     }
   },
 };

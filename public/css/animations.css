@@ -1,207 +1,141 @@
 /**
- * PAK DEBATE FORUM — ACADEMY
- * Animations  |  PASS 1 — Foundation
- * Keyframes · Scroll reveals · Parallax utilities
+ * PAK DEBATE FORUM — Animation System
+ * Source of truth: #35 §128–152, #08, #17, #25
+ * ────────────────────────────────────────────────────────────────
+ * Motion is brand language — smooth, cinematic, controlled.
+ * Every animation respects prefers-reduced-motion via base.css.
  */
 
-/* ════ KEYFRAMES ══════════════════════════════════════════ */
-
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes slide-left {
-  from { opacity: 0; transform: translateX(-32px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slide-right {
-  from { opacity: 0; transform: translateX(32px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes scale-in {
-  from { opacity: 0; transform: scale(0.94); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes line-grow {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
-
-@keyframes number-count {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-
-/* ════ HERO ENTRY ANIMATIONS ══════════════════════════════ */
-
-.hero__eyebrow {
-  animation: fade-up var(--dur-slower) var(--ease-out) 200ms both;
-}
-.hero__title {
-  animation: fade-up var(--dur-slower) var(--ease-out) 380ms both;
-}
-.hero__subtitle {
-  animation: fade-up var(--dur-slower) var(--ease-out) 520ms both;
-}
-.hero__actions {
-  animation: fade-up var(--dur-slower) var(--ease-out) 640ms both;
-}
-.hero__scroll {
-  animation: fade-in var(--dur-slower) var(--ease-out) 900ms both;
-}
-
-
-/* ════ SCROLL REVEAL SYSTEM ═══════════════════════════════ */
-
-/*
- * Usage:
- *   <element data-reveal>             — default: fade-up
- *   <element data-reveal="fade-in">
- *   <element data-reveal="slide-left">
- *   <element data-reveal="slide-right">
- *   <element data-reveal="scale">
- *   <div data-reveal-stagger>         — children stagger automatically
- *
- * JS adds .is-visible when element enters viewport.
- */
+/* ═══ SCROLL REVEAL ══════════════════════════════════════════ */
+/* #35 §141-142: Subtle entrance, opacity + translation        */
 
 [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
   transition:
-    opacity var(--dur-slower) var(--ease-out),
-    transform var(--dur-slower) var(--ease-out);
+    opacity var(--dur-long) var(--ease-emphasized),
+    transform var(--dur-long) var(--ease-emphasized);
 }
 
-[data-reveal="fade-in"] {
-  transform: none;
-}
-
-[data-reveal="slide-left"] {
-  transform: translateX(-28px);
-}
-
-[data-reveal="slide-right"] {
-  transform: translateX(28px);
-}
-
-[data-reveal="scale"] {
-  transform: scale(0.94);
-}
-
-/* Visible state — added by IntersectionObserver */
 [data-reveal].is-visible {
   opacity: 1;
-  transform: none;
+  transform: translateY(0);
 }
 
-
-/* Stagger container — children animate in sequence */
+/* Stagger children */
 [data-reveal-stagger] > * {
   opacity: 0;
   transform: translateY(20px);
   transition:
-    opacity var(--dur-slower) var(--ease-out),
-    transform var(--dur-slower) var(--ease-out);
+    opacity var(--dur-medium) var(--ease-emphasized),
+    transform var(--dur-medium) var(--ease-emphasized);
 }
-
-[data-reveal-stagger].is-visible > *:nth-child(1)  { transition-delay:  60ms; }
-[data-reveal-stagger].is-visible > *:nth-child(2)  { transition-delay: 130ms; }
-[data-reveal-stagger].is-visible > *:nth-child(3)  { transition-delay: 200ms; }
-[data-reveal-stagger].is-visible > *:nth-child(4)  { transition-delay: 270ms; }
-[data-reveal-stagger].is-visible > *:nth-child(5)  { transition-delay: 340ms; }
-[data-reveal-stagger].is-visible > *:nth-child(6)  { transition-delay: 410ms; }
-[data-reveal-stagger].is-visible > *:nth-child(n+7){ transition-delay: 480ms; }
 
 [data-reveal-stagger].is-visible > * {
   opacity: 1;
-  transform: none;
+  transform: translateY(0);
 }
 
+[data-reveal-stagger].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-reveal-stagger].is-visible > *:nth-child(2) { transition-delay: 80ms; }
+[data-reveal-stagger].is-visible > *:nth-child(3) { transition-delay: 160ms; }
+[data-reveal-stagger].is-visible > *:nth-child(4) { transition-delay: 240ms; }
+[data-reveal-stagger].is-visible > *:nth-child(5) { transition-delay: 320ms; }
+[data-reveal-stagger].is-visible > *:nth-child(6) { transition-delay: 400ms; }
 
-/* ════ SECTION TRANSITION LINES ═══════════════════════════ */
+/* Scale reveal — hero objects */
+[data-reveal="scale"] {
+  opacity: 0;
+  transform: scale(0.92);
+  transition:
+    opacity var(--dur-cinematic) var(--ease-emphasized),
+    transform var(--dur-cinematic) var(--ease-emphasized);
+}
+
+[data-reveal="scale"].is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Fade-only reveal — typography */
+[data-reveal="fade"] {
+  opacity: 0;
+  transform: none;
+  transition: opacity var(--dur-long) var(--ease-standard);
+}
+
+[data-reveal="fade"].is-visible {
+  opacity: 1;
+}
+
+/* ═══ LINE REVEALS ═══════════════════════════════════════════ */
+/* For decorative gold/green accent lines                      */
 
 .reveal-line {
-  display: block;
-  height: 1px;
-  background: var(--c-accent);
-  transform-origin: left;
-  transform: scaleX(0);
-  transition: transform var(--dur-slower) var(--ease-out);
+  width: 0;
+  transition: width var(--dur-long) var(--ease-emphasized);
 }
 
 .reveal-line.is-visible {
-  transform: scaleX(1);
+  width: 64px;
 }
 
+/* ═══ HERO SPECIFIC ══════════════════════════════════════════ */
 
-/* ════ HOVER STATES ═══════════════════════════════════════ */
-
-/* Lift on hover — apply to any element */
-.hover-lift {
-  transition: transform var(--dur-base) var(--ease-out);
-}
-.hover-lift:hover { transform: translateY(-4px); }
-
-/* Glow on hover */
-.hover-glow:hover {
-  box-shadow: 0 0 0 1px var(--c-accent-border), var(--shadow-accent);
+.hero-entrance {
+  opacity: 0;
+  transform: translateY(32px);
+  animation: hero-enter var(--dur-cinematic) var(--ease-emphasized) forwards;
+  animation-delay: 200ms;
 }
 
-
-/* ════ LOADING STATES ═════════════════════════════════════ */
-
-@keyframes shimmer {
-  from { background-position: -200% 0; }
-  to   { background-position: 200% 0; }
-}
-
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--c-surface) 25%,
-    var(--c-surface-2) 50%,
-    var(--c-surface) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.6s ease-in-out infinite;
-  border-radius: var(--radius-md);
-}
-
-
-/* ════ REDUCED MOTION ═════════════════════════════════════ */
-
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal],
-  [data-reveal-stagger] > *,
-  .reveal-line {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
+@keyframes hero-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  .hero__eyebrow,
-  .hero__title,
-  .hero__subtitle,
-  .hero__actions,
-  .hero__scroll {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
+/* Podium entrance — scale + opacity (#35 §87) */
+.hero-podium-entrance {
+  opacity: 0;
+  transform: scale(0.88) translateY(20px);
+  animation: podium-enter 1.4s var(--ease-emphasized) forwards;
+  animation-delay: 500ms;
+}
 
-  .hero__scroll-line {
-    animation: none !important;
+@keyframes podium-enter {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
+}
+
+/* Subtle ambient glow pulse — gold spotlight (#35 §68) */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+
+.glow-ambient {
+  animation: glow-pulse 4s var(--ease-standard) infinite;
+}
+
+/* ═══ COUNTER ANIMATION ══════════════════════════════════════ */
+/* Handled by JS (main.js), these are supporting styles        */
+
+[data-count] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══ PAGE-LEVEL TRANSITIONS ═════════════════════════════════ */
+/* #33 §53: Fast, connect pages, not a loading screen          */
+
+.page-enter {
+  opacity: 0;
+  animation: page-fade-in var(--dur-medium) var(--ease-entrance) forwards;
+}
+
+@keyframes page-fade-in {
+  to { opacity: 1; }
 }

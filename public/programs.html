@@ -1,92 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Programs | Pak Debate Forum Academy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse all Pak Debate Forum Academy programs — debate training, public speaking, writing workshops, and competitive preparation." />
+  <meta name="theme-color" content="#050505" />
+  <title>Programs — Pak Debate Forum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/tokens.css" /><link rel="stylesheet" href="/css/base.css" />
-  <link rel="stylesheet" href="/css/components.css" /><link rel="stylesheet" href="/css/animations.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
   <link rel="stylesheet" href="/css/page.css" />
-  <style>
-    .filter-bar { display:flex; gap:var(--sp-2); flex-wrap:wrap; margin-bottom:var(--sp-8); }
-    .filter-btn { padding:var(--sp-2) var(--sp-5); border:1px solid var(--c-border-2); border-radius:var(--radius-full); font-size:var(--text-sm); color:var(--c-text-muted); cursor:pointer; background:none; transition:all var(--dur-fast); }
-    .filter-btn.is-active,.filter-btn:hover { border-color:var(--c-accent-border); color:var(--c-accent); background:var(--c-accent-bg); }
-  </style>
+  <link rel="stylesheet" href="/css/animations.css" />
 </head>
 <body>
-  <header id="app-nav" class="nav"></header>
-  <div id="app-drawer" class="nav__drawer"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="app-nav"></header>
+  <div id="app-drawer"></div>
 
-  <main id="main-content" style="padding-top:var(--nav-height);">
-    <div class="container">
-      <div class="page-header">
-        <p class="overline">Academy Programs</p>
-        <h1 class="page-title">All Programs</h1>
-        <p class="page-lead">Structured training from beginner to advanced — in-person, online, and hybrid. Find the programme that matches your goals.</p>
+  <main id="main-content">
+
+    <!-- ─── PAGE HERO ─────────────────────────────────────── -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <p class="eyebrow">Academy Programs</p>
+          <h1 class="section-title" style="font-size: var(--text-display-lg);">All Programs</h1>
+          <p class="section-subtitle">
+            Structured training from beginner to advanced — in-person, online, and hybrid. Find the programme that matches your goals.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <div class="filter-bar" id="filter-bar">
-        <button class="filter-btn is-active" data-cat="all">All</button>
-        <button class="filter-btn" data-cat="debate">Debate</button>
-        <button class="filter-btn" data-cat="public_speaking">Public Speaking</button>
-        <button class="filter-btn" data-cat="writing">Writing</button>
-        <button class="filter-btn" data-cat="workshop">Workshops</button>
+    <!-- ─── DISCOVERY ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="container">
+
+        <div class="filter-bar" id="filter-bar" data-reveal>
+          <button class="filter-btn is-active" data-cat="all">All</button>
+          <button class="filter-btn" data-cat="debate">Debate</button>
+          <button class="filter-btn" data-cat="public_speaking">Public Speaking</button>
+          <button class="filter-btn" data-cat="writing">Writing</button>
+          <button class="filter-btn" data-cat="workshop">Workshops</button>
+        </div>
+
+        <div id="programs-grid" class="grid-3">
+          <div class="state-loading"><div class="spinner"></div></div>
+        </div>
       </div>
+    </section>
 
-      <div id="programs-grid" class="grid-3"><div class="state-loading"><div class="spinner"></div></div></div>
-    </div>
+    <!-- ─── CTA ───────────────────────────────────────────── -->
+    <section class="cta-block">
+      <div class="container" data-reveal>
+        <h2 class="cta-block__title">Don't See What You Need?</h2>
+        <p class="cta-block__text">Reach out and we'll help you find the right path.</p>
+        <div class="cta-block__actions">
+          <a href="/contact.html" class="btn btn--primary btn--lg">Contact Us</a>
+          <a href="/register.html" class="btn btn--secondary btn--lg">Apply to the Academy</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer id="app-footer" class="footer"></footer>
+  <footer id="app-footer"></footer>
 
   <script src="/js/api.js"></script>
   <script src="/js/nav.js"></script>
+  <script src="/js/main.js"></script>
   <script>
     let allPrograms = [];
     let activeFilter = 'all';
 
     function levelBadge(level) {
-      const map = { beginner:'badge--green', intermediate:'badge--accent', advanced:'badge--blue', all:'' };
-      return `<span class="badge ${map[level]||''}">${level}</span>`;
+      const map = { beginner: 'badge--green', intermediate: 'badge--accent', advanced: 'badge--blue', all: 'badge--muted' };
+      return `<span class="badge ${map[level] || 'badge--muted'}">${level}</span>`;
     }
 
     function renderGrid(programs) {
       const el = document.getElementById('programs-grid');
-      if (!programs.length) { el.innerHTML = '<div class="state-empty">No programs found.</div>'; return; }
+      if (!programs.length) { el.innerHTML = '<div class="state-empty">No programs found in this category.</div>'; return; }
       el.innerHTML = programs.map(p => `
-        <article class="card card--accent">
+        <article class="card card--interactive" data-reveal>
           <div class="card__body">
-            <p class="card__label">${p.category.replace('_',' ')}</p>
+            <p class="card__eyebrow">${p.category.replace('_', ' ')}</p>
             <h2 class="card__title">${p.title}</h2>
-            <p class="card__description">${p.description.substring(0,150)}…</p>
-            <div style="display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-bottom:var(--sp-2);">
+            <p class="card__description">${p.description.substring(0, 150)}…</p>
+            <div style="display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-top: var(--sp-4);">
               ${levelBadge(p.level)}
-              <span class="badge">${p.delivery_mode.replace('_',' ')}</span>
-              ${p.duration?`<span class="badge">${p.duration}</span>`:''}
+              <span class="badge badge--muted">${p.delivery_mode.replace('_', ' ')}</span>
+              ${p.duration ? `<span class="badge badge--muted">${p.duration}</span>` : ''}
             </div>
           </div>
           <div class="card__footer">
             <div>
-              <div style="font-size:var(--text-xs);color:var(--c-text-sub);">
-                ${p.age_min||''}${p.age_max?'–'+p.age_max+' yrs':''}
-                ${p.coach_name?'· Coach: '+p.coach_name:''}
+              <div style="font-size: var(--text-meta); color: var(--color-text-tertiary);">
+                ${p.age_min || ''}${p.age_max ? '–' + p.age_max + ' yrs' : ''}
+                ${p.coach_name ? ' · Coach: ' + p.coach_name : ''}
               </div>
-              <div style="font-size:var(--text-sm);color:var(--c-accent);margin-top:2px;">
-                ${p.price?'PKR '+p.price.toLocaleString():'Contact for pricing'}
+              <div style="font-size: var(--text-body-sm); color: var(--color-accent-gold); margin-top: 2px;">
+                ${p.price ? 'PKR ' + p.price.toLocaleString() : 'Contact for pricing'}
               </div>
             </div>
             <a href="/program.html?id=${p.id}" class="btn btn--primary btn--sm">View →</a>
           </div>
         </article>`).join('');
+      if (window.initReveals) window.initReveals(el);
+    }
+
+    function applyFilter(cat, pushHistory = true) {
+      activeFilter = cat || 'all';
+      const btn = document.querySelector(`.filter-btn[data-cat="${activeFilter}"]`) || document.querySelector(`.filter-btn[data-cat="all"]`);
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+      if (btn) {
+        btn.classList.add('is-active');
+        activeFilter = btn.dataset.cat;
+      }
+
+      if (pushHistory) {
+        const url = new URL(window.location.href);
+        if (activeFilter !== 'all') {
+          url.searchParams.set('category', activeFilter);
+        } else {
+          url.searchParams.delete('category');
+        }
+        window.history.pushState({}, '', url.toString());
+      }
+
+      const filtered = activeFilter === 'all' ? allPrograms : allPrograms.filter(p => p.category === activeFilter);
+      renderGrid(filtered);
     }
 
     async function init() {
+      const params = new URLSearchParams(window.location.search);
+      const urlCat = params.get('category');
+      if (urlCat) activeFilter = urlCat;
+
       try {
         const { programs } = await API.programs.list();
         allPrograms = programs;
-        renderGrid(programs);
+        applyFilter(activeFilter, false);
       } catch(e) {
         document.getElementById('programs-grid').innerHTML = `<div class="state-error">${e.message}</div>`;
       }
@@ -95,11 +152,13 @@
     document.getElementById('filter-bar').addEventListener('click', e => {
       const btn = e.target.closest('.filter-btn');
       if (!btn) return;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      activeFilter = btn.dataset.cat;
-      const filtered = activeFilter === 'all' ? allPrograms : allPrograms.filter(p => p.category === activeFilter);
-      renderGrid(filtered);
+      applyFilter(btn.dataset.cat, true);
+    });
+
+    window.addEventListener('popstate', () => {
+      const params = new URLSearchParams(window.location.search);
+      const urlCat = params.get('category') || 'all';
+      applyFilter(urlCat, false);
     });
 
     init();
