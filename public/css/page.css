@@ -38,19 +38,25 @@
   padding-top: var(--nav-height);
 }
 
-/* Spotlight beam from above — like a stage light hitting center */
+/* Cinematic stage spotlight beam — narrow at top, expanding wide to bottom */
 .hero::before {
   content: '';
   position: absolute;
-  top: -5%;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 55%;
-  height: 75%;
-  background: radial-gradient(ellipse 60% 80% at 50% 0%,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(200, 200, 200, 0.04) 30%,
-      transparent 65%);
+  width: 100%;
+  max-width: 1200px;
+  height: 85%;
+  clip-path: polygon(42% 0%, 58% 0%, 95% 100%, 5% 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(201, 162, 74, 0.22) 0%,
+    rgba(201, 162, 74, 0.09) 35%,
+    rgba(201, 162, 74, 0.03) 70%,
+    transparent 100%
+  );
+  filter: blur(14px);
   pointer-events: none;
   z-index: 1;
 }
