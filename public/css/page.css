@@ -417,6 +417,10 @@
   background-image: url('/assets/academy/academypagebg.png');
   background-size: cover;
   background-position: center;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--sp-12);
 }
 
 .academy-hero {
@@ -481,13 +485,18 @@
 
 @media (max-width: 767px) {
   .academy-hero {
-    grid-template-columns: 1.3fr 0.7fr;
-    gap: var(--sp-4);
+    grid-template-columns: 1fr;
+    gap: var(--sp-12);
+    text-align: center;
+  }
+
+  .academy-hero__content {
+    margin-inline: auto;
   }
 
   .podium-stage img {
-    max-width: 220px;
-    margin-top: 20px;
+    max-width: 260px;
+    margin-top: 0;
   }
 
   .academy-hero__content .section-title {
