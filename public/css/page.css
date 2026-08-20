@@ -489,6 +489,7 @@
   .page-hero--academy {
     min-height: auto;
     padding-top: calc(var(--nav-height) + var(--sp-6));
+    padding-bottom: var(--sp-4);
   }
 
   .academy-hero {
@@ -503,7 +504,7 @@
   }
 
   .podium-stage img {
-    max-width: 300px;
+    max-width: 220px;
     margin: 0 auto;
   }
 }
