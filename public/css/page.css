@@ -528,12 +528,12 @@
 
 .about-hero {
   position: relative;
-  padding-top: calc(var(--nav-height) + var(--sp-8));
+  padding-top: calc(var(--nav-height) + var(--sp-10));
   padding-bottom: var(--sp-10);
   background-image:
     linear-gradient(180deg,
-      rgba(3, 4, 4, 0.75) 0%,
-      rgba(3, 4, 4, 0.55) 50%,
+      rgba(3, 4, 4, 0.70) 0%,
+      rgba(3, 4, 4, 0.50) 60%,
       rgba(3, 4, 4, 0.88) 100%),
     url('/assets/about/aboutpagepic.png');
   background-size: cover;
