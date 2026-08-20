@@ -652,7 +652,8 @@
     url('/assets/footer/footerbackground.png');
   background-size: cover;
   background-position: center;
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-image: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 50%, transparent 100%) 1;
   padding-block: var(--sp-16) var(--sp-8);
   overflow: hidden;
 }
@@ -727,7 +728,8 @@
 
 /* Footer bottom */
 .footer__bottom {
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-image: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 50%, transparent 100%) 1;
   padding-top: var(--sp-6);
   display: flex;
   flex-direction: column;
