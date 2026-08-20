@@ -451,8 +451,9 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 320px;
+  max-width: 360px;
   height: auto;
+  margin-top: 40px;
   filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 32px rgba(201, 162, 74, 0.2));
   transition: transform var(--dur-medium) var(--ease-standard);
 }
@@ -466,13 +467,15 @@
   }
 
   .podium-stage img {
-    max-width: 380px;
+    max-width: 440px;
+    margin-top: 60px;
   }
 }
 
 @media (min-width: 1280px) {
   .podium-stage img {
-    max-width: 460px;
+    max-width: 540px;
+    margin-top: 80px;
   }
 }
 
@@ -483,7 +486,8 @@
   }
 
   .podium-stage img {
-    max-width: 160px;
+    max-width: 220px;
+    margin-top: 20px;
   }
 
   .academy-hero__content .section-title {
