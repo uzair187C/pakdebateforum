@@ -528,17 +528,17 @@
 
 .about-hero {
   position: relative;
-  padding-top: calc(var(--nav-height) + var(--sp-6));
-  padding-bottom: var(--sp-8);
-  min-height: 420px;
+  padding-top: calc(var(--nav-height) + var(--sp-12));
+  padding-bottom: var(--sp-12);
+  min-height: 460px;
   display: flex;
   align-items: center;
   background-image:
     linear-gradient(90deg,
-      rgba(3, 4, 4, 0.95) 0%,
-      rgba(3, 4, 4, 0.88) 38%,
-      rgba(3, 4, 4, 0.6) 65%,
-      rgba(3, 4, 4, 0.7) 100%),
+      rgba(3, 4, 4, 0.96) 0%,
+      rgba(3, 4, 4, 0.90) 45%,
+      rgba(3, 4, 4, 0.65) 75%,
+      rgba(3, 4, 4, 0.75) 100%),
     url('/assets/about/aboutpagepic.png');
   background-size: cover;
   background-position: center right;
@@ -546,23 +546,39 @@
 }
 
 .about-hero__content {
-  max-width: 580px;
+  max-width: 600px;
 }
 
 .founding-quote {
   position: relative;
   padding: var(--sp-6) var(--sp-8);
-  border-left: 2px solid var(--color-accent-gold);
+  border-left: 3px solid var(--color-accent-gold);
+  background: linear-gradient(135deg, rgba(201, 162, 74, 0.06) 0%, rgba(3, 4, 4, 0.25) 100%);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.founding-quote::before {
+  content: '“';
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  line-height: 1;
+  color: rgba(201, 162, 74, 0.2);
+  pointer-events: none;
 }
 
 .founding-quote__text {
   font-family: var(--font-display);
-  font-size: var(--text-heading-md);
-  font-weight: var(--w-medium);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: var(--w-semibold);
   font-style: italic;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   line-height: 1.45;
   margin-bottom: var(--sp-4);
+  letter-spacing: var(--track-tight);
 }
 
 .founding-quote__author {
@@ -580,7 +596,7 @@
 .founding-quote__author::before {
   content: '';
   display: inline-block;
-  width: 20px;
+  width: 24px;
   height: 1px;
   background: var(--color-accent-gold);
 }
@@ -589,7 +605,7 @@
   .about-hero {
     min-height: auto;
     padding-top: calc(var(--nav-height) + var(--sp-8));
-    padding-bottom: var(--sp-8);
+    padding-bottom: var(--sp-10);
     background-image:
       linear-gradient(180deg,
         rgba(3, 4, 4, 0.94) 0%,
@@ -599,6 +615,10 @@
 
   .about-hero__content {
     max-width: 100%;
+  }
+
+  .founding-quote {
+    padding: var(--sp-5) var(--sp-6);
   }
 
   .founding-quote__text {
