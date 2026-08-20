@@ -413,6 +413,12 @@
    Podium as signature visual anchor on the Academy page.
    ═══════════════════════════════════════════════════════════ */
 
+.page-hero--academy {
+  background-image: url('/assets/academy/academypagebg.png');
+  background-size: cover;
+  background-position: center;
+}
+
 .academy-hero {
   display: grid;
   grid-template-columns: 1fr;
@@ -451,41 +457,7 @@
   transition: transform var(--dur-medium) var(--ease-standard);
 }
 
-/* Atmospheric spotlight behind podium */
-.podium-stage__light {
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 110%;
-  height: 100%;
-  background: radial-gradient(ellipse at 50% 40%,
-      rgba(201, 162, 74, 0.16) 0%,
-      rgba(8, 122, 88, 0.05) 50%,
-      transparent 75%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Elliptical golden stage pedestal base ring */
-.podium-stage__pedestal {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 340px;
-  height: 48px;
-  background: radial-gradient(ellipse at center,
-      rgba(201, 162, 74, 0.25) 0%,
-      rgba(201, 162, 74, 0.06) 60%,
-      transparent 80%);
-  border-radius: 50%;
-  box-shadow: 0 0 40px rgba(201, 162, 74, 0.15);
-  border: 1px solid rgba(201, 162, 74, 0.3);
-  pointer-events: none;
-  z-index: 1;
-}
+/* Pedestal and lighting removed as per user request */
 
 @media (min-width: 768px) {
   .academy-hero {
@@ -496,21 +468,11 @@
   .podium-stage img {
     max-width: 380px;
   }
-
-  .podium-stage__pedestal {
-    max-width: 400px;
-    height: 60px;
-  }
 }
 
 @media (min-width: 1280px) {
   .podium-stage img {
     max-width: 460px;
-  }
-
-  .podium-stage__pedestal {
-    max-width: 460px;
-    height: 72px;
   }
 }
 
@@ -522,11 +484,6 @@
 
   .podium-stage img {
     max-width: 160px;
-  }
-
-  .podium-stage__pedestal {
-    max-width: 180px;
-    height: 28px;
   }
 
   .academy-hero__content .section-title {
