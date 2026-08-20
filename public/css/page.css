@@ -410,35 +410,41 @@
 
 /* ═══════════════════════════════════════════════════════════════
    ACADEMY HERO — Content + Podium split
-   Podium as signature visual anchor on the Academy page.
    ═══════════════════════════════════════════════════════════ */
 
 .page-hero--academy {
+  position: relative;
   background-image: url('/assets/academy/academypagebg.png');
   background-size: cover;
-  background-position: center;
-  min-height: 85vh;
+  background-position: center bottom;
+  min-height: 82vh;
   display: flex;
-  align-items: center;
-  padding-block: var(--sp-12);
+  align-items: flex-end;
+  padding-top: calc(var(--nav-height) + var(--sp-8));
+  padding-bottom: 0;
+  overflow: hidden;
 }
 
 .academy-hero {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--sp-6);
-  align-items: center;
+  align-items: flex-end;
+  width: 100%;
 }
 
 .academy-hero__content {
   max-width: 560px;
+  align-self: center;
+  padding-bottom: var(--sp-12);
 }
 
 .academy-hero__podium {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  align-self: flex-end;
 }
 
 .podium-stage {
@@ -446,58 +452,61 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   width: 100%;
-  padding-bottom: var(--sp-6);
 }
 
 .podium-stage img {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
   height: auto;
-  margin-top: 40px;
+  display: block;
+  margin: 0 auto;
   filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 32px rgba(201, 162, 74, 0.2));
   transition: transform var(--dur-medium) var(--ease-standard);
 }
 
-/* Pedestal and lighting removed as per user request */
-
 @media (min-width: 768px) {
   .academy-hero {
     grid-template-columns: 1.2fr 0.8fr;
-    gap: var(--sp-12);
+    gap: var(--sp-8);
   }
 
   .podium-stage img {
-    max-width: 440px;
-    margin-top: 60px;
+    max-width: 480px;
   }
 }
 
 @media (min-width: 1280px) {
   .podium-stage img {
-    max-width: 540px;
-    margin-top: 80px;
+    max-width: 560px;
   }
 }
 
 @media (max-width: 767px) {
+  .page-hero--academy {
+    min-height: auto;
+    padding-top: calc(var(--nav-height) + var(--sp-6));
+  }
+
   .academy-hero {
     grid-template-columns: 1fr;
-    gap: var(--sp-12);
+    gap: var(--sp-6);
     text-align: center;
   }
 
   .academy-hero__content {
     margin-inline: auto;
+    padding-bottom: 0;
   }
 
   .podium-stage img {
-    max-width: 260px;
-    margin-top: 0;
+    max-width: 300px;
+    margin: 0 auto;
   }
+}
 
   .academy-hero__content .section-title {
     font-size: var(--text-display-sm) !important;
