@@ -522,15 +522,27 @@
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.nav__drawer.has-transited {
   transition:
     transform var(--dur-medium) var(--ease-emphasized),
     visibility var(--dur-medium) var(--ease-standard);
-  visibility: hidden;
 }
 
 .nav__drawer.is-open {
   transform: translateX(0);
   visibility: visible;
+  pointer-events: auto;
+}
+
+@media (min-width: 1024px) {
+  .nav__drawer,
+  .nav__drawer-scrim {
+    display: none !important;
+  }
 }
 
 .nav__drawer-inner {

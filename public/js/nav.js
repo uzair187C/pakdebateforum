@@ -193,6 +193,7 @@
       }
 
       const toggle = (force) => {
+        drawer.classList.add('has-transited');
         const open = force !== undefined ? force : !drawer.classList.contains('is-open');
         drawer.classList.toggle('is-open', open);
         drawer.setAttribute('aria-hidden', String(!open));
