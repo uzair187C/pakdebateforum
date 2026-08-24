@@ -161,10 +161,11 @@
 
 /* Podium tagline — academy (#38) */
 .podium-stage .hero__podium-tagline {
-  position: static;
-  transform: none;
-  margin-top: var(--sp-4);
-  margin-bottom: var(--sp-2);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
   color: rgba(201, 162, 74, 0.55);
   font-family: var(--font-body);
   font-size: var(--text-label-sm);
@@ -172,14 +173,14 @@
   letter-spacing: var(--track-widest);
   text-transform: uppercase;
   text-align: center;
-  width: 100%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 @media (min-width: 768px) {
   .podium-stage .hero__podium-tagline {
     font-size: var(--text-label-md);
+    bottom: var(--sp-2);
   }
 }
 
@@ -480,6 +481,7 @@
   align-items: center;
   justify-content: flex-end;
   width: 100%;
+  padding-bottom: var(--sp-8);
 }
 
 .podium-stage img {
