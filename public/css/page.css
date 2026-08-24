@@ -584,6 +584,20 @@
 
 
 /* ═══════════════════════════════════════════════════════════════
+   HOME STATS BACKGROUND TINT
+   ═══════════════════════════════════════════════════════════ */
+.home-stats-bg {
+  position: relative;
+  background-image:
+    radial-gradient(ellipse at top, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.85) 40%, transparent 75%),
+    linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.88) 40%, rgba(3, 4, 4, 0.88) 60%, rgba(3, 4, 4, 1) 100%),
+    url('/assets/home/bgpic4.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    ABOUT PAGE HERO WITH CINEMATIC BACKGROUND & FOUNDING QUOTE
    ═══════════════════════════════════════════════════════════ */
 
