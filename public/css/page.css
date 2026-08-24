@@ -159,31 +159,30 @@
   filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.6)) drop-shadow(0 4px 24px rgba(201, 162, 74, 0.12));
 }
 
-/* Podium tagline (#38) */
-.hero__podium-tagline {
-  position: absolute;
-  bottom: var(--sp-6);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  color: var(--color-text-tertiary);
+/* Podium tagline — academy (#38) */
+.podium-stage .hero__podium-tagline {
+  position: static;
+  transform: none;
+  margin-top: var(--sp-4);
+  margin-bottom: var(--sp-2);
+  color: rgba(201, 162, 74, 0.55);
   font-family: var(--font-body);
   font-size: var(--text-label-sm);
   font-weight: var(--w-medium);
   letter-spacing: var(--track-widest);
   text-transform: uppercase;
-  opacity: 0.4;
   text-align: center;
   width: 100%;
   pointer-events: none;
+  z-index: 2;
 }
 
-@media (min-width: 1024px) {
-  .hero__podium-tagline {
-    bottom: var(--sp-10);
+@media (min-width: 768px) {
+  .podium-stage .hero__podium-tagline {
     font-size: var(--text-label-md);
   }
 }
+
 
 
 /* Scroll indicator */
