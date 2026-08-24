@@ -179,10 +179,15 @@
 
 @media (min-width: 768px) {
   .podium-stage .hero__podium-tagline {
+    /* Switch to in-flow so it sits just below the podium image */
+    position: static;
+    transform: none;
+    white-space: normal;
     font-size: var(--text-label-md);
-    bottom: var(--sp-2);
+    margin-top: var(--sp-5);
   }
 }
+
 
 
 
