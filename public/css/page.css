@@ -559,8 +559,9 @@
    ═══════════════════════════════════════════════════════════ */
 .academy-why-bg {
   position: relative;
-  background-image: 
-    linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.6) 40%, rgba(5, 5, 5, 0.6) 60%, rgba(5, 5, 5, 0.95) 100%),
+  background-image:
+    radial-gradient(ellipse at top, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.85) 40%, transparent 75%),
+    linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.88) 40%, rgba(3, 4, 4, 0.88) 60%, rgba(3, 4, 4, 1) 100%),
     url('/assets/academy/debate_bg_separate_3.jpg');
   background-size: cover;
   background-position: center;
@@ -572,13 +573,15 @@
    ═══════════════════════════════════════════════════════════ */
 .academy-cta-bg {
   position: relative;
-  background-image: 
-    linear-gradient(to bottom, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.6) 50%, rgba(5, 5, 5, 0.9) 100%),
+  background-image:
+    radial-gradient(ellipse at top, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.85) 40%, transparent 75%),
+    linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.88) 40%, rgba(3, 4, 4, 0.88) 60%, rgba(3, 4, 4, 1) 100%),
     url('/assets/academy/debate_bg_separate_2.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
 
 /* ═══════════════════════════════════════════════════════════════
    ABOUT PAGE HERO WITH CINEMATIC BACKGROUND & FOUNDING QUOTE
