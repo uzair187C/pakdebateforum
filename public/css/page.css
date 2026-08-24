@@ -560,8 +560,8 @@
 .academy-why-bg {
   position: relative;
   background-image:
-    radial-gradient(ellipse at top, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.85) 40%, transparent 75%),
-    linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.88) 40%, rgba(3, 4, 4, 0.88) 60%, rgba(3, 4, 4, 1) 100%),
+    radial-gradient(circle at center, transparent 20%, rgba(3, 4, 4, 0.8) 100%),
+    linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.78) 20%, rgba(3, 4, 4, 0.78) 80%, rgba(3, 4, 4, 1) 100%),
     url('/assets/academy/debate_bg_separate_3.jpg');
   background-size: cover;
   background-position: center;
@@ -574,8 +574,8 @@
 .academy-cta-bg {
   position: relative;
   background-image:
-    radial-gradient(ellipse at top, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.85) 40%, transparent 75%),
-    linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.88) 40%, rgba(3, 4, 4, 0.88) 60%, rgba(3, 4, 4, 1) 100%),
+    radial-gradient(circle at center, transparent 20%, rgba(3, 4, 4, 0.8) 100%),
+    linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.78) 20%, rgba(3, 4, 4, 0.78) 80%, rgba(3, 4, 4, 1) 100%),
     url('/assets/academy/debate_bg_separate_2.jpg');
   background-size: cover;
   background-position: center;
@@ -589,8 +589,8 @@
 .home-stats-bg {
   position: relative;
   background-image:
-    radial-gradient(ellipse at top, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.85) 40%, transparent 75%),
-    linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.88) 40%, rgba(3, 4, 4, 0.88) 60%, rgba(3, 4, 4, 1) 100%),
+    radial-gradient(circle at center, transparent 20%, rgba(3, 4, 4, 0.8) 100%),
+    linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.78) 20%, rgba(3, 4, 4, 0.78) 80%, rgba(3, 4, 4, 1) 100%),
     url('/assets/home/bgpic4.png');
   background-size: cover;
   background-position: center;
