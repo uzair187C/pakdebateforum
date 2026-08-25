@@ -51,6 +51,13 @@
         </div>
 
         <form id="reg-form" novalidate data-reveal>
+          <div class="form-group" id="target-group" style="display: none; margin-bottom: var(--sp-5);">
+            <label class="form-label" for="target_select">Select Programme or Event <span class="req">*</span></label>
+            <select class="form-select" id="target_select" name="target_select">
+              <option value="">— Loading programmes and events… —</option>
+            </select>
+          </div>
+
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="full_name">Full Name <span class="req">*</span></label>
@@ -110,20 +117,53 @@
   <script src="/js/main.js"></script>
   <script>
     const params = new URLSearchParams(location.search);
-    const type = params.get('type') || 'program';
-    const refId = params.get('id');
-    const name  = params.get('name') || 'this item';
+    let type = params.get('type') || 'program';
+    let refId = params.get('id');
+    const name = params.get('name');
 
-    document.getElementById('reg-type-label').textContent = type === 'event' ? 'Event Registration' : 'Programme Application';
-    document.getElementById('reg-title').textContent = name;
-    document.getElementById('reg-subtitle').textContent =
-      type === 'event'
-        ? 'Complete the form to register for this event. You will receive a confirmation email.'
-        : 'Complete the form to apply for this programme. Our team will follow up within 2 business days.';
+    if (refId) {
+      document.getElementById('reg-type-label').textContent = type === 'event' ? 'Event Registration' : 'Programme Application';
+      document.getElementById('reg-title').textContent = name || (type === 'event' ? 'Event Sign-up' : 'Programme Application');
+      document.getElementById('reg-subtitle').textContent =
+        type === 'event'
+          ? 'Complete the form to register for this event. You will receive a confirmation email.'
+          : 'Complete the form to apply for this programme. Our team will follow up within 2 business days.';
+    } else {
+      document.getElementById('reg-type-label').textContent = 'Join Pak Debate Forum';
+      document.getElementById('reg-title').textContent = 'Registration & Application';
+      document.getElementById('reg-subtitle').textContent = 'Select a programme or event below and complete your registration details.';
+      
+      const targetGroup = document.getElementById('target-group');
+      const targetSelect = document.getElementById('target_select');
+      targetGroup.style.display = 'block';
 
-    if (!refId) {
-      document.getElementById('alert-area').innerHTML = '<div class="alert alert--error">Missing registration target. Please return and try again.</div>';
-      document.getElementById('reg-form').style.display = 'none';
+      (async function loadTargets() {
+        try {
+          const [progRes, evRes] = await Promise.all([
+            API.programs.list().catch(() => ({ programs: [] })),
+            API.events.list('open,upcoming').catch(() => ({ events: [] }))
+          ]);
+
+          let html = '<option value="">— Select a Programme or Event —</option>';
+          if (progRes.programs && progRes.programs.length > 0) {
+            html += '<optgroup label="Academic Programmes">';
+            progRes.programs.forEach(p => {
+              html += `<option value="program:${p.id}">Programme: ${p.title}</option>`;
+            });
+            html += '</optgroup>';
+          }
+          if (evRes.events && evRes.events.length > 0) {
+            html += '<optgroup label="Upcoming Events & Tournaments">';
+            evRes.events.forEach(e => {
+              html += `<option value="event:${e.id}">Event: ${e.title}</option>`;
+            });
+            html += '</optgroup>';
+          }
+          targetSelect.innerHTML = html;
+        } catch (err) {
+          targetSelect.innerHTML = '<option value="">Failed to load options. Please refresh.</option>';
+        }
+      })();
     }
 
     document.getElementById('reg-form').addEventListener('submit', async function(e) {
@@ -139,16 +179,31 @@
         return;
       }
 
+      let submitType = type;
+      let submitRefId = refId ? parseInt(refId) : null;
+
+      if (!refId) {
+        const selectedVal = document.getElementById('target_select').value;
+        if (!selectedVal) {
+          document.getElementById('alert-area').innerHTML = '<div class="alert alert--error">Please select a programme or event to apply for.</div>';
+          if (window.showToast) window.showToast('Please select a programme or event.', 'error');
+          return;
+        }
+        const parts = selectedVal.split(':');
+        submitType = parts[0];
+        submitRefId = parseInt(parts[1]);
+      }
+
       btn.disabled = true;
       btn.textContent = 'Submitting…';
       status.textContent = '';
       document.getElementById('alert-area').innerHTML = '';
 
       const payload = {
-        type,
-        reference_id: parseInt(refId),
+        type:              submitType,
+        reference_id:      submitRefId,
         full_name:         fullName,
-        email,
+        email:             email,
         phone:             document.getElementById('phone').value.trim() || null,
         age:               parseInt(document.getElementById('age').value) || null,
         institution:       document.getElementById('institution').value.trim() || null,
