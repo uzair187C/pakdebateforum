@@ -32,7 +32,7 @@
       transparent 18%,
       transparent 82%,
       rgba(3, 4, 4, 0.9) 100%),
-    url('/assets/home/homepagebgpic.png');
+    url('/assets/home/homepagebgpic.webp');
   background-size: cover, cover, cover;
   background-position: center, center, center;
   padding-top: var(--nav-height);
@@ -446,7 +446,7 @@
 
 .page-hero--academy {
   position: relative;
-  background-image: url('/assets/academy/academypagebg.png');
+  background-image: url('/assets/academy/academypagebg.webp');
   background-size: cover;
   background-position: center bottom;
   min-height: 82vh;
@@ -562,7 +562,7 @@
   background-image:
     radial-gradient(circle at center, transparent 20%, rgba(3, 4, 4, 0.8) 100%),
     linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.78) 20%, rgba(3, 4, 4, 0.78) 80%, rgba(3, 4, 4, 1) 100%),
-    url('/assets/academy/debate_bg_separate_3.jpg');
+    url('/assets/academy/debate_bg_separate_3.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -576,7 +576,7 @@
   background-image:
     radial-gradient(circle at center, transparent 20%, rgba(3, 4, 4, 0.8) 100%),
     linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.78) 20%, rgba(3, 4, 4, 0.78) 80%, rgba(3, 4, 4, 1) 100%),
-    url('/assets/academy/debate_bg_separate_2.jpg');
+    url('/assets/academy/debate_bg_separate_2.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -591,7 +591,7 @@
   background-image:
     radial-gradient(circle at center, transparent 20%, rgba(3, 4, 4, 0.8) 100%),
     linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.78) 20%, rgba(3, 4, 4, 0.78) 80%, rgba(3, 4, 4, 1) 100%),
-    url('/assets/home/bgpic4.png');
+    url('/assets/home/bgpic4.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -612,7 +612,7 @@
       rgba(3, 4, 4, 0.75) 0%,
       rgba(3, 4, 4, 0.55) 60%,
       rgba(3, 4, 4, 0.88) 100%),
-    url('/assets/about/aboutpagepic.png');
+    url('/assets/about/aboutpagepic.webp');
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -670,7 +670,7 @@
       linear-gradient(180deg,
         rgba(3, 4, 4, 0.82) 0%,
         rgba(3, 4, 4, 0.70) 100%),
-      url('/assets/about/aboutpagepic.png');
+      url('/assets/about/aboutpagepic.webp');
   }
 
   .about-hero__content {
@@ -701,7 +701,7 @@
       rgba(3, 4, 4, 0.92) 0%,
       rgba(3, 4, 4, 0.85) 60%,
       rgba(3, 4, 4, 0.95) 100%),
-    url('/assets/events/eventspagepic.png');
+    url('/assets/events/eventspagepic.webp');
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -731,7 +731,7 @@
       rgba(3, 4, 4, 0.88) 35%,
       rgba(3, 4, 4, 0.5) 65%,
       rgba(3, 4, 4, 0.2) 100%),
-    url('/assets/resources/resourcespagepic.png');
+    url('/assets/resources/resourcespagepic.webp');
   background-size: cover;
   background-position: center right;
   overflow: hidden;
@@ -746,7 +746,7 @@
       linear-gradient(180deg,
         rgba(3, 4, 4, 0.94) 0%,
         rgba(3, 4, 4, 0.75) 100%),
-      url('/assets/resources/resourcespagepic.png');
+      url('/assets/resources/resourcespagepic.webp');
   }
 }
 
