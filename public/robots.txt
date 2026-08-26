@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /admin.html
-
-Sitemap: https://pakdebateforum.org/sitemap.xml

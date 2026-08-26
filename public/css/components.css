@@ -676,7 +676,7 @@
   background-image:
     radial-gradient(ellipse at top left, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.85) 45%, transparent 75%),
     linear-gradient(180deg, rgba(3, 4, 4, 1) 0%, rgba(3, 4, 4, 0.88) 25%, rgba(3, 4, 4, 0.78) 100%),
-    url('/assets/footer/footerbackground.webp');
+    url('/assets/footer/footerbackground.png');
   background-size: cover;
   background-position: center;
   border-top: 1px solid rgba(255, 255, 255, 0.03);
