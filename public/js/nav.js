@@ -44,7 +44,7 @@
     el.innerHTML = `
       <div class="nav__inner container">
         <a href="/" class="nav__logo" aria-label="Pak Debate Forum — Home">
-          <img src="/assets/brand/pdf-logo.svg" alt="" class="nav__logo-img" width="36" height="36">
+          <img src="/assets/brand/pdf-logo.png" alt="" class="nav__logo-img" width="36" height="36">
           <span class="nav__logo-text">Pak Debate Forum</span>
         </a>
 
@@ -79,7 +79,7 @@
       <div class="nav__drawer-inner">
         <div class="nav__drawer-header">
           <a href="/" class="nav__logo" aria-label="Pak Debate Forum — Home">
-            <img src="/assets/brand/pdf-logo.svg" alt="" class="nav__logo-img" width="32" height="32">
+            <img src="/assets/brand/pdf-logo.png" alt="" class="nav__logo-img" width="32" height="32">
             <span class="nav__logo-text">Pak Debate Forum</span>
           </a>
           <button id="drawer-close" class="nav__drawer-close" aria-label="Close menu">
@@ -119,7 +119,7 @@
 
           <!-- Brand block (#34 §4) -->
           <div class="footer__brand">
-            <img src="/assets/brand/pdf-logo.svg" alt="Pak Debate Forum" class="footer__logo" width="40" height="40">
+            <img src="/assets/brand/pdf-logo.png" alt="Pak Debate Forum" class="footer__logo" width="40" height="40">
             <p class="footer__brand-name">Pak Debate Forum</p>
             <p class="footer__tagline">Train your voice. Sharpen your mind. Compete with purpose.</p>
           </div>
