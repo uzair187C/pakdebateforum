@@ -1,6 +1,7 @@
 {
-	"name": "divine-boat-b7b4",
-	"version": "0.0.0",
+	"name": "pakdebateforum-worker",
+	"version": "1.0.0",
+	"description": "Pak Debate Forum — Official Web Worker & Application API",
 	"private": true,
 	"scripts": {
 		"deploy": "wrangler deploy",
