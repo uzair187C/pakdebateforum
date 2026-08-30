@@ -1479,3 +1479,73 @@
 .toast__close:hover {
   color: var(--color-text-primary);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT EXPERIENCE OVERRIDES — FOOTER & CARDS
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="light"] .footer {
+  background-color: #F5F2EA !important;
+  background-image: none !important;
+  border-top: 1px solid rgba(201, 162, 74, 0.25) !important;
+}
+
+[data-theme="light"] .footer__brand-name {
+  color: #1C1C1A !important;
+}
+
+[data-theme="light"] .footer__tagline,
+[data-theme="light"] .footer__col-heading,
+[data-theme="light"] .footer__copy,
+[data-theme="light"] .footer__legal-link {
+  color: #55544E !important;
+}
+
+[data-theme="light"] .footer__link {
+  color: #2B2B28 !important;
+}
+
+[data-theme="light"] .footer__link:hover,
+[data-theme="light"] .footer__legal-link:hover {
+  color: #856404 !important;
+}
+
+[data-theme="light"] .footer__bottom {
+  border-top: 1px solid rgba(28, 28, 26, 0.10) !important;
+  border-image: none !important;
+}
+
+/* Light Theme Card & Text Shade Overrides */
+[data-theme="light"] .card,
+[data-theme="light"] .sidebar-card,
+[data-theme="light"] .cta-block,
+[data-theme="light"] .split__media,
+[data-theme="light"] .section-header--boxed,
+[data-theme="light"] .program-card,
+[data-theme="light"] .event-card,
+[data-theme="light"] .resource-card,
+[data-theme="light"] .stat-card,
+[data-theme="light"] .feedback-card {
+  background-color: #FFFFFF !important;
+  background-image: none !important;
+  border-color: rgba(201, 162, 74, 0.22) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+  color: #1C1C1A !important;
+}
+
+[data-theme="light"] .founding-quote,
+[data-theme="light"] blockquote,
+[data-theme="light"] .quote-block {
+  background-color: #FDFBF7 !important;
+  background-image: none !important;
+  color: #1C1C1A !important;
+  border-left: 4px solid #C9A24A !important;
+  border-color: rgba(201, 162, 74, 0.3) !important;
+  box-shadow: 0 2px 14px rgba(201, 162, 74, 0.08) !important;
+}
+
+[data-theme="light"] .badge--outline {
+  border-color: rgba(133, 100, 4, 0.3) !important;
+  color: #856404 !important;
+}
+
