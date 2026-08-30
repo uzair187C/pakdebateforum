@@ -217,103 +217,122 @@
 
   /* ── Event Handlers for Theme & Language Controls ─────── */
   function attachControlListeners() {
-    const langBtn = document.getElementById('lang-toggle');
-    const drawerLangBtn = document.getElementById('drawer-lang-toggle');
+    // Bound via global delegation below
+  }
 
-    const themeBtn = document.getElementById('theme-toggle');
-    const drawerThemeBtn = document.getElementById('drawer-theme-toggle');
+  /* ── Behavior: Scroll + Drawer Toggle ─────────────────── */
+  function toggleDrawer(force) {
+    const drawer = document.getElementById('app-drawer');
+    const hamburger = document.getElementById('hamburger');
+    let scrim = document.getElementById('drawer-scrim');
 
-    const toggleLang = () => {
-      const current = getLang();
-      const next = current === 'zh' ? 'en' : 'zh';
-      if (window.I18N) {
-        window.I18N.setLang(next);
-      } else {
-        localStorage.setItem('pdf_lang', next);
-        location.reload();
-      }
-    };
-
-    const toggleTheme = () => {
-      const current = getTheme();
-      const next = current === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('pdf_theme', next);
-      renderNav();
-      renderDrawer();
-    };
-
-    if (langBtn && !langBtn.dataset.bound) {
-      langBtn.dataset.bound = 'true';
-      langBtn.addEventListener('click', toggleLang);
+    if (!scrim) {
+      scrim = document.createElement('div');
+      scrim.id = 'drawer-scrim';
+      scrim.className = 'nav__drawer-scrim';
+      document.body.appendChild(scrim);
     }
-    if (drawerLangBtn && !drawerLangBtn.dataset.bound) {
-      drawerLangBtn.dataset.bound = 'true';
-      drawerLangBtn.addEventListener('click', toggleLang);
-    }
-    if (themeBtn && !themeBtn.dataset.bound) {
-      themeBtn.dataset.bound = 'true';
-      themeBtn.addEventListener('click', toggleTheme);
-    }
-    if (drawerThemeBtn && !drawerThemeBtn.dataset.bound) {
-      drawerThemeBtn.dataset.bound = 'true';
-      drawerThemeBtn.addEventListener('click', toggleTheme);
+
+    if (!drawer || !hamburger) return;
+
+    drawer.classList.add('has-transited');
+    const open = force !== undefined ? force : !drawer.classList.contains('is-open');
+    drawer.classList.toggle('is-open', open);
+    drawer.setAttribute('aria-hidden', String(!open));
+    hamburger.classList.toggle('is-open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    scrim.classList.toggle('is-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  function toggleLang() {
+    const current = getLang();
+    const next = current === 'zh' ? 'en' : 'zh';
+    if (window.I18N) {
+      window.I18N.setLang(next);
+    } else {
+      localStorage.setItem('pdf_lang', next);
+      location.reload();
     }
   }
 
-  /* ── Behavior: Scroll + Mobile menu ────────────────────── */
+  function toggleTheme() {
+    const current = getTheme();
+    const next = current === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('pdf_theme', next);
+    renderNav();
+    renderDrawer();
+  }
+
   function initBehavior() {
     const nav = document.getElementById('app-nav');
-    const hamburger = document.getElementById('hamburger');
-    const drawer = document.getElementById('app-drawer');
     if (!nav) return;
 
     /* Scroll state */
-    const onScroll = () => nav.classList.toggle('is-scrolled', scrollY > 40);
+    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    /* Mobile menu */
-    if (hamburger && drawer) {
-      let scrim = document.getElementById('drawer-scrim');
-      if (!scrim) {
-        scrim = document.createElement('div');
-        scrim.id = 'drawer-scrim';
-        scrim.className = 'nav__drawer-scrim';
-        document.body.appendChild(scrim);
+    /* Keyboard accessibility */
+    document.addEventListener('keydown', e => {
+      const drawer = document.getElementById('app-drawer');
+      if (e.key === 'Escape' && drawer && drawer.classList.contains('is-open')) {
+        toggleDrawer(false);
+        const hamburger = document.getElementById('hamburger');
+        if (hamburger) hamburger.focus();
       }
-
-      const toggle = (force) => {
-        drawer.classList.add('has-transited');
-        const open = force !== undefined ? force : !drawer.classList.contains('is-open');
-        drawer.classList.toggle('is-open', open);
-        drawer.setAttribute('aria-hidden', String(!open));
-        hamburger.classList.toggle('is-open', open);
-        hamburger.setAttribute('aria-expanded', String(open));
-        scrim.classList.toggle('is-open', open);
-        document.body.style.overflow = open ? 'hidden' : '';
-      };
-
-      hamburger.addEventListener('click', () => toggle());
-      scrim.addEventListener('click', () => toggle(false));
-
-      const closeBtn = document.getElementById('drawer-close');
-      if (closeBtn) {
-        closeBtn.addEventListener('click', () => toggle(false));
-      }
-
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
-          toggle(false);
-          hamburger.focus();
-        }
-      });
-
-      drawer.querySelectorAll('.nav__drawer-link').forEach(l =>
-        l.addEventListener('click', () => toggle(false))
-      );
-    }
+    });
   }
+
+  /* Global Event Delegation for Nav Controls & Hamburger Menu */
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (!target) return;
+
+    /* Hamburger Menu Button */
+    const hamburger = target.closest('#hamburger');
+    if (hamburger) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleDrawer();
+      return;
+    }
+
+    /* Drawer Close / Scrim */
+    const closeBtn = target.closest('#drawer-close') || target.closest('#drawer-scrim');
+    if (closeBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleDrawer(false);
+      return;
+    }
+
+    /* Drawer Link Click */
+    const drawerLink = target.closest('.nav__drawer-link');
+    if (drawerLink) {
+      toggleDrawer(false);
+      return;
+    }
+
+    /* Language Toggle */
+    const langBtn = target.closest('#lang-toggle') || target.closest('#drawer-lang-toggle');
+    if (langBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleLang();
+      return;
+    }
+
+    /* Theme Toggle */
+    const themeBtn = target.closest('#theme-toggle') || target.closest('#drawer-theme-toggle');
+    if (themeBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleTheme();
+      return;
+    }
+  });
 
   /* Expose render functions globally */
   window.renderNav = renderNav;

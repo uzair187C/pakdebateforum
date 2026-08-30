@@ -64,10 +64,10 @@
     <!-- ─── CTA ───────────────────────────────────────────── -->
     <section class="cta-block academy-cta-bg">
       <div class="container" data-reveal>
-        <h2 class="cta-block__title">Want to Host an Event?</h2>
-        <p class="cta-block__text">Partner with Pak Debate Forum for your next tournament, workshop, or training event.</p>
+        <h2 class="cta-block__title" data-i18n="events.cta_title">Want to Host an Event?</h2>
+        <p class="cta-block__text" data-i18n="events.cta_text">Partner with Pak Debate Forum for your next tournament, workshop, or training event.</p>
         <div class="cta-block__actions">
-          <a href="/contact.html" class="btn btn--primary btn--lg">Get in Touch</a>
+          <a href="/contact.html" class="btn btn--primary btn--lg" data-i18n="btn.get_in_touch">Get in Touch</a>
         </div>
       </div>
     </section>
@@ -110,6 +110,7 @@
             <p class="state-message__title">No Events Found</p>
             <p class="state-message__text">There are no events matching this filter right now. Check back soon.</p>
           </div>`;
+        if (window.I18N) window.I18N.translateDOM(el);
         return;
       }
       el.innerHTML = events.map(ev => {
@@ -135,10 +136,11 @@
               <span>${ev.fee === 0 ? 'Free' : 'PKR ' + (ev.fee || 0).toLocaleString()}</span>
             </div>
           </div>
-          <a href="/event.html?id=${ev.id}" class="btn btn--secondary btn--sm" style="flex-shrink: 0;">View Details →</a>
+          <a href="/event.html?id=${ev.id}" class="btn btn--secondary btn--sm" style="flex-shrink: 0;" data-i18n="btn.view_details">View Details →</a>
         </article>`;
       }).join('');
       if (window.initReveals) window.initReveals(el);
+      if (window.I18N) window.I18N.translateDOM(el);
     }
 
     function applyFilter(st, pushHistory = true) {

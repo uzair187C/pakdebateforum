@@ -61,7 +61,11 @@
       try {
         const { coaches } = await API.coaches.list();
         const el = document.getElementById('coaches-grid');
-        if (!coaches.length) { el.innerHTML = '<div class="state-empty">No coaches listed yet.</div>'; return; }
+        if (!coaches.length) { 
+          el.innerHTML = '<div class="state-empty" data-i18n="coaches.empty">No coaches listed yet.</div>'; 
+          if (window.I18N) window.I18N.translateDOM(el);
+          return; 
+        }
         el.innerHTML = coaches.map(c => {
           let tags = [];
           try { tags = JSON.parse(c.expertise || '[]'); } catch {}
@@ -76,6 +80,7 @@
             </div>`;
         }).join('');
         if (window.initReveals) window.initReveals(el);
+        if (window.I18N) window.I18N.translateDOM(el);
       } catch(e) {
         document.getElementById('coaches-grid').innerHTML = `<div class="state-error">${e.message}</div>`;
       }

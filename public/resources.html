@@ -91,9 +91,10 @@
         el.innerHTML = `
           <div class="state-message">
             <div class="state-message__icon">📚</div>
-            <p class="state-message__title">No Resources Yet</p>
+            <p class="state-message__title" data-i18n="resources.empty">No Resources Yet</p>
             <p class="state-message__text">No resources in this category yet. Check back soon.</p>
           </div>`;
+        if (window.I18N) window.I18N.translateDOM(el);
         return;
       }
       el.innerHTML = resources.map(r => `
@@ -111,9 +112,10 @@
               </div>
             </div>
           </div>
-          <a href="${r.url}" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" style="flex-shrink: 0;">Open →</a>
+          <a href="${r.url}" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" style="flex-shrink: 0;" data-i18n="btn.download_pdf">Open →</a>
         </div>`).join('');
       if (window.initReveals) window.initReveals(el);
+      if (window.I18N) window.I18N.translateDOM(el);
     }
 
     async function load(cat) {

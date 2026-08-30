@@ -126,6 +126,18 @@ const I18N = {
     'results.hero_eyebrow': 'Competitive Record',
     'results.hero_title': 'International Achievements & Representation',
     'results.hero_subtitle': 'Documented records of competitive success and equity representation across world championships.',
+    'results.wsdc_title': 'WSDC 2026 Nairobi — Judge Breaks',
+    'results.wsdc_desc': 'PDF sent a subsidised judging contingent to the World Schools Debating Championship 2026 in Nairobi. Syed Hamza Javaid and Abdul Wassay broke as judges at the tournament.',
+    'results.oxford_title': 'Oxford WSDC 2026 — Grand Final Judge',
+    'results.oxford_desc': 'Jawad Ahmad judged the Open Grand Final at the Oxford World Schools Debating Championship 2026.',
+    'results.prewsdc_title': 'Pakistan Pre-WSDC 2026',
+    'results.prewsdc_desc': '37 nations, 60 teams, and 28 official National Debate Teams participated. PDF awarded $2,200 in fee waivers to support broader international access.',
+    'results.sofia_desc': "PDF committed partial sponsorship of 20–40% of cost toward the LUMS team's trip to WUDC Sofia. PDF raised $1,200 through the Pak Debate Forum Open to support the journey. Ahmad Bin Tahir and Daud Ali Kharal of LUMS received the scholarship.",
+    'results.nat_teams': 'National Teams',
+    'results.nat_teams_sub': 'Official delegations',
+    'results.ballots_title': 'Official Ballots & Result Sheets',
+    'results.ballots_desc': 'Downloadable results, speaker scorecards, and team rankings for past tournaments.',
+    'btn.browse_results': 'Browse Results Docs →',
 
     /* ── Events Page (events.html) ─────────── */
     'events.hero_eyebrow': 'Events Ecosystem',
@@ -181,6 +193,29 @@ const I18N = {
     'search.input_placeholder': 'Search programs, events, resources...',
     'search.no_results': 'No matching results found.',
     'search.results_count': 'found',
+
+    /* ── Coaches Page (coaches.html) ───────── */
+    'coaches.hero_title': 'Meet the Coaches',
+    'coaches.hero_subtitle': 'Our coaches bring national and international competitive experience. Every programme is designed and delivered by practitioners, not theorists.',
+    'coaches.empty': 'No coaches listed yet.',
+    'coaches.expertise': 'Expertise',
+
+    /* ── Common CTAs & Dynamic Buttons ─────── */
+    'events.cta_title': 'Want to Host an Event?',
+    'events.cta_text': 'Partner with Pak Debate Forum for your next tournament, workshop, or training event.',
+    'programs.cta_title': "Don't See What You Need?",
+    'programs.cta_text': "Reach out and we'll help you find the right path.",
+    'programs.empty': 'No programs found in this category.',
+    'resources.empty': 'No resources found.',
+    'results.empty': 'No results listed yet.',
+    'about.team_eyebrow': 'Our Team',
+
+    'btn.get_in_touch': 'Get in Touch',
+    'btn.view_details': 'View Details →',
+    'btn.register_now': 'Register Now',
+    'btn.contact_us': 'Contact Us',
+    'btn.apply_academy': 'Apply to the Academy',
+    'btn.download_pdf': 'Download Resource',
 
     /* ── Misc & Toast ───────────────────────── */
     'toast.success_register': 'Registration submitted successfully!',
@@ -299,6 +334,29 @@ const I18N = {
     'about.mission_title': '我们的学术使命',
     'about.access_title': '推动辩论教育普及',
 
+    /* ── Coaches Page (coaches.html) ───────── */
+    'coaches.hero_title': '认识导师团队',
+    'coaches.hero_subtitle': '我们的导师具备深厚的国内与国际赛事竞技经验。每门课程均由实战辩手与裁判精心设计并亲授。',
+    'coaches.empty': '暂无导师信息。',
+    'coaches.expertise': '专业领域',
+
+    /* ── Common CTAs & Dynamic Buttons ─────── */
+    'events.cta_title': '想要举办或联合承办赛事？',
+    'events.cta_text': '与 Pak Debate Forum 合作举办您的下一场锦标赛、工作坊或辩论培训。',
+    'programs.cta_title': '未找到所需课程？',
+    'programs.cta_text': '随时与我们联系，我们将为您推荐最适合的辩论学习路径。',
+    'programs.empty': '该分类下暂无课程。',
+    'resources.empty': '未找到学术资源。',
+    'results.empty': '暂无赛场战绩记录。',
+    'about.team_eyebrow': '核心团队',
+
+    'btn.get_in_touch': '联系我们',
+    'btn.view_details': '查看详情 →',
+    'btn.register_now': '立即报名',
+    'btn.contact_us': '联系我们',
+    'btn.apply_academy': '申请加入学院',
+    'btn.download_pdf': '下载学术资源',
+
     /* ── Academy Page (academy.html) ───────── */
     'academy.hero_eyebrow': 'PDF 辩论学院',
     'academy.hero_title': '系统化辩论与领导力训练',
@@ -310,6 +368,18 @@ const I18N = {
     'results.hero_eyebrow': '竞技战绩',
     'results.hero_title': '国际赛场荣誉与代表力',
     'results.hero_subtitle': '收录PDF在世界中学生辩论赛（WSDC）、牛津大学辩论赛等顶尖国际赛事中的学术成果。',
+    'results.wsdc_title': 'WSDC 2026 奈洛比 — 裁判晋级',
+    'results.wsdc_desc': 'PDF 资助并派遣裁判团参加了 2026 年在奈洛比举行的世界中学生辩论锦标赛。Syed Hamza Javaid 与 Abdul Wassay 成功晋级淘汰赛裁判。',
+    'results.oxford_title': '牛津 WSDC 2026 — 总决赛裁判',
+    'results.oxford_desc': 'Jawad Ahmad 担任 2026 年牛津世界中学生辩论锦标赛公开组总决赛裁判。',
+    'results.prewsdc_title': '2026 巴基斯坦 Pre-WSDC 锦标赛',
+    'results.prewsdc_desc': '汇聚 37 个国家、60 支代表队及 28 支官方国家队。PDF 资助了 $2,200 美元报名费豁免，推动更广泛的国际交流。',
+    'results.sofia_desc': 'PDF 资助 LUMS 辩论队前往保加利亚索非亚参加 WUDC 20-40% 行程费用，并通过 PDF 公开赛筹集 $1,200 美元。LUMS 选手 Ahmad Bin Tahir 与 Daud Ali Kharal 荣获资助。',
+    'results.nat_teams': '官方国家队',
+    'results.nat_teams_sub': '代表队阵容',
+    'results.ballots_title': '官方裁判表与成绩单',
+    'results.ballots_desc': '往届锦标赛的可下载赛果、辩手积分卡与队伍排名。',
+    'btn.browse_results': '浏览赛果文件 →',
 
     /* ── Events Page (events.html) ─────────── */
     'events.hero_eyebrow': '赛事活动生态',

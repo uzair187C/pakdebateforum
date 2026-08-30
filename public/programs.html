@@ -64,11 +64,11 @@
     <!-- ─── CTA ───────────────────────────────────────────── -->
     <section class="cta-block academy-cta-bg">
       <div class="container" data-reveal>
-        <h2 class="cta-block__title">Don't See What You Need?</h2>
-        <p class="cta-block__text">Reach out and we'll help you find the right path.</p>
+        <h2 class="cta-block__title" data-i18n="programs.cta_title">Don't See What You Need?</h2>
+        <p class="cta-block__text" data-i18n="programs.cta_text">Reach out and we'll help you find the right path.</p>
         <div class="cta-block__actions">
-          <a href="/contact.html" class="btn btn--primary btn--lg">Contact Us</a>
-          <a href="/register.html" class="btn btn--secondary btn--lg">Apply to the Academy</a>
+          <a href="/contact.html" class="btn btn--primary btn--lg" data-i18n="btn.contact_us">Contact Us</a>
+          <a href="/register.html" class="btn btn--secondary btn--lg" data-i18n="btn.apply_academy">Apply to the Academy</a>
         </div>
       </div>
     </section>
@@ -92,7 +92,11 @@
 
     function renderGrid(programs) {
       const el = document.getElementById('programs-grid');
-      if (!programs.length) { el.innerHTML = '<div class="state-empty">No programs found in this category.</div>'; return; }
+      if (!programs.length) { 
+        el.innerHTML = '<div class="state-empty" data-i18n="programs.empty">No programs found in this category.</div>'; 
+        if (window.I18N) window.I18N.translateDOM(el);
+        return; 
+      }
       el.innerHTML = programs.map(p => `
         <article class="card card--interactive" data-reveal>
           <div class="card__body">
@@ -115,10 +119,11 @@
                 ${p.price ? 'PKR ' + p.price.toLocaleString() : 'Contact for pricing'}
               </div>
             </div>
-            <a href="/program.html?id=${p.id}" class="btn btn--primary btn--sm">View →</a>
+            <a href="/program.html?id=${p.id}" class="btn btn--primary btn--sm" data-i18n="btn.view_details">View →</a>
           </div>
         </article>`).join('');
       if (window.initReveals) window.initReveals(el);
+      if (window.I18N) window.I18N.translateDOM(el);
     }
 
     function applyFilter(cat, pushHistory = true) {
