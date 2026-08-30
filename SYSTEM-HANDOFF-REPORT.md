@@ -88,10 +88,10 @@ All pages are located under the `/public` directory:
 
 | Page Path | Purpose & Content Specification |
 | :--- | :--- |
-| `index.html` | **Homepage**: Hero ("Compete. Train. Connect."), verified scale stats (37 nations, 60 teams, $2,200 waivers), founding quote, case studies, 4 pathways, judge credentials, institutional network grid. |
+| `index.html` | **Homepage**: Hero ("Compete. Train. Connect."), verified scale stats (37 nations, 60 teams, $2,200 waivers), founding quote, case studies, 4 pathways, institutional network grid. |
 | `about.html` | **About PDF**: Institutional history ("Built for Access. Proven on the World Stage."), 3 access mechanism cards, case studies (Krabi, WUDC Sofia $1,200, FLTRP $700), tournament ecosystem mapping. |
 | `academy.html` | **Academy**: Training trajectory timeline (2024–2026), 5-stage learning pathway (Foundations to International Readiness), institutional workshop records (UoL, UCP, CMH). |
-| `results.html` | **Competitive Record**: Verified honours only (WSDC 2026 Nairobi, Oxford WSDC 2025, WUDC Sofia 2025, Pre-WSDC 37-nation metrics), international adjudicator credentials panel. |
+| `results.html` | **Competitive Record**: Verified honours only (WSDC 2026 Nairobi, Oxford WSDC 2025, WUDC Sofia 2025, Pre-WSDC 37-nation metrics). |
 | `events.html` | **Events Ecosystem**: Filterable index of upcoming and completed tournaments and community workshops. |
 | `programs.html` | **Programme Directory**: Filterable directory of Academy courses open to global participants. |
 | `resources.html` | **Knowledge Library**: Curated motion packs, adjudication guides, format handbooks, and video archives. |
