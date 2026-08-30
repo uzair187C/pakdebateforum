@@ -1,130 +1,130 @@
-p!DOCTYPE html>
-phtml lang="en" dir="ltr">
-phead>
-  pmeta charset="UTF-8" />
-  pmeta name="viewport" content="width=device-width, initial-scale=1.0" />
-  pmeta name="description" content="Register for a Pak Debate Forum programme or event — applications and event sign-ups." />
-  pmeta name="theme-color" content="#050505" />
-  ptitle>Register — Pak Debate Forump/title>
-  pscript>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Register for a Pak Debate Forum programme or event — applications and event sign-ups." />
+  <meta name="theme-color" content="#050505" />
+  <title>Register — Pak Debate Forum</title>
+  <script>
     (function(){
       var t = localStorage.getItem('pdf_theme') || 'dark';
       var l = localStorage.getItem('pdf_lang') || 'en';
       document.documentElement.setAttribute('data-theme', t);
       document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
     })();
-  p/script>
-  plink rel="preconnect" href="https://fonts.googleapis.com" />
-  plink rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  plink href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  plink rel="stylesheet" href="/css/tokens.css" />
-  plink rel="stylesheet" href="/css/base.css" />
-  plink rel="stylesheet" href="/css/components.css" />
-  plink rel="stylesheet" href="/css/page.css" />
-  plink rel="stylesheet" href="/css/animations.css" />
-p/head>
-pbody>
-  pa href="#main-content" class="skip-link">Skip to main contentp/a>
-  pheader id="app-nav">p/header>
-  pdiv id="app-drawer">p/div>
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="app-nav"></header>
+  <div id="app-drawer"></div>
 
-  pmain id="main-content">
+  <main id="main-content">
 
-    psection class="page-hero">
-      pdiv class="container" style="max-width: 720px;">
-        pa href="javascript:history.back()" style="font-size: var(--text-body-sm); color: var(--color-text-muted); display: inline-flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-6); text-decoration: none;">← Backp/a>
-        pdiv class="section-header" data-reveal>
-          pp class="eyebrow" id="reg-type-label">Registrationp/p>
-          ph1 class="section-title" id="reg-title">Applyp/h1>
-          pp class="section-subtitle" id="reg-subtitle">Complete the form below to submit your registration.p/p>
-        p/div>
-      p/div>
-    p/section>
+    <section class="page-hero">
+      <div class="container" style="max-width: 720px;">
+        <a href="javascript:history.back()" style="font-size: var(--text-body-sm); color: var(--color-text-muted); display: inline-flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-6); text-decoration: none;" data-i18n="nav.back">← Back</a>
+        <div class="section-header" data-reveal>
+          <p class="eyebrow" id="reg-type-label" data-i18n="register.eyebrow">Registration</p>
+          <h1 class="section-title" id="reg-title" data-i18n="register.title">Apply</h1>
+          <p class="section-subtitle" id="reg-subtitle" data-i18n="register.subtitle">Complete the form below to submit your registration.</p>
+        </div>
+      </div>
+    </section>
 
-    psection class="section">
-      pdiv class="container" style="max-width: 720px;">
+    <section class="section">
+      <div class="container" style="max-width: 720px;">
 
-        pdiv id="alert-area">p/div>
+        <div id="alert-area"></div>
 
-        pdiv id="success-view" style="display: none;">
-          pdiv class="alert alert--success" style="padding: var(--sp-8); text-align: center;">
-            pdiv style="font-size: var(--text-heading-lg); margin-bottom: var(--sp-3);">✓p/div>
-            ph2 style="font-family: var(--font-display); font-size: var(--text-heading-lg); margin-bottom: var(--sp-3); color: var(--color-text-primary);">Registration Submitted!p/h2>
-            pp id="success-msg" style="color: var(--color-text-supporting);">Your registration has been received. We will be in touch shortly.p/p>
-            pdiv style="display: flex; gap: var(--sp-3); justify-content: center; flex-wrap: wrap; margin-top: var(--sp-6);">
-              pa href="/events.html" class="btn btn--ghost btn--sm">View Eventsp/a>
-              pa href="/programs.html" class="btn btn--ghost btn--sm">View Programsp/a>
-            p/div>
-          p/div>
-        p/div>
+        <div id="success-view" style="display: none;">
+          <div class="alert alert--success" style="padding: var(--sp-8); text-align: center;">
+            <div style="font-size: var(--text-heading-lg); margin-bottom: var(--sp-3);">✓</div>
+            <h2 style="font-family: var(--font-display); font-size: var(--text-heading-lg); margin-bottom: var(--sp-3); color: var(--color-text-primary);" data-i18n="register.success_title">Registration Submitted!</h2>
+            <p id="success-msg" style="color: var(--color-text-supporting);" data-i18n="register.success_msg">Your registration has been received. We will be in touch shortly.</p>
+            <div style="display: flex; gap: var(--sp-3); justify-content: center; flex-wrap: wrap; margin-top: var(--sp-6);">
+              <a href="/events.html" class="btn btn--ghost btn--sm" data-i18n="btn.view_all_events">View Events</a>
+              <a href="/programs.html" class="btn btn--ghost btn--sm" data-i18n="btn.view_programs">View Programs</a>
+            </div>
+          </div>
+        </div>
 
-        pform id="reg-form" novalidate data-reveal>
-          pdiv class="form-group" id="target-group" style="display: none; margin-bottom: var(--sp-5);">
-            plabel class="form-label" for="target_select">Select Programme or Event pspan class="req">*p/span>p/label>
-            pselect class="form-select" id="target_select" name="target_select">
-              poption value="">— Loading programmes and events… —p/option>
-            p/select>
-          p/div>
+        <form id="reg-form" novalidate data-reveal>
+          <div class="form-group" id="target-group" style="display: none; margin-bottom: var(--sp-5);">
+            <label class="form-label" for="target_select">Select Programme or Event <span class="req">*</span></label>
+            <select class="form-select" id="target_select" name="target_select">
+              <option value="">— Loading programmes and events… —</option>
+            </select>
+          </div>
 
-          pdiv class="form-row">
-            pdiv class="form-group">
-              plabel class="form-label" for="full_name">Full Name pspan class="req">*p/span>p/label>
-              pinput class="form-input" id="full_name" name="full_name" type="text" placeholder="Your full name" required />
-            p/div>
-            pdiv class="form-group">
-              plabel class="form-label" for="email">Email Address pspan class="req">*p/span>p/label>
-              pinput class="form-input" id="email" name="email" type="email" placeholder="you@example.com" required />
-            p/div>
-          p/div>
-          pdiv class="form-row">
-            pdiv class="form-group">
-              plabel class="form-label" for="phone">Phone Numberp/label>
-              pinput class="form-input" id="phone" name="phone" type="tel" inputmode="tel" placeholder="+92 300 0000000" oninput="this.value=this.value.replace(/[^0-9+\s\-()]/g,'')" />
-            p/div>
-            pdiv class="form-group">
-              plabel class="form-label" for="age">Agep/label>
-              pinput class="form-input" id="age" name="age" type="number" min="8" max="99" inputmode="numeric" placeholder="Your age" oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
-            p/div>
-          p/div>
-          pdiv class="form-group">
-            plabel class="form-label" for="institution">School / University / Institutionp/label>
-            pinput class="form-input" id="institution" name="institution" type="text" placeholder="Where do you study?" />
-          p/div>
-          pdiv class="form-group">
-            plabel class="form-label" for="experience_level">Debate Experience Levelp/label>
-            pselect class="form-select" id="experience_level" name="experience_level">
-              poption value="">— Select —p/option>
-              poption value="beginner">Beginner (little or no experience)p/option>
-              poption value="intermediate">Intermediate (some competitions)p/option>
-              poption value="advanced">Advanced (regular competitor)p/option>
-            p/select>
-          p/div>
-          pdiv class="form-group">
-            plabel class="form-label" for="notes">Additional Notes or Questionsp/label>
-            ptextarea class="form-textarea" id="notes" name="notes" placeholder="Anything we should know about your registration?">p/textarea>
-          p/div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="full_name" data-i18n="contact.name_label">Full Name <span class="req">*</span></label>
+              <input class="form-input" id="full_name" name="full_name" type="text" placeholder="Your full name" data-i18n-placeholder="contact.name_placeholder" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email" data-i18n="contact.email_label">Email Address <span class="req">*</span></label>
+              <input class="form-input" id="email" name="email" type="email" placeholder="you@example.com" data-i18n-placeholder="contact.email_placeholder" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="phone" data-i18n="register.phone_label">Phone Number</label>
+              <input class="form-input" id="phone" name="phone" type="tel" inputmode="tel" placeholder="+92 300 0000000" oninput="this.value=this.value.replace(/[^0-9+\s\-()]/g,'')" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="age" data-i18n="register.age_label">Age</label>
+              <input class="form-input" id="age" name="age" type="number" min="8" max="99" inputmode="numeric" placeholder="Your age" oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="institution" data-i18n="register.institution_label">School / University / Institution</label>
+            <input class="form-input" id="institution" name="institution" type="text" placeholder="Where do you study?" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="experience_level" data-i18n="register.experience_label">Debate Experience Level</label>
+            <select class="form-select" id="experience_level" name="experience_level">
+              <option value="">— Select —</option>
+              <option value="beginner">Beginner (little or no experience)</option>
+              <option value="intermediate">Intermediate (some competitions)</option>
+              <option value="advanced">Advanced (regular competitor)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="notes" data-i18n="register.notes_label">Additional Notes or Questions</label>
+            <textarea class="form-textarea" id="notes" name="notes" placeholder="Anything we should know about your registration?"></textarea>
+          </div>
 
-          pdiv style="margin-top: var(--sp-8); display: flex; gap: var(--sp-4); align-items: center; flex-wrap: wrap;">
-            pbutton type="submit" class="btn btn--primary btn--lg" id="submit-btn">
+          <div style="margin-top: var(--sp-8); display: flex; gap: var(--sp-4); align-items: center; flex-wrap: wrap;">
+            <button type="submit" class="btn btn--primary btn--lg" id="submit-btn" data-i18n="btn.submit_registration">
               Submit Registration →
-            p/button>
-            pspan id="submit-status" style="font-size: var(--text-body-sm); color: var(--color-text-muted);">p/span>
-          p/div>
-        p/form>
+            </button>
+            <span id="submit-status" style="font-size: var(--text-body-sm); color: var(--color-text-muted);"></span>
+          </div>
+        </form>
 
-      p/div>
-    p/section>
+      </div>
+    </section>
 
-  p/main>
+  </main>
 
-  pfooter id="app-footer">p/footer>
+  <footer id="app-footer"></footer>
 
-  pscript src="/js/api.js">p/script>
-  pscript src="/js/toast.js">p/script>
-  pscript src="/js/i18n.js">p/script>
-  pscript src="/js/nav.js">p/script>
-  pscript src="/js/main.js">p/script>
-  pscript>
+  <script src="/js/api.js"></script>
+  <script src="/js/toast.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
     const params = new URLSearchParams(location.search);
     let type = params.get('type') || 'program';
     let refId = params.get('id');
@@ -153,24 +153,24 @@ pbody>
             API.events.list('open,upcoming').catch(() => ({ events: [] }))
           ]);
 
-          let html = 'poption value="">— Select a Programme or Event —p/option>';
+          let html = '<option value="">— Select a Programme or Event —</option>';
           if (progRes.programs && progRes.programs.length > 0) {
-            html += 'poptgroup label="Academic Programmes">';
+            html += '<optgroup label="Academic Programmes">';
             progRes.programs.forEach(p => {
-              html += `poption value="program:${p.id}">Programme: ${p.title}p/option>`;
+              html += `<option value="program:${p.id}">Programme: ${p.title}</option>`;
             });
-            html += 'p/optgroup>';
+            html += '</optgroup>';
           }
           if (evRes.events && evRes.events.length > 0) {
-            html += 'poptgroup label="Upcoming Events & Tournaments">';
+            html += '<optgroup label="Upcoming Events & Tournaments">';
             evRes.events.forEach(e => {
-              html += `poption value="event:${e.id}">Event: ${e.title}p/option>`;
+              html += `<option value="event:${e.id}">Event: ${e.title}</option>`;
             });
-            html += 'p/optgroup>';
+            html += '</optgroup>';
           }
           targetSelect.innerHTML = html;
         } catch (err) {
-          targetSelect.innerHTML = 'poption value="">Failed to load options. Please refresh.p/option>';
+          targetSelect.innerHTML = '<option value="">Failed to load options. Please refresh.</option>';
         }
       })();
     }
@@ -183,7 +183,7 @@ pbody>
       const fullName = document.getElementById('full_name').value.trim();
       const email    = document.getElementById('email').value.trim();
       if (!fullName || !email) {
-        document.getElementById('alert-area').innerHTML = 'pdiv class="alert alert--error">Please fill in all required fields.p/div>';
+        document.getElementById('alert-area').innerHTML = '<div class="alert alert--error">Please fill in all required fields.</div>';
         if (window.showToast) window.showToast('Please fill in required fields.', 'error');
         return;
       }
@@ -194,7 +194,7 @@ pbody>
       if (!refId) {
         const selectedVal = document.getElementById('target_select').value;
         if (!selectedVal) {
-          document.getElementById('alert-area').innerHTML = 'pdiv class="alert alert--error">Please select a programme or event to apply for.p/div>';
+          document.getElementById('alert-area').innerHTML = '<div class="alert alert--error">Please select a programme or event to apply for.</div>';
           if (window.showToast) window.showToast('Please select a programme or event.', 'error');
           return;
         }
@@ -228,12 +228,12 @@ pbody>
           `Your registration has been received (ID: ${res.id}). We will contact you at ${email} shortly.`;
         if (window.showToast) window.showToast('Registration submitted successfully!', 'success');
       } catch(err) {
-        document.getElementById('alert-area').innerHTML = `pdiv class="alert alert--error">${err.message}p/div>`;
+        document.getElementById('alert-area').innerHTML = `<div class="alert alert--error">${err.message}</div>`;
         if (window.showToast) window.showToast(err.message || 'Submission failed.', 'error');
         btn.disabled = false;
         btn.textContent = 'Submit Registration →';
       }
     });
-  p/script>
-p/body>
-p/html>
+  </script>
+</body>
+</html>
