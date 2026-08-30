@@ -142,6 +142,32 @@ function initPageEntrance() {
 }
 
 
+/* ═══ FORM INPUT SANITIZATION & NUMERIC ENFORCEMENT ══════════ */
+
+function initNumericInputs() {
+  document.querySelectorAll('input[type="tel"], input[inputmode="tel"], input#phone').forEach(input => {
+    input.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/[^0-9+\s\-()]/g, '');
+    });
+  });
+
+  document.querySelectorAll('input[type="number"], input[inputmode="numeric"], input#age').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+      if ((e.ctrlKey || e.metaKey) && ['a', 'c', 'v', 'x'].includes(e.key.toLowerCase())) return;
+      if (!/^\d$/.test(e.key)) {
+        e.preventDefault();
+      }
+    });
+
+    input.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+  });
+}
+window.initNumericInputs = initNumericInputs;
+
+
 /* ═══ INIT ════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -150,4 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallax();
   initCounters();
   initSmoothScroll();
+  initNumericInputs();
 });
+
