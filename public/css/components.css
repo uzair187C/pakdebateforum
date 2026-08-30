@@ -465,6 +465,12 @@
   background: rgba(212, 175, 55, 0.08);
 }
 
+@media (max-width: 1023px) {
+  .nav__search-btn {
+    display: none !important;
+  }
+}
+
 .nav__cta {
   display: none;
 }
@@ -479,12 +485,19 @@
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 44px;
-  height: 44px;
-  padding: 10px;
+  width: 40px;
+  height: 40px;
+  padding: 9px;
   cursor: pointer;
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  transition: all var(--dur-micro) var(--ease-standard);
+}
+
+.nav__hamburger:hover {
+  border-color: var(--color-accent-gold);
+  background: rgba(201, 162, 74, 0.08);
 }
 
 @media (min-width: 1024px) {
@@ -494,16 +507,16 @@
 .nav__hamburger-line {
   display: block;
   width: 100%;
-  height: 2px;
+  height: 2.5px;
   background: var(--color-text-primary);
-  border-radius: 1px;
+  border-radius: 2px;
   transition:
     transform var(--dur-short) var(--ease-emphasized),
     opacity var(--dur-micro) var(--ease-standard);
 }
 
 .nav__hamburger.is-open .nav__hamburger-line:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(7.5px) rotate(45deg);
 }
 
 .nav__hamburger.is-open .nav__hamburger-line:nth-child(2) {
@@ -511,8 +524,19 @@
 }
 
 .nav__hamburger.is-open .nav__hamburger-line:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+  transform: translateY(-7.5px) rotate(-45deg);
 }
+
+@media (max-width: 480px) {
+  .nav__logo-text {
+    font-size: 1.05rem;
+    white-space: nowrap;
+  }
+  .nav__actions {
+    gap: var(--sp-2);
+  }
+}
+
 
 /* ═══════════════════════════════════════════════════════════════
    7. MOBILE DRAWER
