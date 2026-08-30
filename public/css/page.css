@@ -1194,11 +1194,11 @@
   display: none !important;
 }
 
-/* 2. Recompose Hero Layouts Naturally */
+/* 2. Recompose Hero Layouts & Remove Dark Text Shadows */
 [data-theme="light"] .hero {
-  min-height: 75vh;
-  background-color: var(--color-bg-page);
-  background-image: none !important;
+  min-height: 70vh;
+  background-color: #FAF8F5 !important;
+  background-image: radial-gradient(ellipse 80% 60% at 50% 30%, #FFFFFF 0%, #FAF8F5 70%, #F5F2EA 100%) !important;
   padding-block: calc(var(--nav-height) + var(--sp-8)) var(--sp-12);
 }
 
@@ -1213,13 +1213,44 @@
   margin-inline: auto;
 }
 
+[data-theme="light"] .hero__eyebrow,
+[data-theme="light"] .hero__title,
+[data-theme="light"] .hero__subtitle,
+[data-theme="light"] .section-title,
+[data-theme="light"] .section-subtitle,
+[data-theme="light"] .eyebrow,
+[data-theme="light"] .hero__title .text-accent {
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .hero__eyebrow {
+  color: #8C6A21 !important;
+}
+
+[data-theme="light"] .hero__eyebrow::before,
+[data-theme="light"] .hero__eyebrow::after {
+  background: #8C6A21 !important;
+}
+
+[data-theme="light"] .hero__title {
+  color: #1C1C1A !important;
+}
+
+[data-theme="light"] .hero__title .text-accent {
+  color: #8C6A21 !important;
+}
+
+[data-theme="light"] .hero__subtitle {
+  color: #4A4A46 !important;
+}
+
 [data-theme="light"] .hero__actions {
   justify-content: center;
 }
 
 [data-theme="light"] .page-hero--academy {
   background-image: none !important;
-  background-color: var(--color-bg-page);
+  background-color: #FAF8F5 !important;
   min-height: auto;
   padding-block: calc(var(--nav-height) + var(--sp-8)) var(--sp-8);
 }
@@ -1238,19 +1269,46 @@
   width: auto;
 }
 
-/* 3. Remove Decorative Atmospheric Background Images */
+/* 3. Pure Warm Light Backgrounds for Sections (No Dark Atmospheric Overlays) */
 [data-theme="light"] .academy-why-bg,
 [data-theme="light"] .academy-cta-bg,
 [data-theme="light"] .home-stats-bg,
+[data-theme="light"] .home-sofia-bg,
+[data-theme="light"] .home-programmes-bg,
 [data-theme="light"] .about-hero,
 [data-theme="light"] .events-hero,
 [data-theme="light"] .resources-hero,
 [data-theme="light"] .page-hero {
   background-image: none !important;
-  background-color: var(--color-bg-section);
+  background-color: #F5F2EA !important;
+  color: #1C1C1A !important;
 }
 
 [data-theme="light"] .page-hero::before {
   display: none !important;
+}
+
+[data-theme="light"] .stats-section {
+  background-color: #F5F2EA !important;
+  border-top: 1px solid rgba(201, 162, 74, 0.2) !important;
+  border-bottom: 1px solid rgba(201, 162, 74, 0.2) !important;
+}
+
+[data-theme="light"] .stat__number--display {
+  color: #8C6A21 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .stat__label {
+  color: #1C1C1A !important;
+}
+
+[data-theme="light"] .stat__context,
+[data-theme="light"] .stats-credibility {
+  color: #73726C !important;
+}
+
+[data-theme="light"] .stat__divider {
+  background: rgba(140, 106, 33, 0.25) !important;
 }
 
