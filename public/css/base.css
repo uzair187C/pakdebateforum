@@ -51,6 +51,41 @@ body > main {
   flex: 1;
 }
 
+/* Light Mode Body Background Override */
+[data-theme="light"] body {
+  background-color: var(--color-bg-page);
+  background-image:
+    radial-gradient(ellipse 70% 50% at 15% 10%, rgba(140, 106, 33, 0.03) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 45% at 85% 55%, rgba(8, 122, 88, 0.02) 0%, transparent 70%),
+    radial-gradient(rgba(28, 28, 26, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
+  color: var(--color-text-primary);
+}
+
+/* Chinese Typography Normalization */
+[lang^="zh"] body,
+[lang^="zh"] input,
+[lang^="zh"] textarea,
+[lang^="zh"] select,
+[lang^="zh"] button {
+  font-family: var(--font-body), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+[lang^="zh"] h1,
+[lang^="zh"] h2,
+[lang^="zh"] h3 {
+  font-family: var(--font-display), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", serif;
+  letter-spacing: normal;
+  line-height: 1.25;
+}
+
+[lang^="zh"] .eyebrow,
+[lang^="zh"] .card__eyebrow,
+[lang^="zh"] .badge {
+  letter-spacing: 0.05em;
+}
+
+
 /* ═══ DISPLAY TYPOGRAPHY ═════════════════════════════════════ */
 /* #03 §6: Cormorant Garamond for display — editorial authority */
 

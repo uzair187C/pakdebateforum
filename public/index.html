@@ -21,6 +21,16 @@
 
   <title>Pak Debate Forum — Compete. Train. Connect.</title>
 
+  <!-- FOUC Prevention Script -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('pdf_theme') || 'dark';
+      var l = localStorage.getItem('pdf_lang') || 'en';
+      document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
+    })();
+  </script>
+
   <!-- Preconnect fonts (#03 §2: Cormorant Garamond + Manrope) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,6 +43,7 @@
   <link rel="stylesheet" href="/css/page.css?v=4" />
   <link rel="stylesheet" href="/css/animations.css" />
 </head>
+
 <body>
 
   <!-- Skip to content (#33 §37) -->
@@ -48,19 +59,19 @@
     <!-- ─── HERO ──────────────────────────────────────────── -->
     <section class="hero" id="hero">
       <div class="hero__content hero-entrance">
-        <p class="hero__eyebrow">Pak Debate Forum</p>
+        <p class="hero__eyebrow" data-i18n="home.hero_eyebrow">Pak Debate Forum</p>
 
         <h1 class="hero__title">
-          Compete. Train.<br><span class="text-accent">Connect.</span>
+          <span data-i18n="home.hero_title_1">Compete.</span> <span data-i18n="home.hero_title_2">Train.</span><br><span class="text-accent" data-i18n="home.hero_title_3">Connect.</span>
         </h1>
 
-        <p class="hero__subtitle">
+        <p class="hero__subtitle" data-i18n="home.hero_subtitle">
           An international debate organization and academy — founded in Pakistan, open to the world. We run tournaments, train speakers, develop adjudicators, and build access to the global debating circuit.
         </p>
 
         <div class="hero__actions">
-          <a href="/academy.html" class="btn btn--primary btn--lg">Explore Academy</a>
-          <a href="/events.html" class="btn btn--secondary btn--lg">View Events</a>
+          <a href="/academy.html" class="btn btn--primary btn--lg" data-i18n="btn.explore_academy">Explore Academy</a>
+          <a href="/events.html" class="btn btn--secondary btn--lg" data-i18n="btn.view_all_events">View Events</a>
         </div>
 
       </div>
@@ -99,24 +110,24 @@
     <!-- ─── VERIFIED SCALE ───────────────────────────────────── -->
     <section class="section--sm stats-section home-stats-bg" aria-label="PDF verified scale">
       <div class="container">
-        <p class="stats-eyebrow" data-reveal>Verified Scale</p>
+        <p class="stats-eyebrow" data-reveal data-i18n="badge.scale">Verified Scale</p>
         <div class="stats-row stats-row--editorial" data-reveal-stagger>
           <div class="stat stat--editorial">
             <p class="stat__number stat__number--display">37</p>
-            <p class="stat__label">Nations</p>
-            <p class="stat__context">2026 Pre-WSDC</p>
+            <p class="stat__label" data-i18n="home.stat_nations">Nations</p>
+            <p class="stat__context" data-i18n="home.stat_nations_sub">2026 Pre-WSDC</p>
           </div>
           <div class="stat__divider" aria-hidden="true"></div>
           <div class="stat stat--editorial">
             <p class="stat__number stat__number--display">60</p>
-            <p class="stat__label">Teams</p>
-            <p class="stat__context">2026 Pre-WSDC</p>
+            <p class="stat__label" data-i18n="home.stat_teams">Teams</p>
+            <p class="stat__context" data-i18n="home.stat_teams_sub">2026 Pre-WSDC</p>
           </div>
           <div class="stat__divider" aria-hidden="true"></div>
           <div class="stat stat--editorial">
             <p class="stat__number stat__number--display">$2,200</p>
-            <p class="stat__label">Fee Waivers</p>
-            <p class="stat__context">Awarded at Pre-WSDC</p>
+            <p class="stat__label" data-i18n="home.stat_waivers">Fee Waivers</p>
+            <p class="stat__context" data-i18n="home.stat_waivers_sub">Awarded at Pre-WSDC</p>
           </div>
         </div>
       </div>
@@ -333,6 +344,7 @@
   <footer id="app-footer"></footer>
 
   <!-- Scripts -->
+  <script src="/js/i18n.js"></script>
   <script src="/js/nav.js"></script>
   <script src="/js/main.js"></script>
   <script>

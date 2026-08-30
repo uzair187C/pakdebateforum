@@ -1,119 +1,128 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="PDF knowledge library — debate format guides, motion databases, adjudication resources, training materials, and competition records." />
-  <meta name="theme-color" content="#050505" />
-  <title>Resources — Pak Debate Forum</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/tokens.css" />
-  <link rel="stylesheet" href="/css/base.css" />
-  <link rel="stylesheet" href="/css/components.css" />
-  <link rel="stylesheet" href="/css/page.css" />
-  <link rel="stylesheet" href="/css/animations.css" />
-</head>
-<body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <header id="app-nav"></header>
-  <div id="app-drawer"></div>
+p!DOCTYPE html>
+phtml lang="en" dir="ltr">
+phead>
+  pmeta charset="UTF-8" />
+  pmeta name="viewport" content="width=device-width, initial-scale=1.0" />
+  pmeta name="description" content="PDF knowledge library — debate format guides, motion databases, adjudication resources, training materials, and competition records." />
+  pmeta name="theme-color" content="#050505" />
+  ptitle>Resources — Pak Debate Forump/title>
+  pscript>
+    (function(){
+      var t = localStorage.getItem('pdf_theme') || 'dark';
+      var l = localStorage.getItem('pdf_lang') || 'en';
+      document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
+    })();
+  p/script>
+  plink rel="preconnect" href="https://fonts.googleapis.com" />
+  plink rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  plink href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  plink rel="stylesheet" href="/css/tokens.css" />
+  plink rel="stylesheet" href="/css/base.css" />
+  plink rel="stylesheet" href="/css/components.css" />
+  plink rel="stylesheet" href="/css/page.css" />
+  plink rel="stylesheet" href="/css/animations.css" />
+p/head>
+pbody>
+  pa href="#main-content" class="skip-link">Skip to main contentp/a>
+  pheader id="app-nav">p/header>
+  pdiv id="app-drawer">p/div>
 
-  <main id="main-content">
+  pmain id="main-content">
 
-    <!-- ─── RESOURCES HERO ──────────────────────────────── -->
-    <section class="resources-hero">
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <p class="eyebrow">Knowledge Library</p>
-          <h1 class="section-title" style="font-size: var(--text-display-lg);">Resources</h1>
-          <p class="section-subtitle">
+    p!-- ─── RESOURCES HERO ──────────────────────────────── -->
+    psection class="resources-hero">
+      pdiv class="container">
+        pdiv class="section-header" data-reveal>
+          pp class="eyebrow">Knowledge Libraryp/p>
+          ph1 class="section-title" style="font-size: var(--text-display-lg);">Resourcesp/h1>
+          pp class="section-subtitle">
             Format guides, motion databases, adjudication materials, training resources, and competition records — curated from PDF’s training and tournament ecosystem.
-          </p>
-        </div>
-      </div>
-    </section>
+          p/p>
+        p/div>
+      p/div>
+    p/section>
 
-    <!-- ─── DISCOVERY (#30 §33–51) ────────────────────────── -->
-    <section class="section">
-      <div class="container">
+    p!-- ─── DISCOVERY (#30 §33–51) ────────────────────────── -->
+    psection class="section">
+      pdiv class="container">
 
-        <div class="filter-bar" id="filter-bar" data-reveal>
-          <button class="filter-btn is-active" data-cat="">All</button>
-          <button class="filter-btn" data-cat="formats">Formats</button>
-          <button class="filter-btn" data-cat="motions">Motions</button>
-          <button class="filter-btn" data-cat="guides">Guides</button>
-          <button class="filter-btn" data-cat="videos">Videos</button>
-          <button class="filter-btn" data-cat="results">Results</button>
-        </div>
+        pdiv class="filter-bar" id="filter-bar" data-reveal>
+          pbutton class="filter-btn is-active" data-cat="">Allp/button>
+          pbutton class="filter-btn" data-cat="formats">Formatsp/button>
+          pbutton class="filter-btn" data-cat="motions">Motionsp/button>
+          pbutton class="filter-btn" data-cat="guides">Guidesp/button>
+          pbutton class="filter-btn" data-cat="videos">Videosp/button>
+          pbutton class="filter-btn" data-cat="results">Resultsp/button>
+        p/div>
 
-        <div id="resources-list">
-          <div class="state-loading"><div class="spinner"></div></div>
-        </div>
+        pdiv id="resources-list">
+          pdiv class="state-loading">pdiv class="spinner">p/div>p/div>
+        p/div>
 
-      </div>
-    </section>
+      p/div>
+    p/section>
 
-    <!-- ─── CTA ───────────────────────────────────────────── -->
-    <section class="cta-block academy-cta-bg">
-      <div class="container" data-reveal>
-        <h2 class="cta-block__title">Looking for Something Specific?</h2>
-        <p class="cta-block__text">Contact us with requests for specific debate formats, motion lists, or training materials.</p>
-        <div class="cta-block__actions">
-          <a href="/contact.html" class="btn btn--primary btn--lg">Get in Touch</a>
-        </div>
-      </div>
-    </section>
+    p!-- ─── CTA ───────────────────────────────────────────── -->
+    psection class="cta-block academy-cta-bg">
+      pdiv class="container" data-reveal>
+        ph2 class="cta-block__title">Looking for Something Specific?p/h2>
+        pp class="cta-block__text">Contact us with requests for specific debate formats, motion lists, or training materials.p/p>
+        pdiv class="cta-block__actions">
+          pa href="/contact.html" class="btn btn--primary btn--lg">Get in Touchp/a>
+        p/div>
+      p/div>
+    p/section>
 
-  </main>
+  p/main>
 
-  <footer id="app-footer"></footer>
+  pfooter id="app-footer">p/footer>
 
-  <script src="/js/api.js"></script>
-  <script src="/js/nav.js"></script>
-  <script src="/js/main.js"></script>
-  <script>
+  pscript src="/js/api.js">p/script>
+  pscript src="/js/i18n.js">p/script>
+  pscript src="/js/nav.js">p/script>
+  pscript src="/js/main.js">p/script>
+  pscript>
     const ICONS = { pdf: '📄', video: '🎬', link: '🔗', doc: '📝' };
 
     function render(resources) {
       const el = document.getElementById('resources-list');
       if (!resources.length) {
         el.innerHTML = `
-          <div class="state-message">
-            <div class="state-message__icon">📚</div>
-            <p class="state-message__title">No Resources Yet</p>
-            <p class="state-message__text">No resources in this category yet. Check back soon.</p>
-          </div>`;
+          pdiv class="state-message">
+            pdiv class="state-message__icon">📚p/div>
+            pp class="state-message__title">No Resources Yetp/p>
+            pp class="state-message__text">No resources in this category yet. Check back soon.p/p>
+          p/div>`;
         return;
       }
       el.innerHTML = resources.map(r => `
-        <div class="resource-item" data-reveal>
-          <div class="resource-icon">${ICONS[r.file_type] || '🔗'}</div>
-          <div style="flex: 1;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--sp-4); flex-wrap: wrap;">
-              <div>
-                <p class="resource-title">${r.title}</p>
-                ${r.description ? `<p class="resource-desc">${r.description}</p>` : ''}
-              </div>
-              <div style="display: flex; gap: var(--sp-2); align-items: center; flex-shrink: 0;">
-                <span class="badge badge--muted">${r.category}</span>
-                <span class="badge badge--muted">${r.file_type}</span>
-              </div>
-            </div>
-          </div>
-          <a href="${r.url}" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" style="flex-shrink: 0;">Open →</a>
-        </div>`).join('');
+        pdiv class="resource-item" data-reveal>
+          pdiv class="resource-icon">${ICONS[r.file_type] || '🔗'}p/div>
+          pdiv style="flex: 1;">
+            pdiv style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--sp-4); flex-wrap: wrap;">
+              pdiv>
+                pp class="resource-title">${r.title}p/p>
+                ${r.description ? `pp class="resource-desc">${r.description}p/p>` : ''}
+              p/div>
+              pdiv style="display: flex; gap: var(--sp-2); align-items: center; flex-shrink: 0;">
+                pspan class="badge badge--muted">${r.category}p/span>
+                pspan class="badge badge--muted">${r.file_type}p/span>
+              p/div>
+            p/div>
+          p/div>
+          pa href="${r.url}" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" style="flex-shrink: 0;">Open →p/a>
+        p/div>`).join('');
       if (window.initReveals) window.initReveals(el);
     }
 
     async function load(cat) {
-      document.getElementById('resources-list').innerHTML = '<div class="state-loading"><div class="spinner"></div></div>';
+      document.getElementById('resources-list').innerHTML = 'pdiv class="state-loading">pdiv class="spinner">p/div>p/div>';
       try {
         const { resources } = await API.resources.list(cat);
         render(resources);
       } catch(e) {
-        document.getElementById('resources-list').innerHTML = `<div class="state-error">${e.message}</div>`;
+        document.getElementById('resources-list').innerHTML = `pdiv class="state-error">${e.message}p/div>`;
       }
     }
 
@@ -150,6 +159,6 @@
 
     const urlCat = new URLSearchParams(window.location.search).get('category') || '';
     applyFilter(urlCat, false);
-  </script>
-</body>
-</html>
+  p/script>
+p/body>
+p/html>

@@ -219,3 +219,57 @@
   /* ═══ BREAKPOINTS (reference — use in @media) ══════════════ */
   /* sm: 480px  md: 768px  lg: 1024px  xl: 1280px  2xl: 1440px */
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT EXPERIENCE THEME TOKENS ([data-theme="light"])
+   Warm Ivory, Dark Charcoal, Restrained Gold, Clean Academic Surfaces
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="light"] {
+  /* Backgrounds */
+  --color-bg-page:             #FAF8F5;
+  --color-bg-deep:             #F3EFEA;
+  --color-bg-section:          #EFECE6;
+  --color-bg-surface:          #FFFFFF;
+  --color-bg-surface-elevated: #FFFFFF;
+  --color-bg-surface-hover:    #F6F4EE;
+
+  /* Text */
+  --color-text-primary:    #1C1C1A;
+  --color-text-secondary:  #2D2D2A;
+  --color-text-supporting: #4A4A46;
+  --color-text-muted:      #73726C;
+  --color-text-tertiary:   #8E8D86;
+  --color-text-on-gold:    #FFFFFF;
+  --color-text-on-green:   #FFFFFF;
+
+  /* Accents — Restrained accessible gold for light mode (WCAG AA compliant) */
+  --color-accent-gold:           #8C6A21;
+  --color-accent-gold-bright:    #76561E;
+  --color-accent-gold-highlight: #5A4012;
+  --color-accent-gold-deep:      #8C6A21;
+  --color-accent-gold-darkest:   #45320D;
+
+  --color-accent-green:        #087A58;
+  --color-accent-green-active: #065F44;
+  --color-accent-green-deep:   #044431;
+
+  /* Borders */
+  --color-border-subtle: rgba(28, 28, 26, 0.10);
+  --color-border-strong: rgba(28, 28, 26, 0.18);
+  --color-border-gold:   rgba(140, 106, 33, 0.45);
+  --color-border-green:  rgba(8, 122, 88, 0.45);
+
+  /* Overlays & Shadows */
+  --color-overlay:       rgba(250, 248, 245, 0.85);
+  --color-overlay-heavy: rgba(250, 248, 245, 0.95);
+  --color-glow-gold:     rgba(140, 106, 33, 0.10);
+  --color-glow-green:    rgba(8, 122, 88, 0.10);
+
+  --shadow-soft:      0 2px 8px rgba(28, 28, 26, 0.05);
+  --shadow-medium:    0 4px 16px rgba(28, 28, 26, 0.08);
+  --shadow-deep:      0 8px 32px rgba(28, 28, 26, 0.10);
+  --shadow-cinematic: 0 12px 48px rgba(28, 28, 26, 0.12);
+  --shadow-gold-glow: 0 0 16px rgba(140, 106, 33, 0.12);
+}
+

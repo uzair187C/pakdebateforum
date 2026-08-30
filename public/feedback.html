@@ -1,92 +1,101 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Share your feedback with Pak Debate Forum — programme, event, coaching, and website feedback welcome." />
-  <meta name="theme-color" content="#050505" />
-  <title>Feedback — Pak Debate Forum</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/tokens.css" />
-  <link rel="stylesheet" href="/css/base.css" />
-  <link rel="stylesheet" href="/css/components.css" />
-  <link rel="stylesheet" href="/css/page.css" />
-  <link rel="stylesheet" href="/css/animations.css" />
-</head>
-<body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <header id="app-nav"></header>
-  <div id="app-drawer"></div>
+p!DOCTYPE html>
+phtml lang="en" dir="ltr">
+phead>
+  pmeta charset="UTF-8" />
+  pmeta name="viewport" content="width=device-width, initial-scale=1.0" />
+  pmeta name="description" content="Share your feedback with Pak Debate Forum — programme, event, coaching, and website feedback welcome." />
+  pmeta name="theme-color" content="#050505" />
+  ptitle>Feedback — Pak Debate Forump/title>
+  pscript>
+    (function(){
+      var t = localStorage.getItem('pdf_theme') || 'dark';
+      var l = localStorage.getItem('pdf_lang') || 'en';
+      document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
+    })();
+  p/script>
+  plink rel="preconnect" href="https://fonts.googleapis.com" />
+  plink rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  plink href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  plink rel="stylesheet" href="/css/tokens.css" />
+  plink rel="stylesheet" href="/css/base.css" />
+  plink rel="stylesheet" href="/css/components.css" />
+  plink rel="stylesheet" href="/css/page.css" />
+  plink rel="stylesheet" href="/css/animations.css" />
+p/head>
+pbody>
+  pa href="#main-content" class="skip-link">Skip to main contentp/a>
+  pheader id="app-nav">p/header>
+  pdiv id="app-drawer">p/div>
 
-  <main id="main-content">
+  pmain id="main-content">
 
-    <section class="page-hero">
-      <div class="container" style="max-width: 640px;">
-        <div class="section-header" data-reveal>
-          <p class="eyebrow">We're Listening</p>
-          <h1 class="section-title">Share Your Feedback</h1>
-          <p class="section-subtitle">Your feedback helps us improve our programmes, events, and coaching. All submissions are read by the team.</p>
-        </div>
-      </div>
-    </section>
+    psection class="page-hero">
+      pdiv class="container" style="max-width: 640px;">
+        pdiv class="section-header" data-reveal>
+          pp class="eyebrow">We're Listeningp/p>
+          ph1 class="section-title">Share Your Feedbackp/h1>
+          pp class="section-subtitle">Your feedback helps us improve our programmes, events, and coaching. All submissions are read by the team.p/p>
+        p/div>
+      p/div>
+    p/section>
 
-    <section class="section">
-      <div class="container" style="max-width: 640px;">
+    psection class="section">
+      pdiv class="container" style="max-width: 640px;">
 
-        <div id="alert-area"></div>
+        pdiv id="alert-area">p/div>
 
-        <div id="success-view" style="display: none;">
-          <div class="alert alert--success" style="padding: var(--sp-8); text-align: center;">
-            <div style="font-size: var(--text-heading-lg); margin-bottom: var(--sp-3);">✓</div>
-            <h2 style="font-family: var(--font-display); font-size: var(--text-heading-lg); margin-bottom: var(--sp-3); color: var(--color-text-primary);">Thank You!</h2>
-            <p style="color: var(--color-text-supporting);">Your feedback has been received. We appreciate you taking the time.</p>
-            <div style="margin-top: var(--sp-6);"><a href="/" class="btn btn--ghost btn--sm">Back to Home</a></div>
-          </div>
-        </div>
+        pdiv id="success-view" style="display: none;">
+          pdiv class="alert alert--success" style="padding: var(--sp-8); text-align: center;">
+            pdiv style="font-size: var(--text-heading-lg); margin-bottom: var(--sp-3);">✓p/div>
+            ph2 style="font-family: var(--font-display); font-size: var(--text-heading-lg); margin-bottom: var(--sp-3); color: var(--color-text-primary);">Thank You!p/h2>
+            pp style="color: var(--color-text-supporting);">Your feedback has been received. We appreciate you taking the time.p/p>
+            pdiv style="margin-top: var(--sp-6);">pa href="/" class="btn btn--ghost btn--sm">Back to Homep/a>p/div>
+          p/div>
+        p/div>
 
-        <form id="feedback-form" novalidate data-reveal>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="name">Your Name <span class="req">*</span></label>
-              <input class="form-input" id="name" type="text" placeholder="Full name" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="email">Email Address <span class="req">*</span></label>
-              <input class="form-input" id="email" type="email" placeholder="you@example.com" required />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="category">Feedback Category <span class="req">*</span></label>
-            <select class="form-select" id="category" required>
-              <option value="">— Select a category —</option>
-              <option value="general">General</option>
-              <option value="program">Programme Feedback</option>
-              <option value="event">Event Feedback</option>
-              <option value="coach">Coach Feedback</option>
-              <option value="website">Website Feedback</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="message">Your Message <span class="req">*</span></label>
-            <textarea class="form-textarea" id="message" placeholder="Share your thoughts, suggestions, or concerns…" style="min-height: 160px;" required></textarea>
-          </div>
-          <button type="submit" class="btn btn--primary btn--lg btn--full" id="submit-btn">Submit Feedback →</button>
-        </form>
+        pform id="feedback-form" novalidate data-reveal>
+          pdiv class="form-row">
+            pdiv class="form-group">
+              plabel class="form-label" for="name">Your Name pspan class="req">*p/span>p/label>
+              pinput class="form-input" id="name" type="text" placeholder="Full name" required />
+            p/div>
+            pdiv class="form-group">
+              plabel class="form-label" for="email">Email Address pspan class="req">*p/span>p/label>
+              pinput class="form-input" id="email" type="email" placeholder="you@example.com" required />
+            p/div>
+          p/div>
+          pdiv class="form-group">
+            plabel class="form-label" for="category">Feedback Category pspan class="req">*p/span>p/label>
+            pselect class="form-select" id="category" required>
+              poption value="">— Select a category —p/option>
+              poption value="general">Generalp/option>
+              poption value="program">Programme Feedbackp/option>
+              poption value="event">Event Feedbackp/option>
+              poption value="coach">Coach Feedbackp/option>
+              poption value="website">Website Feedbackp/option>
+            p/select>
+          p/div>
+          pdiv class="form-group">
+            plabel class="form-label" for="message">Your Message pspan class="req">*p/span>p/label>
+            ptextarea class="form-textarea" id="message" placeholder="Share your thoughts, suggestions, or concerns…" style="min-height: 160px;" required>p/textarea>
+          p/div>
+          pbutton type="submit" class="btn btn--primary btn--lg btn--full" id="submit-btn">Submit Feedback →p/button>
+        p/form>
 
-      </div>
-    </section>
+      p/div>
+    p/section>
 
-  </main>
+  p/main>
 
-  <footer id="app-footer"></footer>
+  pfooter id="app-footer">p/footer>
 
-  <script src="/js/api.js"></script>
-  <script src="/js/toast.js"></script>
-  <script src="/js/nav.js"></script>
-  <script src="/js/main.js"></script>
-  <script>
+  pscript src="/js/api.js">p/script>
+  pscript src="/js/toast.js">p/script>
+  pscript src="/js/i18n.js">p/script>
+  pscript src="/js/nav.js">p/script>
+  pscript src="/js/main.js">p/script>
+  pscript>
     document.getElementById('feedback-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = document.getElementById('submit-btn');
@@ -96,7 +105,7 @@
       const message  = document.getElementById('message').value.trim();
 
       if (!name || !email || !category || !message) {
-        document.getElementById('alert-area').innerHTML = '<div class="alert alert--error">Please fill in all required fields.</div>';
+        document.getElementById('alert-area').innerHTML = 'pdiv class="alert alert--error">Please fill in all required fields.p/div>';
         if (window.showToast) window.showToast('Please fill in required fields.', 'error');
         return;
       }
@@ -111,12 +120,12 @@
         document.getElementById('success-view').style.display  = 'block';
         if (window.showToast) window.showToast('Feedback submitted successfully!', 'success');
       } catch(err) {
-        document.getElementById('alert-area').innerHTML = `<div class="alert alert--error">${err.message}</div>`;
+        document.getElementById('alert-area').innerHTML = `pdiv class="alert alert--error">${err.message}p/div>`;
         if (window.showToast) window.showToast(err.message || 'Feedback submission failed.', 'error');
         btn.disabled = false;
         btn.textContent = 'Submit Feedback →';
       }
     });
-  </script>
-</body>
-</html>
+  p/script>
+p/body>
+p/html>

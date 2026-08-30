@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>System Error | Pak Debate Forum</title>
+  <script>
+    (function(){
+      var t = localStorage.getItem('pdf_theme') || 'dark';
+      var l = localStorage.getItem('pdf_lang') || 'en';
+      document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
+    })();
+  </script>
   <meta name="description" content="An unexpected application error occurred. Pak Debate Forum system administrators have been notified.">
   <link rel="canonical" href="https://pakdebateforum.org/error.html">
 
@@ -57,6 +65,7 @@
   <script src="/js/api.js"></script>
   <script src="/js/toast.js"></script>
   <script src="/js/main.js"></script>
+  <script src="/js/i18n.js"></script>
   <script src="/js/nav.js"></script>
 </body>
 </html>

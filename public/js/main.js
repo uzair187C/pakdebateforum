@@ -171,6 +171,7 @@ window.initNumericInputs = initNumericInputs;
 /* ═══ INIT ════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.I18N) window.I18N.init();
   initPageEntrance();
   initReveals();
   initParallax();
@@ -178,4 +179,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initNumericInputs();
 });
+
 

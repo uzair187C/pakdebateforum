@@ -8,7 +8,7 @@ Pak Debate Forum (PDF) is Pakistan's premier platform dedicated to democratizing
 
 ## 🌟 Our Mission
 
-To foster an articulate, confident, and critically engaged generation by providing structured training, competitive platforms, transparent governance, and comprehensive debate resources for debaters of all experience levels.
+To foster an articulate, confident, and critically engaged generation by providing structured training, competitive platforms, transparent  governance, and comprehensive debate resources for debaters of all experience levels.
 
 ---
 

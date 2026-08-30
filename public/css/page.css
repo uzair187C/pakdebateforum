@@ -1181,3 +1181,76 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT EXPERIENCE PAGE OVERRIDES & PODIUM SUPPRESSION
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1. Complete Podium Removal */
+[data-theme="light"] .hero__podium,
+[data-theme="light"] .academy-hero__podium,
+[data-theme="light"] .podium-stage,
+[data-theme="light"] .hero__podium-tagline {
+  display: none !important;
+}
+
+/* 2. Recompose Hero Layouts Naturally */
+[data-theme="light"] .hero {
+  min-height: 75vh;
+  background-color: var(--color-bg-page);
+  background-image: none !important;
+  padding-block: calc(var(--nav-height) + var(--sp-8)) var(--sp-12);
+}
+
+[data-theme="light"] .hero::before,
+[data-theme="light"] .hero::after {
+  display: none !important;
+}
+
+[data-theme="light"] .hero__content {
+  max-width: 800px;
+  text-align: center;
+  margin-inline: auto;
+}
+
+[data-theme="light"] .hero__actions {
+  justify-content: center;
+}
+
+[data-theme="light"] .page-hero--academy {
+  background-image: none !important;
+  background-color: var(--color-bg-page);
+  min-height: auto;
+  padding-block: calc(var(--nav-height) + var(--sp-8)) var(--sp-8);
+}
+
+[data-theme="light"] .academy-hero {
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+[data-theme="light"] .academy-hero__content {
+  max-width: 760px;
+  text-align: center;
+}
+
+[data-theme="light"] .academy-hero__content .btn {
+  width: auto;
+}
+
+/* 3. Remove Decorative Atmospheric Background Images */
+[data-theme="light"] .academy-why-bg,
+[data-theme="light"] .academy-cta-bg,
+[data-theme="light"] .home-stats-bg,
+[data-theme="light"] .about-hero,
+[data-theme="light"] .events-hero,
+[data-theme="light"] .resources-hero,
+[data-theme="light"] .page-hero {
+  background-image: none !important;
+  background-color: var(--color-bg-section);
+}
+
+[data-theme="light"] .page-hero::before {
+  display: none !important;
+}
+
