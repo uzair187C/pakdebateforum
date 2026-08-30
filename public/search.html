@@ -45,23 +45,23 @@
     <section class="section section--hero bg-surface-base">
       <div class="container container--narrow">
         <div class="search-hero text-center" data-reveal="fade-up">
-          <p class="hero__eyebrow">Search Intelligence</p>
-          <h1 class="hero__title">Search <span class="text-gold">Pak Debate Forum</span></h1>
-          <p class="hero__lead">Find training programs, debate competitions, educational materials, and faculty.</p>
+          <p class="hero__eyebrow" data-i18n="search.intelligence">Search Intelligence</p>
+          <h1 class="hero__title" data-i18n="search.hero_title">Search Pak Debate Forum</h1>
+          <p class="hero__lead" data-i18n="search.lead">Find training programs, debate competitions, educational materials, and faculty.</p>
 
           <div class="search-box-wrap margin-top-6">
             <div class="search-box">
               <svg class="search-box__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="search" id="search-input" class="search-box__input" placeholder="Type to search (e.g. World Schools, WSDC, Coaching, Motion)..." autofocus autocomplete="off">
-              <button id="search-clear" class="search-box__clear" style="display: none;" aria-label="Clear search">&times;</button>
+              <input type="search" id="search-input" class="search-box__input" placeholder="Type to search (e.g. World Schools, WSDC, Coaching, Motion)..." data-i18n-placeholder="search.input_placeholder" autofocus autocomplete="off">
+              <button id="search-clear" class="search-box__clear" style="display: none;" aria-label="Clear search" data-i18n-aria="search.clear">&times;</button>
             </div>
 
             <div class="filter-pills margin-top-4" id="search-tabs">
-              <button class="filter-pill is-active" data-category="all">All Results</button>
-              <button class="filter-pill" data-category="programs">Programs</button>
-              <button class="filter-pill" data-category="events">Events</button>
-              <button class="filter-pill" data-category="resources">Resources</button>
-              <button class="filter-pill" data-category="coaches">Coaches</button>
+              <button class="filter-pill is-active" data-category="all" data-i18n="search.tab_all">All Results</button>
+              <button class="filter-pill" data-category="programs" data-i18n="search.tab_programs">Programs</button>
+              <button class="filter-pill" data-category="events" data-i18n="search.tab_events">Events</button>
+              <button class="filter-pill" data-category="resources" data-i18n="search.tab_resources">Resources</button>
+              <button class="filter-pill" data-category="coaches" data-i18n="search.tab_coaches">Coaches</button>
             </div>
           </div>
         </div>
@@ -77,16 +77,16 @@
 
         <div id="search-loading" class="state-loading" style="display: none;">
           <div class="spinner"></div>
-          <p class="text-muted text-sm margin-top-3">Searching platform records...</p>
+          <p class="text-muted text-sm margin-top-3" data-i18n="search.loading">Searching platform records...</p>
         </div>
 
         <div id="search-empty" class="state-empty" style="display: none;">
-          <h3 class="heading-md margin-bottom-2 text-gold">No Results Found</h3>
-          <p class="text-muted">We couldn't find any matches for your query. Try broadening your keywords.</p>
+          <h3 class="heading-md margin-bottom-2 text-gold" data-i18n="search.empty_title">No Results Found</h3>
+          <p class="text-muted" data-i18n="search.empty_desc">We couldn't find any matches for your query. Try broadening your keywords.</p>
         </div>
 
         <div id="search-initial" class="state-initial text-center padding-8">
-          <p class="text-muted">Enter a search query above to explore the Pak Debate Forum archive.</p>
+          <p class="text-muted" data-i18n="search.initial_desc">Enter a search query above to explore the Pak Debate Forum archive.</p>
         </div>
 
         <div id="search-results-grid" class="search-results-grid" style="display: none;"></div>

@@ -162,6 +162,7 @@
     gridEl.innerHTML = items.map(item => renderResultCard(item)).join('');
     gridEl.style.display = 'grid';
 
+    if (window.I18N) window.I18N.translateDOM(gridEl);
     if (window.initReveals) window.initReveals();
   }
 

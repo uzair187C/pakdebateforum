@@ -217,6 +217,93 @@ const I18N = {
     'btn.apply_academy': 'Apply to the Academy',
     'btn.download_pdf': 'Download Resource',
 
+    /* ── Homepage Extended ─────────────────── */
+    'home.upcoming_events': 'Upcoming Events',
+    'home.upcoming_sub': 'Tournaments, workshops, and seminars designed to challenge and inspire.',
+    'home.network_eyebrow': 'Institutional Network',
+    'home.network_title': 'Who We Work With',
+    'network.collaboration': 'Collaboration',
+    'network.partner': 'Scholarship Partner',
+    'network.host': 'Workshop Host',
+    'home.join_title': 'Join the Circuit',
+    'home.join_text': "Whether you're a first-time speaker, a competitive veteran, or an institution looking to collaborate — there is a place for you at Pak Debate Forum.",
+    'btn.view_program': 'View Program →',
+
+    /* ── About Page Extended ────────────────── */
+    'about.leadership_title': 'Meet the Team',
+    'about.leadership_sub': 'The people behind Pak Debate Forum.',
+    'about.impact_eyebrow': 'Impact',
+    'about.impact_title': 'Where PDF Has Made a Difference',
+
+    /* ── Academy Page Extended ──────────────── */
+    'academy.why_eyebrow': 'Why the Academy Exists',
+    'academy.why_title': 'Building Competitive Capacity',
+    'academy.why_p1': 'The PDF Academy is the training arm of Pak Debate Forum — connected to the same mission of international access and representation. Structured programmes develop speakers, debaters, and adjudicators from beginner to competitive level.',
+    'academy.why_p2': 'From the September 2024 Academy cohort to the 2026 Community Workshops at university debating societies — training at PDF is an evolving, evidence-based practice.',
+    'academy.stat1_title': 'First Academy Cohort',
+    'academy.stat2_title': 'Community Workshops',
+    'academy.pathway_eyebrow': 'Learning Pathway',
+    'academy.pathway_title': 'From Foundations to International Readiness',
+    'academy.stage1_title': 'Foundations',
+    'academy.stage1_desc': 'Argument structure, delivery basics, and format orientation.',
+    'academy.stage2_title': 'Skills',
+    'academy.stage2_desc': 'Refutation, case building, strategic speaking, and engagement techniques.',
+    'academy.stage3_title': 'Competitive Application',
+    'academy.stage3_desc': 'Tournament preparation, format mastery (BP, AP, WS), and practice rounds.',
+    'academy.stage4_title': 'Advanced Development',
+    'academy.stage4_desc': 'Adjudication training, coaching skills, and institutional development.',
+    'academy.stage5_title': 'International Readiness',
+    'academy.stage5_desc': 'Preparation for WSDC, WUDC, ABP, and other international circuit events.',
+    'academy.workshop_eyebrow': 'Community Workshops',
+    'academy.workshop_title': 'Training Beyond the Academy',
+    'academy.workshop_sub': 'In 2026, PDF expanded training reach through structured workshops at university debating societies — covering judging development, competitive training, and structured feedback.',
+    'academy.current_programs': 'Current Programs',
+    'academy.programs_title': 'Academy Programs',
+    'academy.coming_up': "What's Coming Up",
+
+    /* ── Search Page Extended ───────────────── */
+    'search.intelligence': 'Search Intelligence',
+    'search.lead': 'Find training programs, debate competitions, educational materials, and faculty.',
+    'search.clear': 'Clear search',
+    'search.tab_all': 'All Results',
+    'search.tab_programs': 'Programs',
+    'search.tab_events': 'Events',
+    'search.tab_resources': 'Resources',
+    'search.tab_coaches': 'Coaches',
+    'search.loading': 'Searching platform records...',
+    'search.empty_title': 'No Results Found',
+    'search.empty_desc': "We couldn't find any matches for your query. Try broadening your keywords.",
+    'search.initial_desc': 'Enter a search query above to explore the Pak Debate Forum archive.',
+
+    /* ── Single Event / Program Extended ────── */
+    'event.details': 'Event Details',
+    'event.back_all': '← All Events',
+    'event.related_program': 'Related Programme',
+    'event.not_open': 'Not Open Yet',
+    'event.closed': 'Closed',
+    'event.date': 'Date',
+    'event.venue': 'Venue',
+    'event.city': 'City',
+    'event.deadline': 'Deadline',
+    'event.capacity': 'Capacity',
+    'event.fee': 'Entry Fee',
+    'event.status': 'Status',
+    'event.free': 'Free',
+    'event.no_desc': 'No description available.',
+    'program.details': 'Programme Details',
+    'program.back_all': '← All Programs',
+    'program.about_title': 'About this Programme',
+    'program.curriculum_title': 'Curriculum',
+    'program.coach_title': 'Your Coach',
+    'program.age_range': 'Age Range',
+    'program.duration': 'Duration',
+    'program.schedule': 'Schedule',
+    'program.delivery': 'Delivery',
+    'program.level': 'Level',
+    'program.fee': 'Fee',
+    'program.apply_btn': 'Apply for this Programme →',
+    'program.ask_btn': 'Ask a Question',
+
     /* ── Misc & Toast ───────────────────────── */
     'toast.success_register': 'Registration submitted successfully!',
     'toast.success_feedback': 'Thank you for your feedback!',
@@ -436,6 +523,93 @@ const I18N = {
     'search.no_results': '未找到相关结果。',
     'search.results_count': '条相关结果',
 
+    /* ── Homepage Extended ─────────────────── */
+    'home.upcoming_events': '近期赛事与活动',
+    'home.upcoming_sub': '旨在激发思考与挑战能力的辩论赛、工作坊与学术研讨会。',
+    'home.network_eyebrow': '学术合作网络',
+    'home.network_title': '我们的合作机构',
+    'network.collaboration': '战略合作',
+    'network.partner': '奖学金合作伙伴',
+    'network.host': '工作坊举办高校',
+    'home.join_title': '加入辩论社群',
+    'home.join_text': '无论您是初次演讲的新手、资深竞技辩手，还是寻求合作的学术机构 —— Pak Debate Forum 随时欢迎您的加入。',
+    'btn.view_program': '查看课程详情 →',
+
+    /* ── About Page Extended ────────────────── */
+    'about.leadership_title': '核心领导团队',
+    'about.leadership_sub': 'Pak Debate Forum 的创始人与核心推动者。',
+    'about.impact_eyebrow': '社会影响力',
+    'about.impact_title': 'PDF 创造的改变',
+
+    /* ── Academy Page Extended ──────────────── */
+    'academy.why_eyebrow': '学院成立宗旨',
+    'academy.why_title': '培养国际竞技实力',
+    'academy.why_p1': 'PDF 辩论学院是 Pak Debate Forum 的核心教学分支，肩负提升国际化代表力与教育普及的使命。系统化课程赋能辩手与裁判从入门迈向国际顶尖水平。',
+    'academy.why_p2': '从 2024 年 9 月首期学员班，到 2026 年在各名校举办的社区工作坊 —— PDF 的培训体系始终保持严谨与科学。',
+    'academy.stat1_title': '首期学院班学员',
+    'academy.stat2_title': '社区高校工作坊',
+    'academy.pathway_eyebrow': '进阶成长路径',
+    'academy.pathway_title': '从基础奠基至国际赛场备战',
+    'academy.stage1_title': '01 基础奠基',
+    'academy.stage1_desc': '论证结构、演讲表达基础与辩论赛制导引。',
+    'academy.stage2_title': '02 技能进阶',
+    'academy.stage2_desc': '反驳技巧、建构立论、战略性表达与质询回应。',
+    'academy.stage3_title': '03 实战竞技',
+    'academy.stage3_desc': '锦标赛备战、BP/AP/WSDC 赛制精通与模拟实战。',
+    'academy.stage4_title': '04 高阶拓展',
+    'academy.stage4_desc': '裁判裁决训练、教练指导能力与社群建设。',
+    'academy.stage5_title': '05 国际赛场备战',
+    'academy.stage5_desc': '针对 WSDC、WUDC、ABP 等世界顶级赛事的专项备战。',
+    'academy.workshop_eyebrow': '高校工作坊',
+    'academy.workshop_title': '学院之外的广泛赋能',
+    'academy.workshop_sub': '2026 年，PDF 在多所大学辩论社团举办了定点工作坊，涵盖裁判培养、竞技训练与深度反馈。',
+    'academy.current_programs': '现已开放课程',
+    'academy.programs_title': '学院训练项目',
+    'academy.coming_up': '最新活动预告',
+
+    /* ── Search Page Extended ───────────────── */
+    'search.intelligence': '智能搜索',
+    'search.lead': '查找培训课程、辩论赛事、学术资料与导师团队。',
+    'search.clear': '清除搜索',
+    'search.tab_all': '全部结果',
+    'search.tab_programs': '课程',
+    'search.tab_events': '赛事',
+    'search.tab_resources': '资源',
+    'search.tab_coaches': '导师',
+    'search.loading': '正在检索平台数据...',
+    'search.empty_title': '未找到相关结果',
+    'search.empty_desc': '未能找到匹配的结果，请尝试更换或简化关键词。',
+    'search.initial_desc': '请在上方输入关键词以检索 Pak Debate Forum 资料库。',
+
+    /* ── Single Event / Program Extended ────── */
+    'event.details': '赛事详情',
+    'event.back_all': '← 返回赛事列表',
+    'event.related_program': '关联培训课程',
+    'event.not_open': '暂未开放报名',
+    'event.closed': '报名已截止',
+    'event.date': '比赛日期',
+    'event.venue': '比赛地点',
+    'event.city': '城市',
+    'event.deadline': '报名截止',
+    'event.capacity': '参赛名额',
+    'event.fee': '报名费用',
+    'event.status': '赛事状态',
+    'event.free': '免费参赛',
+    'event.no_desc': '暂无详细说明。',
+    'program.details': '课程详情',
+    'program.back_all': '← 返回课程列表',
+    'program.about_title': '关于本课程',
+    'program.curriculum_title': '课程大纲',
+    'program.coach_title': '授课导师',
+    'program.age_range': '适合年龄',
+    'program.duration': '课程时长',
+    'program.schedule': '上课时间',
+    'program.delivery': '授课形式',
+    'program.level': '课程难度',
+    'program.fee': '课程学费',
+    'program.apply_btn': '申请本课程 →',
+    'program.ask_btn': '咨询课程细节',
+
     /* ── Misc & Toast ───────────────────────── */
     'toast.success_register': '报名申请提交成功！',
     'toast.success_feedback': '感谢您的宝贵意见！',
@@ -462,9 +636,10 @@ const I18N = {
     if (window.renderFooter) window.renderFooter();
   },
 
-  translateDOM() {
+  translateDOM(container = document) {
+    const scope = container || document;
     /* Translate elements with data-i18n */
-    document.querySelectorAll('[data-i18n]').forEach(el => {
+    scope.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (key) {
         el.textContent = this.t(key);
@@ -472,7 +647,7 @@ const I18N = {
     });
 
     /* Translate elements with data-i18n-placeholder */
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    scope.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
       const key = el.getAttribute('data-i18n-placeholder');
       if (key) {
         el.setAttribute('placeholder', this.t(key));
@@ -480,7 +655,7 @@ const I18N = {
     });
 
     /* Translate elements with data-i18n-aria */
-    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    scope.querySelectorAll('[data-i18n-aria]').forEach(el => {
       const key = el.getAttribute('data-i18n-aria');
       if (key) {
         el.setAttribute('aria-label', this.t(key));

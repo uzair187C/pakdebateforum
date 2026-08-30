@@ -51,7 +51,8 @@
 
     async function init() {
       if (!id) {
-        document.getElementById('root').innerHTML = '<div class="state-error">No program ID specified. <a href="/programs.html">Browse programs →</a></div>';
+        document.getElementById('root').innerHTML = '<div class="state-error">No program ID specified. <a href="/programs.html" data-i18n="btn.view_programs">Browse programs →</a></div>';
+        if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
         return;
       }
       try {
@@ -62,7 +63,7 @@
         try { curriculum = JSON.parse(p.curriculum || '[]'); } catch {}
 
         document.getElementById('root').innerHTML = `
-          <a href="/programs.html" style="font-size: var(--text-body-sm); color: var(--color-text-muted); display: inline-flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-8); text-decoration: none;">← All Programs</a>
+          <a href="/programs.html" style="font-size: var(--text-body-sm); color: var(--color-text-muted); display: inline-flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-8); text-decoration: none;" data-i18n="program.back_all">← All Programs</a>
 
           <div class="detail-layout">
             <div>
@@ -74,17 +75,17 @@
                 ${p.duration ? `<span class="badge badge--muted">${p.duration}</span>` : ''}
               </div>
 
-              <h2 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--w-semibold); margin-bottom: var(--sp-4); color: var(--color-text-primary);">About this Programme</h2>
+              <h2 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--w-semibold); margin-bottom: var(--sp-4); color: var(--color-text-primary);" data-i18n="program.about_title">About this Programme</h2>
               <p style="color: var(--color-text-supporting); line-height: 1.8; margin-bottom: var(--sp-10);">${p.description}</p>
 
               ${curriculum.length ? `
-              <h2 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--w-semibold); margin-bottom: var(--sp-4); color: var(--color-text-primary);">Curriculum</h2>
+              <h2 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--w-semibold); margin-bottom: var(--sp-4); color: var(--color-text-primary);" data-i18n="program.curriculum_title">Curriculum</h2>
               <ol class="curriculum-list" style="margin-bottom: var(--sp-10);">
                 ${curriculum.map(m => `<li>${m}</li>`).join('')}
               </ol>` : ''}
 
               ${p.coach_name ? `
-              <h2 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--w-semibold); margin-bottom: var(--sp-4); color: var(--color-text-primary);">Your Coach</h2>
+              <h2 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--w-semibold); margin-bottom: var(--sp-4); color: var(--color-text-primary);" data-i18n="program.coach_title">Your Coach</h2>
               <div class="sidebar-card" style="margin-bottom: var(--sp-10);">
                 <div style="font-weight: var(--w-semibold); color: var(--color-text-primary); margin-bottom: var(--sp-1);">${p.coach_name}</div>
                 <div style="font-size: var(--text-body-sm); color: var(--color-accent-gold); margin-bottom: var(--sp-3);">${p.coach_title || ''}</div>
@@ -94,24 +95,26 @@
 
             <div>
               <div class="sidebar-card">
-                <h3 style="font-family: var(--font-display); font-size: var(--text-heading-sm); font-weight: var(--w-semibold); margin-bottom: var(--sp-6); color: var(--color-text-primary);">Programme Details</h3>
+                <h3 style="font-family: var(--font-display); font-size: var(--text-heading-sm); font-weight: var(--w-semibold); margin-bottom: var(--sp-6); color: var(--color-text-primary);" data-i18n="program.details">Programme Details</h3>
                 <ul class="info-list">
-                  ${p.age_min || p.age_max ? `<li><span class="info-label">Age Range</span><span class="info-val">${p.age_min || ''}${p.age_max ? '–' + p.age_max + ' years' : ''}</span></li>` : ''}
-                  ${p.duration ? `<li><span class="info-label">Duration</span><span class="info-val">${p.duration}</span></li>` : ''}
-                  ${p.schedule ? `<li><span class="info-label">Schedule</span><span class="info-val">${p.schedule}</span></li>` : ''}
-                  <li><span class="info-label">Delivery</span><span class="info-val">${p.delivery_mode.replace('_', ' ')}</span></li>
-                  <li><span class="info-label">Level</span><span class="info-val">${p.level}</span></li>
-                  <li><span class="info-label">Fee</span><span class="info-val" style="color: var(--color-accent-gold);">${p.price ? 'PKR ' + p.price.toLocaleString() : 'Contact us for pricing'}</span></li>
+                  ${p.age_min || p.age_max ? `<li><span class="info-label" data-i18n="program.age_range">Age Range</span><span class="info-val">${p.age_min || ''}${p.age_max ? '–' + p.age_max + ' years' : ''}</span></li>` : ''}
+                  ${p.duration ? `<li><span class="info-label" data-i18n="program.duration">Duration</span><span class="info-val">${p.duration}</span></li>` : ''}
+                  ${p.schedule ? `<li><span class="info-label" data-i18n="program.schedule">Schedule</span><span class="info-val">${p.schedule}</span></li>` : ''}
+                  <li><span class="info-label" data-i18n="program.delivery">Delivery</span><span class="info-val">${p.delivery_mode.replace('_', ' ')}</span></li>
+                  <li><span class="info-label" data-i18n="program.level">Level</span><span class="info-val">${p.level}</span></li>
+                  <li><span class="info-label" data-i18n="program.fee">Fee</span><span class="info-val" style="color: var(--color-accent-gold);">${p.price ? 'PKR ' + p.price.toLocaleString() : 'Contact us for pricing'}</span></li>
                 </ul>
                 <div style="margin-top: var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-3);">
-                  <a href="/register.html?type=program&id=${p.id}&name=${encodeURIComponent(p.title)}" class="btn btn--primary">Apply for this Programme →</a>
-                  <a href="/contact.html" class="btn btn--ghost">Ask a Question</a>
+                  <a href="/register.html?type=program&id=${p.id}&name=${encodeURIComponent(p.title)}" class="btn btn--primary" data-i18n="program.apply_btn">Apply for this Programme →</a>
+                  <a href="/contact.html" class="btn btn--ghost" data-i18n="program.ask_btn">Ask a Question</a>
                 </div>
               </div>
             </div>
           </div>`;
+        if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
       } catch(e) {
-        document.getElementById('root').innerHTML = `<div class="state-error">${e.message}. <a href="/programs.html">Browse programs →</a></div>`;
+        document.getElementById('root').innerHTML = `<div class="state-error">${e.message}. <a href="/programs.html" data-i18n="btn.view_programs">Browse programs →</a></div>`;
+        if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
       }
     }
 

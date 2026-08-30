@@ -47,7 +47,8 @@
 
     async function init() {
       if (!id) {
-        document.getElementById('root').innerHTML = '<div class="state-error">No event ID. <a href="/events.html">Browse events →</a></div>';
+        document.getElementById('root').innerHTML = '<div class="state-error">No event ID. <a href="/events.html" data-i18n="btn.view_all_events">Browse events →</a></div>';
+        if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
         return;
       }
       try {
@@ -56,21 +57,21 @@
         const canRegister = ev.status === 'open';
 
         document.getElementById('root').innerHTML = `
-          <a href="/events.html" style="font-size: var(--text-body-sm); color: var(--color-text-muted); display: inline-flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-8); text-decoration: none;">← All Events</a>
+          <a href="/events.html" style="font-size: var(--text-body-sm); color: var(--color-text-muted); display: inline-flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-8); text-decoration: none;" data-i18n="event.back_all">← All Events</a>
 
           <div class="detail-layout">
             <div>
               <div style="display: flex; gap: var(--sp-2); align-items: center; margin-bottom: var(--sp-5); flex-wrap: wrap;">
                 <span class="badge badge--accent">${ev.type}</span>
                 <span class="badge ${STATUS_BADGE[ev.status] || 'badge--muted'}">${ev.status}</span>
-                ${ev.fee === 0 ? '<span class="badge badge--green">Free</span>' : ''}
+                ${ev.fee === 0 ? '<span class="badge badge--green" data-i18n="event.free">Free</span>' : ''}
               </div>
               <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: var(--track-tight); margin-bottom: var(--sp-8); color: var(--color-text-primary);">${ev.title}</h1>
-              <p style="color: var(--color-text-supporting); line-height: 1.8; margin-bottom: var(--sp-8);">${ev.description || 'No description available.'}</p>
+              <p style="color: var(--color-text-supporting); line-height: 1.8; margin-bottom: var(--sp-8);">${ev.description || '<span data-i18n="event.no_desc">No description available.</span>'}</p>
 
               ${ev.program_title ? `
               <div class="sidebar-card" style="margin-bottom: var(--sp-6);">
-                <p style="font-size: var(--text-meta); color: var(--color-text-tertiary); letter-spacing: var(--track-wide); text-transform: uppercase; margin-bottom: var(--sp-2);">Related Programme</p>
+                <p style="font-size: var(--text-meta); color: var(--color-text-tertiary); letter-spacing: var(--track-wide); text-transform: uppercase; margin-bottom: var(--sp-2);" data-i18n="event.related_program">Related Programme</p>
                 <p style="color: var(--color-text-primary);">${ev.program_title}</p>
               </div>` : ''}
 
@@ -82,28 +83,30 @@
 
             <div>
               <div class="sidebar-card">
-                <h3 style="font-family: var(--font-display); font-size: var(--text-heading-sm); font-weight: var(--w-semibold); margin-bottom: var(--sp-6); color: var(--color-text-primary);">Event Details</h3>
+                <h3 style="font-family: var(--font-display); font-size: var(--text-heading-sm); font-weight: var(--w-semibold); margin-bottom: var(--sp-6); color: var(--color-text-primary);" data-i18n="event.details">Event Details</h3>
                 <ul class="info-list">
-                  <li><span class="info-label">Date</span><span class="info-val">${ev.date_start}${ev.date_end && ev.date_end !== ev.date_start ? ' — ' + ev.date_end : ''}</span></li>
-                  ${ev.venue ? `<li><span class="info-label">Venue</span><span class="info-val">${ev.venue}</span></li>` : ''}
-                  ${ev.city ? `<li><span class="info-label">City</span><span class="info-val">${ev.city}</span></li>` : ''}
-                  ${ev.registration_deadline ? `<li><span class="info-label">Deadline</span><span class="info-val" style="color: var(--color-error);">${ev.registration_deadline}</span></li>` : ''}
-                  ${ev.max_participants ? `<li><span class="info-label">Capacity</span><span class="info-val">${ev.max_participants} participants${ev.registration_count ? ' (' + ev.registration_count + ' registered)' : ''}</span></li>` : ''}
-                  <li><span class="info-label">Entry Fee</span><span class="info-val" style="color: var(--color-accent-gold);">${ev.fee === 0 ? 'Free' : 'PKR ' + ev.fee.toLocaleString()}</span></li>
-                  <li><span class="info-label">Status</span><span class="info-val">${ev.status}</span></li>
+                  <li><span class="info-label" data-i18n="event.date">Date</span><span class="info-val">${ev.date_start}${ev.date_end && ev.date_end !== ev.date_start ? ' — ' + ev.date_end : ''}</span></li>
+                  ${ev.venue ? `<li><span class="info-label" data-i18n="event.venue">Venue</span><span class="info-val">${ev.venue}</span></li>` : ''}
+                  ${ev.city ? `<li><span class="info-label" data-i18n="event.city">City</span><span class="info-val">${ev.city}</span></li>` : ''}
+                  ${ev.registration_deadline ? `<li><span class="info-label" data-i18n="event.deadline">Deadline</span><span class="info-val" style="color: var(--color-error);">${ev.registration_deadline}</span></li>` : ''}
+                  ${ev.max_participants ? `<li><span class="info-label" data-i18n="event.capacity">Capacity</span><span class="info-val">${ev.max_participants} participants${ev.registration_count ? ' (' + ev.registration_count + ' registered)' : ''}</span></li>` : ''}
+                  <li><span class="info-label" data-i18n="event.fee">Entry Fee</span><span class="info-val" style="color: var(--color-accent-gold);">${ev.fee === 0 ? 'Free' : 'PKR ' + ev.fee.toLocaleString()}</span></li>
+                  <li><span class="info-label" data-i18n="event.status">Status</span><span class="info-val">${ev.status}</span></li>
                 </ul>
 
                 <div style="margin-top: var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-3);">
                   ${canRegister
-                    ? `<a href="/register.html?type=event&id=${ev.id}&name=${encodeURIComponent(ev.title)}" class="btn btn--primary">Register Now →</a>`
+                    ? `<a href="/register.html?type=event&id=${ev.id}&name=${encodeURIComponent(ev.title)}" class="btn btn--primary" data-i18n="btn.register_now">Register Now →</a>`
                     : `<button class="btn btn--ghost" disabled style="opacity: .5; cursor: not-allowed;">Registration ${ev.status === 'upcoming' ? 'Not Open Yet' : 'Closed'}</button>`}
-                  <a href="/contact.html" class="btn btn--ghost">Contact Us</a>
+                  <a href="/contact.html" class="btn btn--ghost" data-i18n="btn.contact_us">Contact Us</a>
                 </div>
               </div>
             </div>
           </div>`;
+        if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
       } catch(e) {
-        document.getElementById('root').innerHTML = `<div class="state-error">${e.message}. <a href="/events.html">Browse events →</a></div>`;
+        document.getElementById('root').innerHTML = `<div class="state-error">${e.message}. <a href="/events.html" data-i18n="btn.view_all_events">Browse events →</a></div>`;
+        if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
       }
     }
 

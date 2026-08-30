@@ -246,10 +246,12 @@
   }
 
   function toggleLang() {
+    const wasOpen = document.getElementById('app-drawer')?.classList.contains('is-open');
     const current = getLang();
     const next = current === 'zh' ? 'en' : 'zh';
     if (window.I18N) {
       window.I18N.setLang(next);
+      if (wasOpen) toggleDrawer(true);
     } else {
       localStorage.setItem('pdf_lang', next);
       location.reload();
@@ -257,12 +259,14 @@
   }
 
   function toggleTheme() {
+    const wasOpen = document.getElementById('app-drawer')?.classList.contains('is-open');
     const current = getTheme();
     const next = current === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('pdf_theme', next);
     renderNav();
     renderDrawer();
+    toggleDrawer(!!wasOpen);
   }
 
   function initBehavior() {
