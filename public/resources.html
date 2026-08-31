@@ -103,14 +103,16 @@
       el.innerHTML = resources.map(r => {
         const catTranslated = window.I18N ? window.I18N.t(`category.${r.category}`) : r.category;
         const fileTypeTranslated = window.I18N ? window.I18N.t(`filetype.${r.file_type}`) : r.file_type;
+        const rTitle = window.I18N ? window.I18N.db(r.slug, 'title', r.title) : r.title;
+        const rDesc = window.I18N ? window.I18N.db(r.slug, 'description', r.description || '') : (r.description || '');
         return `
         <div class="resource-item" data-reveal>
           <div class="resource-icon">${ICONS[r.file_type] || '🔗'}</div>
           <div style="flex: 1;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--sp-4); flex-wrap: wrap;">
               <div>
-                <p class="resource-title">${r.title}</p>
-                ${r.description ? `<p class="resource-desc">${r.description}</p>` : ''}
+                <p class="resource-title">${rTitle}</p>
+                ${rDesc ? `<p class="resource-desc">${rDesc}</p>` : ''}
               </div>
               <div style="display: flex; gap: var(--sp-2); align-items: center; flex-shrink: 0;">
                 <span class="badge badge--muted" data-i18n="category.${r.category}">${catTranslated}</span>
