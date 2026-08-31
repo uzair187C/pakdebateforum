@@ -81,6 +81,9 @@
   <script src="/js/nav.js"></script>
   <script src="/js/main.js"></script>
   <script>
+    let currentEventsList = [];
+    let currentStatusFilter = '';
+
     function statusBadge(status) {
       const map = {
         upcoming: 'badge--accent',
@@ -88,7 +91,8 @@
         completed:'badge--muted',
         cancelled:'badge--red',
       };
-      return `<span class="badge ${map[status] || 'badge--muted'}">${status}</span>`;
+      const translatedStatus = window.I18N ? window.I18N.t(`status.${status}`) : status;
+      return `<span class="badge ${map[status] || 'badge--muted'}" data-i18n="status.${status}">${translatedStatus}</span>`;
     }
 
     function formatDate(dateStr) {
@@ -96,25 +100,36 @@
       const d = new Date(dateStr);
       if (isNaN(d)) return dateStr;
       const day = d.getDate();
-      const month = d.toLocaleString('en', { month: 'short' }).toUpperCase();
+      const isZh = window.I18N && window.I18N.lang === 'zh';
+      const monthNamesEn = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+      const monthNamesZh = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+      const month = isZh ? monthNamesZh[d.getMonth()] : monthNamesEn[d.getMonth()];
       const year = d.getFullYear();
-      return { day, month, full: `${day} ${month} ${year}` };
+      return { day, month, full: isZh ? `${year}年${d.getMonth()+1}月${day}日` : `${day} ${month} ${year}` };
     }
 
     function renderEvents(events) {
+      currentEventsList = events;
       const el = document.getElementById('events-collection');
       if (!events.length) {
         el.innerHTML = `
           <div class="state-message">
             <div class="state-message__icon">📅</div>
-            <p class="state-message__title">No Events Found</p>
-            <p class="state-message__text">There are no events matching this filter right now. Check back soon.</p>
+            <p class="state-message__title" data-i18n="events.empty_title">No Events Found</p>
+            <p class="state-message__text" data-i18n="events.empty_text">There are no events matching this filter right now. Check back soon.</p>
           </div>`;
         if (window.I18N) window.I18N.translateDOM(el);
         return;
       }
       el.innerHTML = events.map(ev => {
         const dt = formatDate(ev.date_start);
+        const title = window.I18N ? window.I18N.db(ev.slug, 'title', ev.title) : ev.title;
+        const rawDesc = window.I18N ? window.I18N.db(ev.slug, 'desc', ev.description) : ev.description;
+        const desc = rawDesc ? (rawDesc.length > 180 ? rawDesc.substring(0, 180) + '…' : rawDesc) : '';
+        const translatedType = window.I18N ? window.I18N.t(`type.${ev.type}`) : ev.type;
+        const freeText = window.I18N ? window.I18N.t('event.free') : 'Free';
+        const feeDisplay = ev.fee === 0 ? freeText : 'PKR ' + (ev.fee || 0).toLocaleString();
+
         return `
         <article class="event-row" data-reveal>
           ${dt ? `
@@ -124,16 +139,16 @@
           </div>` : ''}
           <div class="event-info">
             <div style="display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin-bottom: var(--sp-2);">
-              <h2 style="font-family: var(--font-display); font-size: var(--text-heading-sm); font-weight: var(--w-semibold); color: var(--color-text-primary);">${ev.title}</h2>
+              <h2 style="font-family: var(--font-display); font-size: var(--text-heading-sm); font-weight: var(--w-semibold); color: var(--color-text-primary);">${title}</h2>
               ${statusBadge(ev.status)}
             </div>
             <p style="font-size: var(--text-body-sm); color: var(--color-text-supporting); line-height: var(--lh-body); margin-bottom: var(--sp-3);">
-              ${ev.description ? ev.description.substring(0, 180) + '…' : ''}
+              ${desc}
             </p>
             <div style="display: flex; gap: var(--sp-4); flex-wrap: wrap; font-size: var(--text-meta); color: var(--color-text-muted);">
               ${ev.city ? `<span>📍 ${ev.city}${ev.venue ? ', ' + ev.venue : ''}</span>` : ''}
-              <span class="badge badge--muted">${ev.type}</span>
-              <span>${ev.fee === 0 ? 'Free' : 'PKR ' + (ev.fee || 0).toLocaleString()}</span>
+              <span class="badge badge--muted" data-i18n="type.${ev.type}">${translatedType}</span>
+              <span>${feeDisplay}</span>
             </div>
           </div>
           <a href="/event.html?id=${ev.id}" class="btn btn--secondary btn--sm" style="flex-shrink: 0;" data-i18n="btn.view_details">View Details →</a>
@@ -145,6 +160,7 @@
 
     function applyFilter(st, pushHistory = true) {
       const targetStatus = st || '';
+      currentStatusFilter = targetStatus;
       const btn = document.querySelector(`.filter-btn[data-status="${targetStatus}"]`) || document.querySelector(`.filter-btn[data-status=""]`);
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
       const activeStatus = btn ? btn.dataset.status : '';
@@ -172,6 +188,12 @@
         document.getElementById('events-collection').innerHTML = `<div class="state-error">${e.message}</div>`;
       }
     }
+
+    window.onLangChange = function() {
+      if (currentEventsList.length) {
+        renderEvents(currentEventsList);
+      }
+    };
 
     document.getElementById('filter-bar').addEventListener('click', e => {
       const btn = e.target.closest('.filter-btn');
