@@ -49,11 +49,11 @@
 
         <div class="filter-bar" id="filter-bar" data-reveal>
           <button class="filter-btn is-active" data-cat="" data-i18n="btn.filter_all">All</button>
-          <button class="filter-btn" data-cat="formats">Formats</button>
-          <button class="filter-btn" data-cat="motions">Motions</button>
-          <button class="filter-btn" data-cat="guides">Guides</button>
-          <button class="filter-btn" data-cat="videos">Videos</button>
-          <button class="filter-btn" data-cat="results" data-i18n="nav.results">Results</button>
+          <button class="filter-btn" data-cat="formats" data-i18n="category.formats">Formats</button>
+          <button class="filter-btn" data-cat="motions" data-i18n="category.motions">Motions</button>
+          <button class="filter-btn" data-cat="guides" data-i18n="category.guides">Guides</button>
+          <button class="filter-btn" data-cat="videos" data-i18n="category.videos">Videos</button>
+          <button class="filter-btn" data-cat="results" data-i18n="category.results">Results</button>
         </div>
 
         <div id="resources-list">
@@ -84,8 +84,11 @@
   <script src="/js/main.js"></script>
   <script>
     const ICONS = { pdf: '📄', video: '🎬', link: '🔗', doc: '📝' };
+    let currentResourcesList = [];
+    let currentCategoryFilter = '';
 
     function render(resources) {
+      currentResourcesList = resources;
       const el = document.getElementById('resources-list');
       if (!resources.length) {
         el.innerHTML = `
@@ -97,7 +100,10 @@
         if (window.I18N) window.I18N.translateDOM(el);
         return;
       }
-      el.innerHTML = resources.map(r => `
+      el.innerHTML = resources.map(r => {
+        const catTranslated = window.I18N ? window.I18N.t(`category.${r.category}`) : r.category;
+        const fileTypeTranslated = window.I18N ? window.I18N.t(`filetype.${r.file_type}`) : r.file_type;
+        return `
         <div class="resource-item" data-reveal>
           <div class="resource-icon">${ICONS[r.file_type] || '🔗'}</div>
           <div style="flex: 1;">
@@ -107,13 +113,14 @@
                 ${r.description ? `<p class="resource-desc">${r.description}</p>` : ''}
               </div>
               <div style="display: flex; gap: var(--sp-2); align-items: center; flex-shrink: 0;">
-                <span class="badge badge--muted">${r.category}</span>
-                <span class="badge badge--muted">${r.file_type}</span>
+                <span class="badge badge--muted" data-i18n="category.${r.category}">${catTranslated}</span>
+                <span class="badge badge--muted" data-i18n="filetype.${r.file_type}">${fileTypeTranslated}</span>
               </div>
             </div>
           </div>
           <a href="${r.url}" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" style="flex-shrink: 0;" data-i18n="btn.download_pdf">Open →</a>
-        </div>`).join('');
+        </div>`;
+      }).join('');
       if (window.initReveals) window.initReveals(el);
       if (window.I18N) window.I18N.translateDOM(el);
     }
@@ -127,6 +134,12 @@
         document.getElementById('resources-list').innerHTML = `<div class="state-error">${e.message}</div>`;
       }
     }
+
+    window.onLangChange = function() {
+      if (currentResourcesList.length) {
+        render(currentResourcesList);
+      }
+    };
 
     function applyFilter(cat, pushHistory = true) {
       const targetCat = cat || '';

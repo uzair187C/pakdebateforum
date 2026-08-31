@@ -91,21 +91,21 @@
             <input class="form-input" id="institution" name="institution" type="text" placeholder="Where do you study?" />
           </div>
           <div class="form-group">
-            <label class="form-label" for="experience_level" data-i18n="register.experience_label">Debate Experience Level</label>
+            <label class="form-label" for="experience_level" data-i18n="register.exp_label">Debate Experience Level</label>
             <select class="form-select" id="experience_level" name="experience_level">
               <option value="">— Select —</option>
-              <option value="beginner">Beginner (little or no experience)</option>
-              <option value="intermediate">Intermediate (some competitions)</option>
-              <option value="advanced">Advanced (regular competitor)</option>
+              <option value="beginner" data-i18n="register.exp_beginner">Beginner (little or no experience)</option>
+              <option value="intermediate" data-i18n="register.exp_intermediate">Intermediate (some competitions)</option>
+              <option value="advanced" data-i18n="register.exp_advanced">Advanced (regular competitor)</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-label" for="notes" data-i18n="register.notes_label">Additional Notes or Questions</label>
-            <textarea class="form-textarea" id="notes" name="notes" placeholder="Anything we should know about your registration?"></textarea>
+            <textarea class="form-textarea" id="notes" name="notes" placeholder="Anything we should know about your registration?" data-i18n-placeholder="register.notes_placeholder"></textarea>
           </div>
 
           <div style="margin-top: var(--sp-8); display: flex; gap: var(--sp-4); align-items: center; flex-wrap: wrap;">
-            <button type="submit" class="btn btn--primary btn--lg" id="submit-btn" data-i18n="btn.submit_registration">
+            <button type="submit" class="btn btn--primary btn--lg" id="submit-btn" data-i18n="btn.submit">
               Submit Registration →
             </button>
             <span id="submit-status" style="font-size: var(--text-body-sm); color: var(--color-text-muted);"></span>
@@ -130,18 +130,33 @@
     let refId = params.get('id');
     const name = params.get('name');
 
-    if (refId) {
-      document.getElementById('reg-type-label').textContent = type === 'event' ? 'Event Registration' : 'Programme Application';
-      document.getElementById('reg-title').textContent = name || (type === 'event' ? 'Event Sign-up' : 'Programme Application');
-      document.getElementById('reg-subtitle').textContent =
-        type === 'event'
-          ? 'Complete the form to register for this event. You will receive a confirmation email.'
-          : 'Complete the form to apply for this programme. Our team will follow up within 2 business days.';
-    } else {
-      document.getElementById('reg-type-label').textContent = 'Join Pak Debate Forum';
-      document.getElementById('reg-title').textContent = 'Registration & Application';
-      document.getElementById('reg-subtitle').textContent = 'Select a programme or event below and complete your registration details.';
-      
+    function updateRegHeader() {
+      const isZh = window.I18N && window.I18N.lang === 'zh';
+      if (refId) {
+        document.getElementById('reg-type-label').textContent = type === 'event' 
+          ? (isZh ? '赛事报名' : 'Event Registration') 
+          : (isZh ? '课程申请' : 'Programme Application');
+        document.getElementById('reg-title').textContent = name || (type === 'event' 
+          ? (isZh ? '赛事在线报名' : 'Event Sign-up') 
+          : (isZh ? '课程在线申请' : 'Programme Application'));
+        document.getElementById('reg-subtitle').textContent =
+          type === 'event'
+            ? (isZh ? '请填写表格以完成赛事报名。我们将在确认后向您发送确认信函。' : 'Complete the form to register for this event. You will receive a confirmation email.')
+            : (isZh ? '请填写表格以申请此课程。我们的学术团队将在2个工作日内与您联系。' : 'Complete the form to apply for this programme. Our team will follow up within 2 business days.');
+      } else {
+        document.getElementById('reg-type-label').setAttribute('data-i18n', 'register.hero_eyebrow');
+        document.getElementById('reg-title').setAttribute('data-i18n', 'register.hero_title');
+        document.getElementById('reg-subtitle').setAttribute('data-i18n', 'register.hero_subtitle');
+        if (window.I18N) window.I18N.translateDOM(document.querySelector('.page-hero'));
+      }
+    }
+
+    updateRegHeader();
+    window.onLangChange = function() {
+      updateRegHeader();
+    };
+
+    if (!refId) {
       const targetGroup = document.getElementById('target-group');
       const targetSelect = document.getElementById('target_select');
       targetGroup.style.display = 'block';
@@ -153,18 +168,21 @@
             API.events.list('open,upcoming').catch(() => ({ events: [] }))
           ]);
 
-          let html = '<option value="">— Select a Programme or Event —</option>';
+          const isZh = window.I18N && window.I18N.lang === 'zh';
+          let html = `<option value="">— ${isZh ? '请选择课程项目或赛事' : 'Select a Programme or Event'} —</option>`;
           if (progRes.programs && progRes.programs.length > 0) {
-            html += '<optgroup label="Academic Programmes">';
+            html += `<optgroup label="${isZh ? '学院课程项目' : 'Academic Programmes'}">`;
             progRes.programs.forEach(p => {
-              html += `<option value="program:${p.id}">Programme: ${p.title}</option>`;
+              const pTitle = window.I18N ? window.I18N.db(p.slug, 'title', p.title) : p.title;
+              html += `<option value="program:${p.id}">${isZh ? '课程' : 'Programme'}: ${pTitle}</option>`;
             });
             html += '</optgroup>';
           }
           if (evRes.events && evRes.events.length > 0) {
-            html += '<optgroup label="Upcoming Events & Tournaments">';
+            html += `<optgroup label="${isZh ? '近期赛事与锦标赛' : 'Upcoming Events & Tournaments'}">`;
             evRes.events.forEach(e => {
-              html += `<option value="event:${e.id}">Event: ${e.title}</option>`;
+              const eTitle = window.I18N ? window.I18N.db(e.slug, 'title', e.title) : e.title;
+              html += `<option value="event:${e.id}">${isZh ? '赛事' : 'Event'}: ${eTitle}</option>`;
             });
             html += '</optgroup>';
           }
