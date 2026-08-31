@@ -62,12 +62,66 @@ const I18N = {
     'status.upcoming': 'Upcoming',
     'status.open': 'Open Registration',
     'status.completed': 'Completed',
+    'status.cancelled': 'Cancelled',
     'status.active': 'Active Cohort',
     'status.archived': 'Archived',
     'badge.scale': 'Verified Scale',
     'badge.pathway': '4 Learning Pathways',
     'badge.access': 'Equity & Access',
     'badge.record': 'Competitive Record',
+
+    /* ── Dynamic Categories & Types ─────────── */
+    'category.debate': 'Debate',
+    'category.public_speaking': 'Public Speaking',
+    'category.writing': 'Writing',
+    'category.workshop': 'Workshops',
+    'category.formats': 'Formats',
+    'category.motions': 'Motions',
+    'category.guides': 'Guides',
+    'category.videos': 'Videos',
+    'category.results': 'Results',
+    'type.tournament': 'Tournament',
+    'type.workshop': 'Workshop',
+    'type.seminar': 'Seminar',
+    'type.webinar': 'Webinar',
+    'type.camp': 'Camp',
+    'mode.in_person': 'In Person',
+    'mode.online': 'Online',
+    'mode.hybrid': 'Hybrid',
+    'level.beginner': 'Beginner',
+    'level.intermediate': 'Intermediate',
+    'level.advanced': 'Advanced',
+    'level.all': 'All Levels',
+    'filetype.pdf': 'PDF Document',
+    'filetype.video': 'Video',
+    'filetype.link': 'Link',
+    'filetype.doc': 'Document',
+
+    /* ── Dynamic Seed Titles & DB Fallbacks ──── */
+    'db.beginner-debate.title': 'Beginner Debate Training',
+    'db.beginner-debate.desc': 'An entry-level programme designed to introduce competitive debate to students with little or no prior experience. Learn argument construction, rebuttal, and World Schools fundamentals.',
+    'db.advanced-competitive.title': 'Advanced Competitive Track',
+    'db.advanced-competitive.desc': 'An intensive programme for experienced debaters targeting regional, national, and international competition. Covers BP format mastery, adjudication, and strategy.',
+    'db.public-speaking.title': 'Confidence & Public Speaking',
+    'db.public-speaking.desc': 'A confidence-building programme focused on public speaking, presentation skills, and executive communication for MUNs and school presentations.',
+    'db.intermediate-worlds.title': 'World Schools Intermediate',
+    'db.intermediate-worlds.desc': 'Focuses on World Schools format with emphasis on style, matter, and manner — the three pillars of WS adjudication.',
+    'db.essay-writing.title': 'Academic Essay & Writing Programme',
+    'db.essay-writing.desc': 'A research and writing programme designed to help students produce high-quality argumentative essays for academic contests.',
+    'db.summer-intensive.title': 'Summer Debate Intensive',
+    'db.summer-intensive.desc': 'A five-day residential-style summer camp covering debate, public speaking, and critical thinking with mock tournaments.',
+    'db.national-schools-2026.title': 'National Schools Debate Championship 2026',
+    'db.national-schools-2026.desc': "Pakistan's most prestigious inter-school debate competition. Open to schools from all provinces. World Schools format.",
+    'db.bp-open-karachi.title': 'Karachi Open — British Parliamentary',
+    'db.bp-open-karachi.desc': 'A British Parliamentary open tournament welcoming debaters from universities and schools across Sindh.',
+    'db.beginner-workshop-aug.title': 'Introduction to Debate — Free Workshop',
+    'db.beginner-workshop-aug.desc': 'A free 3-hour introductory workshop for students who have never debated before. Parents welcome.',
+    'db.summer-camp-aug.title': 'Summer Debate Intensive — August Cohort',
+    'db.summer-camp-aug.desc': 'Our flagship 5-day Summer Intensive Programme for students ages 13-20. Covers debate and public speaking.',
+    'db.adjudication-training.title': 'Certified Adjudication Training Workshop',
+    'db.adjudication-training.desc': 'A full-day workshop for students and adults who wish to become certified debate adjudicators.',
+    'db.world-schools-prep.title': 'World Schools Tournament Preparation Camp',
+    'db.world-schools-prep.desc': 'A 3-day preparation camp for teams selected to represent their schools at World Schools tournaments.',
 
     /* ── Homepage (index.html) ─────────────── */
     'home.hero_eyebrow': 'Pak Debate Forum',
@@ -158,6 +212,10 @@ const I18N = {
     'contact.hero_eyebrow': 'Get In Touch',
     'contact.hero_title': 'Connect With Pak Debate Forum',
     'contact.hero_subtitle': 'Have questions about programs, tournament partnerships, or institutional coaching? Reach out to our team.',
+    'contact.info_email': 'Email',
+    'contact.info_location': 'Location',
+    'contact.info_hours': 'Hours',
+    'contact.info_hours_val': 'Mon–Fri, 10:00am – 6:00pm PKT',
     'contact.name_label': 'Full Name',
     'contact.name_placeholder': 'Your full name',
     'contact.email_label': 'Email Address',
@@ -165,6 +223,11 @@ const I18N = {
     'contact.category_label': 'Inquiry Category',
     'contact.message_label': 'Your Message',
     'contact.message_placeholder': 'How can we help you?',
+    'contact.subj_general': 'General Enquiry',
+    'contact.subj_program': 'Programme Question',
+    'contact.subj_event': 'Event Question',
+    'contact.subj_coach': 'Coaching Enquiry',
+    'contact.subj_website': 'Partnership / Other',
 
     /* ── Register Page (register.html) ─────── */
     'register.hero_eyebrow': 'Registration & Application',
@@ -368,12 +431,66 @@ const I18N = {
     'status.upcoming': '即将举办',
     'status.open': '开放报名',
     'status.completed': '已结束',
+    'status.cancelled': '已取消',
     'status.active': '开班中',
     'status.archived': '已归档',
     'badge.scale': '认证规模',
     'badge.pathway': '4大进阶体系',
     'badge.access': '公平与资助',
     'badge.record': '竞技战绩',
+
+    /* ── Dynamic Categories & Types ─────────── */
+    'category.debate': '辩论',
+    'category.public_speaking': '公共演讲',
+    'category.writing': '写作与研究',
+    'category.workshop': '工作坊',
+    'category.formats': '赛制规则',
+    'category.motions': '辩题集',
+    'category.guides': '指南手册',
+    'category.videos': '视频教程',
+    'category.results': '赛事记录',
+    'type.tournament': '锦标赛',
+    'type.workshop': '工作坊',
+    'type.seminar': '研讨会',
+    'type.webinar': '线上讲座',
+    'type.camp': '集训营',
+    'mode.in_person': '线下授课',
+    'mode.online': '线上授课',
+    'mode.hybrid': '混合授课',
+    'level.beginner': '入门级',
+    'level.intermediate': '中级',
+    'level.advanced': '高阶',
+    'level.all': '全阶段',
+    'filetype.pdf': 'PDF 文档',
+    'filetype.video': '视频',
+    'filetype.link': '链接',
+    'filetype.doc': '文档',
+
+    /* ── Dynamic Seed Titles & DB Fallbacks ──── */
+    'db.beginner-debate.title': '入门辩论基础培训',
+    'db.beginner-debate.desc': '面向初学者与零基础学员的入门课程。学习立论构建、反驳技巧与世界中学生辩论 (WSDC) 赛制基础。',
+    'db.advanced-competitive.title': '高阶竞技集训班',
+    'db.advanced-competitive.desc': '面向具备竞技经验选手的进阶集训项目。涵盖英辩 (BP) 赛制精点、裁判技巧与高阶战略。',
+    'db.public-speaking.title': '自信与公共演讲班',
+    'db.public-speaking.desc': '专注于提升表达自信、演讲技巧与沟通能力的精品班，适合模拟联合国 (MUN) 与公众表达者。',
+    'db.intermediate-worlds.title': '世界中学生赛制 (WSDC) 中级班',
+    'db.intermediate-worlds.desc': '深度解析世界中学生赛制，侧重表达风格、论据构建与逻辑框架 (Style, Matter, Manner)。',
+    'db.essay-writing.title': '学术论文与研究写作课程',
+    'db.essay-writing.desc': '旨在辅导学员撰写高水平论说性学术论文，针对约翰·洛克 (John Locke) 等国际学术竞赛。',
+    'db.summer-intensive.title': '夏季辩论密集集训营',
+    'db.summer-intensive.desc': '为期五天的沉浸式辩论夏令营，涵盖实战辩论、公共演讲、模拟锦标赛与导师一对一指导。',
+    'db.national-schools-2026.title': '2026 巴基斯坦全国中学生辩论锦标赛',
+    'db.national-schools-2026.desc': '巴基斯坦最高规格的校际辩论大赛，面向全国各省中学开班。采用世界中学生辩论 (WSDC) 赛制。',
+    'db.bp-open-karachi.title': '卡拉奇英辩 (BP) 公开赛',
+    'db.bp-open-karachi.desc': '面向信德省及全国高校与中学选手的英辩 (BP) 公开赛，设最佳辩手奖杯与高额奖学金。',
+    'db.beginner-workshop-aug.title': '辩论入门 — 免费体验工作坊',
+    'db.beginner-workshop-aug.desc': '时长3小时的免费入门体验工作坊，面向零基础辩手与家长，介绍辩论概要与比赛机制。',
+    'db.summer-camp-aug.title': '夏季辩论集训营 — 8月班',
+    'db.summer-camp-aug.desc': '面向13-20岁选手的旗舰级5天集训营，包含辩论实战与公共演讲指导。',
+    'db.adjudication-training.title': '认证裁判培训工作坊',
+    'db.adjudication-training.desc': '面向辩手及裁判的全天候裁判认证工作坊，涵盖判决哲学、打分卡撰写与主裁判技巧。',
+    'db.world-schools-prep.title': '世界中学生大赛备战集训营',
+    'db.world-schools-prep.desc': '为期3天的备战集训营，专为代表各校出征全国与国际大赛的选拔队伍设计。',
 
     /* ── Homepage (index.html) ─────────────── */
     'home.hero_eyebrow': '巴基斯坦辩论论坛',
@@ -487,6 +604,10 @@ const I18N = {
     'contact.hero_eyebrow': '联系我们',
     'contact.hero_title': '与 Pak Debate Forum 取得联系',
     'contact.hero_subtitle': '无论关于课程咨询、赛事合作还是机构培训，欢迎随时与我们的团队沟通。',
+    'contact.info_email': '电子邮箱',
+    'contact.info_location': '所在地',
+    'contact.info_hours': '工作时间',
+    'contact.info_hours_val': '周一至周五，10:00 – 18:00 (PKT)',
     'contact.name_label': '姓名',
     'contact.name_placeholder': '您的姓名',
     'contact.email_label': '电子邮箱',
@@ -494,6 +615,11 @@ const I18N = {
     'contact.category_label': '咨询类别',
     'contact.message_label': '留言内容',
     'contact.message_placeholder': '请在此输入您的咨询内容...',
+    'contact.subj_general': '常规咨询',
+    'contact.subj_program': '课程项目咨询',
+    'contact.subj_event': '赛事活动咨询',
+    'contact.subj_coach': '导师与培训合作',
+    'contact.subj_website': '战略合作 / 其他',
 
     /* ── Register Page (register.html) ─────── */
     'register.hero_eyebrow': '在线报名与申请',
@@ -621,8 +747,17 @@ const I18N = {
   },
 
   t(key) {
+    if (!key) return '';
     const dict = this[this.lang] || this.en;
     return dict[key] || this.en[key] || key;
+  },
+
+  db(slug, field, defaultVal) {
+    if (!slug) return defaultVal || '';
+    const key = `db.${slug}.${field}`;
+    const translated = this.t(key);
+    if (translated && translated !== key) return translated;
+    return defaultVal || '';
   },
 
   setLang(lang) {
@@ -634,6 +769,9 @@ const I18N = {
     if (window.renderNav) window.renderNav();
     if (window.renderDrawer) window.renderDrawer();
     if (window.renderFooter) window.renderFooter();
+    if (typeof window.onLangChange === 'function') {
+      window.onLangChange(lang);
+    }
   },
 
   translateDOM(container = document) {
