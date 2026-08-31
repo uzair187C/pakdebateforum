@@ -87,7 +87,8 @@
 
     function levelBadge(level) {
       const map = { beginner: 'badge--green', intermediate: 'badge--accent', advanced: 'badge--blue', all: 'badge--muted' };
-      return `<span class="badge ${map[level] || 'badge--muted'}">${level}</span>`;
+      const translatedLevel = window.I18N ? window.I18N.t(`level.${level}`) : level;
+      return `<span class="badge ${map[level] || 'badge--muted'}" data-i18n="level.${level}">${translatedLevel}</span>`;
     }
 
     function renderGrid(programs) {
@@ -97,31 +98,42 @@
         if (window.I18N) window.I18N.translateDOM(el);
         return; 
       }
-      el.innerHTML = programs.map(p => `
+      el.innerHTML = programs.map(p => {
+        const title = window.I18N ? window.I18N.db(p.slug, 'title', p.title) : p.title;
+        const rawDesc = window.I18N ? window.I18N.db(p.slug, 'desc', p.description) : p.description;
+        const desc = rawDesc ? (rawDesc.length > 150 ? rawDesc.substring(0, 150) + '…' : rawDesc) : '';
+        const translatedCat = window.I18N ? window.I18N.t(`category.${p.category}`) : p.category.replace('_', ' ');
+        const translatedMode = window.I18N ? window.I18N.t(`mode.${p.delivery_mode}`) : p.delivery_mode.replace('_', ' ');
+        const isZh = window.I18N && window.I18N.lang === 'zh';
+        const ageText = (p.age_min || p.age_max) ? `${p.age_min || ''}${p.age_max ? '–' + p.age_max + (isZh ? ' 岁' : ' yrs') : ''}` : '';
+        const coachText = p.coach_name ? ` · ${isZh ? '导师' : 'Coach'}: ${p.coach_name}` : '';
+        const priceText = p.price ? 'PKR ' + p.price.toLocaleString() : (isZh ? '咨询学费' : 'Contact for pricing');
+
+        return `
         <article class="card card--interactive" data-reveal>
           <div class="card__body">
-            <p class="card__eyebrow">${p.category.replace('_', ' ')}</p>
-            <h2 class="card__title">${p.title}</h2>
-            <p class="card__description">${p.description.substring(0, 150)}…</p>
+            <p class="card__eyebrow" data-i18n="category.${p.category}">${translatedCat}</p>
+            <h2 class="card__title">${title}</h2>
+            <p class="card__description">${desc}</p>
             <div style="display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-top: var(--sp-4);">
               ${levelBadge(p.level)}
-              <span class="badge badge--muted">${p.delivery_mode.replace('_', ' ')}</span>
+              <span class="badge badge--muted" data-i18n="mode.${p.delivery_mode}">${translatedMode}</span>
               ${p.duration ? `<span class="badge badge--muted">${p.duration}</span>` : ''}
             </div>
           </div>
           <div class="card__footer">
             <div>
               <div style="font-size: var(--text-meta); color: var(--color-text-tertiary);">
-                ${p.age_min || ''}${p.age_max ? '–' + p.age_max + ' yrs' : ''}
-                ${p.coach_name ? ' · Coach: ' + p.coach_name : ''}
+                ${ageText}${coachText}
               </div>
               <div style="font-size: var(--text-body-sm); color: var(--color-accent-gold); margin-top: 2px;">
-                ${p.price ? 'PKR ' + p.price.toLocaleString() : 'Contact for pricing'}
+                ${priceText}
               </div>
             </div>
             <a href="/program.html?id=${p.id}" class="btn btn--primary btn--sm" data-i18n="btn.view_details">View →</a>
           </div>
-        </article>`).join('');
+        </article>`;
+      }).join('');
       if (window.initReveals) window.initReveals(el);
       if (window.I18N) window.I18N.translateDOM(el);
     }
@@ -148,6 +160,10 @@
       const filtered = activeFilter === 'all' ? allPrograms : allPrograms.filter(p => p.category === activeFilter);
       renderGrid(filtered);
     }
+
+    window.onLangChange = function() {
+      applyFilter(activeFilter, false);
+    };
 
     async function init() {
       const params = new URLSearchParams(window.location.search);
