@@ -66,7 +66,7 @@
       const translatedLevel = window.I18N ? window.I18N.t(`level.${p.level}`) : p.level;
       const isZh = window.I18N && window.I18N.lang === 'zh';
       const ageText = (p.age_min || p.age_max) ? `${p.age_min || ''}${p.age_max ? '–' + p.age_max + (isZh ? ' 岁' : ' years') : ''}` : '';
-      const priceVal = p.price ? 'PKR ' + p.price.toLocaleString() : (isZh ? '咨询学费' : 'Contact us for pricing');
+      const priceVal = p.price ? 'PKR ' + p.price.toLocaleString() : (window.I18N ? window.I18N.t('program.contact_price') : 'Contact us for pricing');
 
       document.getElementById('root').innerHTML = `
         <a href="/programs.html" style="font-size: var(--text-body-sm); color: var(--color-text-muted); display: inline-flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-8); text-decoration: none;" data-i18n="program.back_all">← All Programs</a>
