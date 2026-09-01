@@ -167,63 +167,77 @@
   }
 
   function renderResultCard(item) {
+    const title = window.I18N ? window.I18N.db(item.slug, 'title', item.title) : item.title;
+    const rawDesc = window.I18N ? window.I18N.db(item.slug, 'description', item.description || item.bio || item.expertise) : (item.description || item.bio || item.expertise || '');
+    const desc = rawDesc ? (rawDesc.length > 150 ? rawDesc.substring(0, 150) + '…' : rawDesc) : '';
+
     if (item._type === 'program') {
+      const levelLabel = window.I18N ? window.I18N.t(`level.${item.level}`) : (item.level || 'All Levels');
+      const badgeText = window.I18N ? window.I18N.t('type.program') : 'Program';
+      const btnText = window.I18N ? window.I18N.t('btn.view_program') : 'View Program →';
       return `
         <div class="card card--interactive" data-reveal="fade-up">
           <div class="card__header">
-            <span class="badge badge--gold">Program</span>
-            <span class="text-xs text-muted">${escapeHtml(item.level || 'All Levels')}</span>
+            <span class="badge badge--gold" data-i18n="type.program">${badgeText}</span>
+            <span class="text-xs text-muted" data-i18n="level.${item.level}">${escapeHtml(levelLabel)}</span>
           </div>
-          <h3 class="card__title">${escapeHtml(item.title)}</h3>
-          <p class="card__description">${escapeHtml(item.description || '')}</p>
+          <h3 class="card__title">${escapeHtml(title)}</h3>
+          <p class="card__description">${escapeHtml(desc)}</p>
           <div class="card__footer margin-top-4">
-            <a href="/program.html?id=${encodeURIComponent(item.id)}" class="btn btn--secondary btn--sm">View Program</a>
+            <a href="/program.html?id=${encodeURIComponent(item.id)}" class="btn btn--secondary btn--sm" data-i18n="btn.view_program">${btnText}</a>
           </div>
         </div>
       `;
     }
     if (item._type === 'event') {
+      const badgeText = window.I18N ? window.I18N.t('type.event') : 'Event';
+      const btnText = window.I18N ? window.I18N.t('btn.view_details') : 'View Details →';
       return `
         <div class="card card--interactive" data-reveal="fade-up">
           <div class="card__header">
-            <span class="badge badge--gold">Event</span>
+            <span class="badge badge--gold" data-i18n="type.event">${badgeText}</span>
             <span class="text-xs text-muted">${escapeHtml(item.city || item.venue || 'Online')}</span>
           </div>
-          <h3 class="card__title">${escapeHtml(item.title)}</h3>
-          <p class="card__description">${escapeHtml(item.description || '')}</p>
+          <h3 class="card__title">${escapeHtml(title)}</h3>
+          <p class="card__description">${escapeHtml(desc)}</p>
           <div class="card__footer margin-top-4">
-            <a href="/event.html?id=${encodeURIComponent(item.id)}" class="btn btn--secondary btn--sm">Event Details</a>
+            <a href="/event.html?id=${encodeURIComponent(item.id)}" class="btn btn--secondary btn--sm" data-i18n="btn.view_details">${btnText}</a>
           </div>
         </div>
       `;
     }
     if (item._type === 'resource') {
       const safeUrl = item.url && (item.url.startsWith('http://') || item.url.startsWith('https://') || item.url.startsWith('/')) ? item.url : '#';
+      const badgeText = window.I18N ? window.I18N.t('type.resource') : 'Resource';
+      const catText = window.I18N ? window.I18N.t(`category.${item.category}`) : (item.category || 'General');
+      const btnText = window.I18N ? window.I18N.t('btn.download_pdf') : 'Download Resource';
       return `
         <div class="card card--interactive" data-reveal="fade-up">
           <div class="card__header">
-            <span class="badge badge--subtle">Resource</span>
-            <span class="text-xs text-muted">${escapeHtml(item.category || 'General')}</span>
+            <span class="badge badge--subtle" data-i18n="type.resource">${badgeText}</span>
+            <span class="text-xs text-muted" data-i18n="category.${item.category}">${escapeHtml(catText)}</span>
           </div>
-          <h3 class="card__title">${escapeHtml(item.title)}</h3>
-          <p class="card__description">${escapeHtml(item.description || '')}</p>
+          <h3 class="card__title">${escapeHtml(title)}</h3>
+          <p class="card__description">${escapeHtml(desc)}</p>
           <div class="card__footer margin-top-4">
-            <a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn--secondary btn--sm">Open Resource</a>
+            <a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn--secondary btn--sm" data-i18n="btn.download_pdf">${btnText}</a>
           </div>
         </div>
       `;
     }
     if (item._type === 'coach') {
+      const badgeText = window.I18N ? window.I18N.t('type.coach') : 'Coach';
+      const btnText = window.I18N ? window.I18N.t('btn.learn_more') : 'Learn More';
       return `
         <div class="card card--interactive" data-reveal="fade-up">
           <div class="card__header">
-            <span class="badge badge--subtle">Coach</span>
+            <span class="badge badge--subtle" data-i18n="type.coach">${badgeText}</span>
             <span class="text-xs text-muted">${escapeHtml(item.title || 'Faculty')}</span>
           </div>
           <h3 class="card__title">${escapeHtml(item.name)}</h3>
-          <p class="card__description">${escapeHtml(item.expertise || item.bio || '')}</p>
+          <p class="card__description">${escapeHtml(desc)}</p>
           <div class="card__footer margin-top-4">
-            <a href="/coaches.html" class="btn btn--secondary btn--sm">Faculty Profiles</a>
+            <a href="/coaches.html" class="btn btn--secondary btn--sm" data-i18n="btn.learn_more">${btnText}</a>
           </div>
         </div>
       `;
