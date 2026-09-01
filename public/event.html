@@ -84,7 +84,7 @@
 
             ${!canRegister && ev.status !== 'upcoming' ? `
             <div class="alert alert--info">
-              Registration for this event is currently <strong data-i18n="status.${ev.status}">${statusTranslated}</strong>.
+              <span data-i18n="event.reg_status_msg">Registration for this event is currently</span> <strong data-i18n="status.${ev.status}">${statusTranslated}</strong>.
             </div>` : ''}
           </div>
 
