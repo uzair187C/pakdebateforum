@@ -387,7 +387,25 @@ const I18N = {
     'db.poi-technique-masterclass.title': 'POI Technique Masterclass — Video',
     'db.poi-technique-masterclass.description': 'A 45-minute video session on Points of Information technique, timing, and strategy from Coach Hassan Malik.',
     'db.intro-to-adjudication-videos.title': 'Introduction to Adjudication — Video Series',
-    'db.intro-to-adjudication-videos.description': 'A four-part video series introducing debate adjudication philosophy and practical ballot writing.'
+    'db.intro-to-adjudication-videos.description': 'A four-part video series introducing debate adjudication philosophy and practical ballot writing.',
+    'event.reg_status_msg': 'Registration for this event is currently',
+    'events.empty_title': 'No Events Found',
+    'events.empty_text': 'There are no events matching this filter right now. Check back soon.',
+    'resources.empty_text': 'No resources in this category yet. Check back soon.',
+    'program.contact_price': 'Contact us for pricing',
+    'badge.international': 'International',
+    'badge.grand_final': 'Grand Final',
+    'badge.organized_by_pdf': 'Organized by PDF',
+    'badge.impact': 'Impact',
+    'results.wsdc_meta': 'WSDC · Adjudication · Nairobi, Kenya',
+    'results.oxford_meta': 'Oxford WSDC · Adjudication · Oxford, UK',
+    'results.prewsdc_meta': 'Tournament · World Schools Format · International',
+    'results.sofia_meta': 'WUDC · Scholarship · Sofia, Bulgaria',
+    'type.program': 'Program',
+    'type.event': 'Event',
+    'type.resource': 'Resource',
+    'type.coach': 'Coach',
+    'feedback.select_cat': '— Select a category —'
   },
 
   /* ══════════════════════════════════════════════════════════
@@ -770,7 +788,25 @@ const I18N = {
     'db.poi-technique-masterclass.title': 'POI 质询技巧大师课 — 视频教程',
     'db.poi-technique-masterclass.description': 'Hassan Malik 导师 45 分钟视频讲解 Points of Information (POI) 质询时机与策略。',
     'db.intro-to-adjudication-videos.title': '裁判入门系列视频教程',
-    'db.intro-to-adjudication-videos.description': '四集系列视频，系统介绍辩论裁判裁决理念与实际评语打分表撰写。'
+    'db.intro-to-adjudication-videos.description': '四集系列视频，系统介绍辩论裁判裁决理念与实际评语打分表撰述。',
+    'event.reg_status_msg': '该赛事的报名状态目前为',
+    'events.empty_title': '未找到赛事',
+    'events.empty_text': '目前没有符合此筛选条件的赛事。请稍后再来查看。',
+    'resources.empty_text': '该分类下暂无资源。请稍后再来查看。',
+    'program.contact_price': '咨询学费',
+    'badge.international': '国际赛事',
+    'badge.grand_final': '总决赛',
+    'badge.organized_by_pdf': 'PDF 主办',
+    'badge.impact': '社会影响',
+    'results.wsdc_meta': 'WSDC · 裁判工作 · 肯尼亚内罗毕',
+    'results.oxford_meta': '牛津 WSDC · 裁判工作 · 英国牛津',
+    'results.prewsdc_meta': '锦标赛 · 世界学校辩论赛制 · 国际',
+    'results.sofia_meta': 'WUDC · 奖学金 · 保加利亚索非亚',
+    'type.program': '课程',
+    'type.event': '赛事',
+    'type.resource': '学术资源',
+    'type.coach': '导师',
+    'feedback.select_cat': '— 选择分类 —'
   },
 
   /* ══════════════════════════════════════════════════════════
