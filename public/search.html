@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search — Pak Debate Forum</title>
   <script>
     (function(){
       var t = localStorage.getItem('pdf_theme') || 'dark';
@@ -12,16 +11,46 @@
       document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
     })();
   </script>
-  <meta name="description" content="Search Pak Debate Forum programs, upcoming competitions, educational resources, and world-class coaches.">
-  <link rel="canonical" href="https://pakdebateforum.org/search.html">
+  <meta name="description" content="Search Pak Debate Forum — Explore debating programs, WSDC tournaments, educational resources, and world-class faculty.">
+  <meta name="keywords" content="search debate, debate academy search, WSDC motions search, pak debate forum search" />
+  <meta name="theme-color" content="#C9A24A" />
+  <meta name="robots" content="index, follow" />
 
-  <!-- Open Graph / Social Media -->
-  <meta property="og:title" content="Search — Pak Debate Forum">
-  <meta property="og:description" content="Find programs, events, resources, and expert coaches across Pak Debate Forum.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://pakdebateforum.org/search.html">
-  <meta property="og:image" content="https://pakdebateforum.org/assets/brand/pdf-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://pakdebateforum.org/search.html" />
+  <link rel="alternate" hreflang="en" href="https://pakdebateforum.org/search.html" />
+  <link rel="alternate" hreflang="zh-CN" href="https://pakdebateforum.org/search.html?lang=zh" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Pak Debate Forum" />
+  <meta property="og:title" content="Search Intelligence — Pak Debate Forum" />
+  <meta property="og:description" content="Find programs, events, resources, and expert coaches across Pak Debate Forum." />
+  <meta property="og:url" content="https://pakdebateforum.org/search.html" />
+  <meta property="og:image" content="https://pakdebateforum.org/assets/brand/pdf-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <title>Search Intelligence — Pak Debate Forum</title>
+
+  <!-- JSON-LD SearchResultsPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SearchResultsPage",
+        "name": "Search Pak Debate Forum",
+        "url": "https://pakdebateforum.org/search.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pakdebateforum.org/" },
+          { "@type": "ListItem", "position": 2, "name": "Search", "item": "https://pakdebateforum.org/search.html" }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
