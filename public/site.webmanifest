@@ -1,0 +1,21 @@
+{
+  "name": "Pak Debate Forum",
+  "short_name": "PakDebate",
+  "description": "Pak Debate Forum — Premier International Debate Academy, Competitions & Training Ecosystem.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030404",
+  "theme_color": "#C9A24A",
+  "icons": [
+    {
+      "src": "/assets/brand/pdf-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/brand/pdf-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
