@@ -632,6 +632,13 @@ export default {
       if (path === '/api/registrations' && method === 'POST') return await createRegistration(env, request);
       if (path === '/api/feedback'      && method === 'POST') return await createFeedback(env, request);
 
+      if (path === '/api/geo' && method === 'GET') {
+        const country = request.cf?.country || request.headers.get('cf-ipcountry') || 'US';
+        const countryCode = String(country).toUpperCase();
+        const isChina = ['CN', 'HK', 'MO', 'TW'].includes(countryCode);
+        return json({ country: countryCode, isChina, defaultLang: isChina ? 'zh' : 'en' });
+      }
+
       if (path === '/api/ping') return json({ ok: true, ts: Date.now() });
 
       return err('Not found', 404);
