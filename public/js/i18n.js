@@ -867,11 +867,56 @@ const I18N = {
     });
   },
 
+  detectChinaLocale() {
+    try {
+      /* 1. URL parameter override: ?lang=zh or ?lang=en */
+      if (typeof window !== 'undefined' && window.location) {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('lang') === 'zh') return 'zh';
+        if (params.get('lang') === 'en') return 'en';
+      }
+
+      /* 2. Browser language preferences (zh, zh-CN, zh-TW, zh-HK, zh-SG) */
+      const navLangs = (typeof navigator !== 'undefined' && (navigator.languages || [navigator.language || navigator.userLanguage])) || [];
+      const hasZh = navLangs.some(l => String(l || '').toLowerCase().startsWith('zh'));
+      if (hasZh) return 'zh';
+
+      /* 3. Client timezone check */
+      const tz = typeof Intl !== 'undefined' && Intl.DateTimeFormat
+        ? Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+        : '';
+      const chinaTz = ['Asia/Shanghai', 'Asia/Chongqing', 'Asia/Urumqi', 'Asia/Harbin', 'Asia/Hong_Kong', 'Asia/Macau', 'Asia/Taipei'];
+      if (chinaTz.includes(tz)) return 'zh';
+    } catch (e) {
+      /* Fail silently */
+    }
+    return 'en';
+  },
+
+  async autoDetectGeo() {
+    if (typeof window === 'undefined' || localStorage.getItem('pdf_lang')) return;
+    try {
+      const res = await fetch('/api/geo');
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.isChina && !localStorage.getItem('pdf_lang')) {
+          this.setLang('zh');
+        }
+      }
+    } catch (e) {
+      /* Fail silently */
+    }
+  },
+
   init() {
-    const saved = localStorage.getItem('pdf_lang') || 'en';
+    let saved = localStorage.getItem('pdf_lang');
+    if (!saved) {
+      saved = this.detectChinaLocale();
+    }
     this.lang = saved === 'zh' ? 'zh' : 'en';
     document.documentElement.setAttribute('lang', this.lang === 'zh' ? 'zh-CN' : 'en');
     this.translateDOM();
+    this.autoDetectGeo();
   }
 };
 
