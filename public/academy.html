@@ -71,7 +71,17 @@
   <script>
     (function(){
       var t = localStorage.getItem('pdf_theme') || 'dark';
-      var l = localStorage.getItem('pdf_lang') || 'en';
+      var l = localStorage.getItem('pdf_lang');
+      if (!l) {
+        try {
+          var langs = navigator.languages || [navigator.language || ''];
+          var hasZh = langs.some(function(lang){ return String(lang || '').toLowerCase().startsWith('zh'); });
+          var tz = typeof Intl !== 'undefined' && Intl.DateTimeFormat ? Intl.DateTimeFormat().resolvedOptions().timeZone || '' : '';
+          var chinaTz = ['Asia/Shanghai', 'Asia/Chongqing', 'Asia/Urumqi', 'Asia/Harbin', 'Asia/Hong_Kong', 'Asia/Macau', 'Asia/Taipei'];
+          if (hasZh || chinaTz.indexOf(tz) !== -1) { l = 'zh'; }
+        } catch(e){}
+      }
+      l = l === 'zh' ? 'zh' : 'en';
       document.documentElement.setAttribute('data-theme', t);
       document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
     })();
