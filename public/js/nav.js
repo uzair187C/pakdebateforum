@@ -29,7 +29,7 @@
   }
 
   const CONTACT = {
-    email: 'info@pakdebateforum.com',
+    email: 'pakdebateforum@gmail.com',
   };
 
   /* ── Helper: active route ──────────────────────────────── */
