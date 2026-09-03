@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Register for Pak Debate Forum programmes and tournaments — Online application and registration portal." />
-  <meta name="keywords" content="debate registration, debate program application, WSDC tournament sign up, pak debate registration" />
+  <meta name="description" content="PDF辩论学院在线报名入口 — 快速报名WSDC与BP辩论课程、国际辩论赛事及裁判认证研讨会。" />
+  <meta name="keywords" content="debate registration, debate program application, WSDC tournament sign up, pak debate registration, 辩论课程报名, 辩论比赛报名入口, WSDC报名, 裁判认证报名" />
   <meta name="theme-color" content="#C9A24A" />
   <meta name="robots" content="index, follow" />
 
@@ -12,19 +12,35 @@
   <link rel="alternate" hreflang="en" href="https://pakdebateforum.org/register.html" />
   <link rel="alternate" hreflang="zh-CN" href="https://pakdebateforum.org/register.html?lang=zh" />
 
-  <!-- Open Graph -->
+  <!-- Open Graph / WeChat / Social -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Pak Debate Forum" />
-  <meta property="og:title" content="Online Registration — Pak Debate Forum" />
-  <meta property="og:description" content="Apply for training programmes, debate workshops, and tournament registrations." />
+  <meta property="og:site_name" content="Pak Debate Forum 巴基斯坦辩论论坛" />
+  <meta property="og:title" content="PDF 辩论课程与赛事在线报名 (Registration Portal)" />
+  <meta property="og:description" content="提交辩论培训课程与国际辩论赛事报名申请。" />
   <meta property="og:url" content="https://pakdebateforum.org/register.html" />
   <meta property="og:image" content="https://pakdebateforum.org/assets/brand/pdf-logo.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="zh_CN" />
 
-  <title>Online Registration — Pak Debate Forum</title>
+  <meta name="wechat:title" content="PDF 辩论学院课程与赛事在线报名入口" />
+  <meta name="wechat:description" content="欢迎填写报名表单，顾问老师将即刻联系您。" />
+  <meta name="wechat:image" content="https://pakdebateforum.org/assets/brand/pdf-logo.png" />
+
+  <title>PDF 在线报名系统 — 辩论课程与赛事 (Online Registration)</title>
   <script>
     (function(){
       var t = localStorage.getItem('pdf_theme') || 'dark';
-      var l = localStorage.getItem('pdf_lang') || 'en';
+      var l = localStorage.getItem('pdf_lang');
+      if (!l) {
+        try {
+          var langs = navigator.languages || [navigator.language || ''];
+          var hasZh = langs.some(function(lang){ return String(lang || '').toLowerCase().startsWith('zh'); });
+          var tz = typeof Intl !== 'undefined' && Intl.DateTimeFormat ? Intl.DateTimeFormat().resolvedOptions().timeZone || '' : '';
+          var chinaTz = ['Asia/Shanghai', 'Asia/Chongqing', 'Asia/Urumqi', 'Asia/Harbin', 'Asia/Hong_Kong', 'Asia/Macau', 'Asia/Taipei'];
+          if (hasZh || chinaTz.indexOf(tz) !== -1) { l = 'zh'; }
+        } catch(e){}
+      }
+      l = l === 'zh' ? 'zh' : 'en';
       document.documentElement.setAttribute('data-theme', t);
       document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
     })();
