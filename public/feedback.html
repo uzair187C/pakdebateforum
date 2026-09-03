@@ -3,13 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Share your feedback with Pak Debate Forum — programme, event, coaching, and website feedback welcome." />
-  <meta name="theme-color" content="#050505" />
-  <title>Feedback — Pak Debate Forum</title>
+  <meta name="description" content="PDF 意见与反馈中心 — 欢迎提交课程、赛事、教练辅导及网站体验的宝贵意见。" />
+  <meta name="keywords" content="feedback, debate feedback, pak debate forum feedback, 意见反馈, 课程评价, 赛事反馈" />
+  <meta name="theme-color" content="#C9A24A" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="canonical" href="https://pakdebateforum.org/feedback.html" />
+  <link rel="alternate" hreflang="en" href="https://pakdebateforum.org/feedback.html" />
+  <link rel="alternate" hreflang="zh-CN" href="https://pakdebateforum.org/feedback.html?lang=zh" />
+
+  <!-- Open Graph / WeChat / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Pak Debate Forum 巴基斯坦辩论论坛" />
+  <meta property="og:title" content="PDF 意见与反馈中心 (Feedback)" />
+  <meta property="og:description" content="您的声音帮助我们不断完善辩论学院与赛事体验。" />
+  <meta property="og:url" content="https://pakdebateforum.org/feedback.html" />
+  <meta property="og:image" content="https://pakdebateforum.org/assets/brand/pdf-logo.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="zh_CN" />
+
+  <meta name="wechat:title" content="PDF 辩论论坛与学院意见反馈" />
+  <meta name="wechat:description" content="欢迎随时向我们提出您的建议。" />
+  <meta name="wechat:image" content="https://pakdebateforum.org/assets/brand/pdf-logo.png" />
+
+  <title>PDF 意见与反馈中心 — 反馈表单 (Feedback &amp; Suggestions)</title>
   <script>
     (function(){
       var t = localStorage.getItem('pdf_theme') || 'dark';
-      var l = localStorage.getItem('pdf_lang') || 'en';
+      var l = localStorage.getItem('pdf_lang');
+      if (!l) {
+        try {
+          var langs = navigator.languages || [navigator.language || ''];
+          var hasZh = langs.some(function(lang){ return String(lang || '').toLowerCase().startsWith('zh'); });
+          var tz = typeof Intl !== 'undefined' && Intl.DateTimeFormat ? Intl.DateTimeFormat().resolvedOptions().timeZone || '' : '';
+          var chinaTz = ['Asia/Shanghai', 'Asia/Chongqing', 'Asia/Urumqi', 'Asia/Harbin', 'Asia/Hong_Kong', 'Asia/Macau', 'Asia/Taipei'];
+          if (hasZh || chinaTz.indexOf(tz) !== -1) { l = 'zh'; }
+        } catch(e){}
+      }
+      l = l === 'zh' ? 'zh' : 'en';
       document.documentElement.setAttribute('data-theme', t);
       document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
     })();
