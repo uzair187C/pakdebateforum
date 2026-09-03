@@ -168,6 +168,18 @@ function initNumericInputs() {
 window.initNumericInputs = initNumericInputs;
 
 
+/* ═══ WECHAT & CHINESE SOCIAL SHARING HELPER ═════════════════ */
+
+function initWeChatSharing() {
+  const isZh = document.documentElement.getAttribute('lang') === 'zh-CN';
+  const wechatTitle = document.querySelector('meta[name="wechat:title"]');
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+
+  if (isZh && wechatTitle && ogTitle) {
+    document.title = wechatTitle.getAttribute('content') || document.title;
+  }
+}
+
 /* ═══ INIT ════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -178,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initSmoothScroll();
   initNumericInputs();
+  initWeChatSharing();
 });
 
 
