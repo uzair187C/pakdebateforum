@@ -452,13 +452,13 @@ const I18N = {
     'nav.back': '← Back',
 
     /* ── Page Titles (EN) ───────────────────── */
-    'title.home': 'Pak Debate Forum — Premier International Debate Academy & Tournaments',
-    'title.academy': 'PDF Academy — World-Class Debate Training & Adjudicator Certification',
-    'title.programs': 'Debate Training Programs — Pak Debate Forum',
+    'title.home': 'Pak Debate Forum — Premier International Debating Academy & Global Platform',
+    'title.academy': 'Best Debating Academy — Pak Debate Forum (PDF Academy)',
+    'title.programs': 'Debating Academy Training Programs — Pak Debate Forum',
     'title.events': 'Debate Events & Tournaments — Pak Debate Forum',
     'title.resources': 'Debate Resources & Handbooks — Pak Debate Forum',
     'title.coaches': 'Faculty & Adjudication Team — Pak Debate Forum',
-    'title.about': 'About Pak Debate Forum — Empowering Voices Globally',
+    'title.about': 'About Pak Debate Forum — Premier International Debating Academy',
     'title.contact': 'Contact Us — Pak Debate Forum',
     'title.results': 'Results & Competitive Record — Pak Debate Forum',
     'title.search': 'Search Site — Pak Debate Forum',
