@@ -7,6 +7,11 @@
 		"nodejs_compat",
 		"global_fetch_strictly_public"
 	],
+	"workers_dev": true,
+	"routes": [
+		{ "pattern": "pakdebateforum.com/*", "zone_name": "pakdebateforum.com" },
+		{ "pattern": "www.pakdebateforum.com/*", "zone_name": "pakdebateforum.com" }
+	],
 	"assets": {
 		"directory": "../public",
 		"binding": "ASSETS"
