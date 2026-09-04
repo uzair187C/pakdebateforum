@@ -1,0 +1,354 @@
+/**
+ * PAK DEBATE FORUM — Base Styles
+ * Source of truth: #03 TYPOGRAPHY, #35 DESIGN-TOKENS, #11 ACCESSIBILITY
+ * ────────────────────────────────────────────────────────────────
+ * Reset · Typography roles · Layout utilities · Accessibility
+ */
+
+/* ═══ RESET ══════════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  scroll-padding-top: calc(var(--nav-height) + 1rem);
+}
+
+body {
+  background-color: var(--color-bg-page);
+  background-image:
+    /* Fixed ambient gold spotlight (top-left) */
+    radial-gradient(ellipse 70% 50% at 15% 10%, rgba(201, 162, 74, 0.045) 0%, transparent 70%),
+    /* Fixed ambient emerald spotlight (right-mid) */
+    radial-gradient(ellipse 60% 45% at 85% 55%, rgba(8, 122, 88, 0.035) 0%, transparent 70%),
+    /* Fixed deep bottom atmosphere glow */
+    radial-gradient(ellipse 80% 40% at 50% 90%, rgba(201, 162, 74, 0.025) 0%, transparent 80%),
+    /* Micro-mesh dot texture (32px pattern) */
+    radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px;
+  background-attachment: fixed, fixed, fixed, scroll;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body-md);
+  font-weight: var(--w-regular);
+  line-height: var(--lh-body);
+  overflow-x: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body > main {
+  flex: 1;
+}
+
+/* Light Mode Body Background Override */
+[data-theme="light"] body {
+  background-color: var(--color-bg-page);
+  background-image:
+    radial-gradient(ellipse 70% 50% at 15% 10%, rgba(140, 106, 33, 0.03) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 45% at 85% 55%, rgba(8, 122, 88, 0.02) 0%, transparent 70%),
+    radial-gradient(rgba(28, 28, 26, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
+  color: var(--color-text-primary);
+}
+
+/* Chinese Typography Normalization */
+[lang^="zh"] body,
+[lang^="zh"] input,
+[lang^="zh"] textarea,
+[lang^="zh"] select,
+[lang^="zh"] button {
+  font-family: var(--font-body), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+[lang^="zh"] h1,
+[lang^="zh"] h2,
+[lang^="zh"] h3 {
+  font-family: var(--font-display), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", serif;
+  letter-spacing: normal;
+  line-height: 1.25;
+}
+
+[lang^="zh"] .eyebrow,
+[lang^="zh"] .card__eyebrow,
+[lang^="zh"] .badge {
+  letter-spacing: 0.05em;
+}
+
+
+/* ═══ DISPLAY TYPOGRAPHY ═════════════════════════════════════ */
+/* #03 §6: Cormorant Garamond for display — editorial authority */
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  line-height: var(--lh-display);
+  letter-spacing: var(--track-tight);
+  color: var(--color-text-primary);
+}
+
+h1 { font-size: var(--text-display-lg); }
+h2 { font-size: var(--text-display-md); }
+h3 { font-size: var(--text-heading-lg); }
+
+/* ═══ INTERFACE HEADINGS ═════════════════════════════════════ */
+/* #03 §4: Manrope for operational/interface headings          */
+
+h4, h5, h6 {
+  font-family: var(--font-body);
+  font-weight: var(--w-semibold);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--track-normal);
+  color: var(--color-text-primary);
+}
+
+h4 { font-size: var(--text-heading-md); }
+h5 { font-size: var(--text-heading-sm); }
+h6 { font-size: var(--text-body-lg); }
+
+/* ═══ BODY TEXT ═══════════════════════════════════════════════ */
+/* #03 §8: Manrope 17px, 1.65 line-height, warm gray           */
+
+p {
+  font-size: var(--text-body-md);
+  line-height: var(--lh-body);
+  color: var(--color-text-supporting);
+}
+
+p + p {
+  margin-top: var(--sp-5);
+}
+
+strong, b {
+  font-weight: var(--w-semibold);
+  color: var(--color-text-primary);
+}
+
+em, i {
+  font-style: italic;
+}
+
+small {
+  font-size: var(--text-meta);
+  color: var(--color-text-muted);
+}
+
+/* ═══ LINKS ══════════════════════════════════════════════════ */
+/* #02 §14: Warm white default, gold hover emphasis            */
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--dur-micro) var(--ease-standard);
+}
+
+/* ═══ MEDIA ══════════════════════════════════════════════════ */
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+/* ═══ LISTS ══════════════════════════════════════════════════ */
+
+ul, ol {
+  list-style: none;
+}
+
+/* ═══ FORM PRIMITIVES ════════════════════════════════════════ */
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+input, textarea, select {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: var(--color-text-primary);
+}
+
+/* ═══ CONTAINER ══════════════════════════════════════════════ */
+/* #35 §53-55: Global max-width + responsive gutters           */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.container--wide   { max-width: var(--container-wide); }
+.container--narrow { max-width: var(--container-narrow); }
+
+/* ═══ SECTION ════════════════════════════════════════════════ */
+/* #35 §50-51: Section-level vertical rhythm                   */
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+.section--sm {
+  padding-block: var(--section-y-sm);
+}
+
+.section--deep {
+  position: relative;
+  background-color: var(--color-bg-deep);
+}
+
+.section--alt {
+  position: relative;
+  background-color: var(--color-bg-section);
+}
+
+/* ═══ SECTION HEADER ═════════════════════════════════════════ */
+/* #36 §29-30: Eyebrow → Headline → Description → Action      */
+
+.section-header {
+  margin-bottom: var(--sp-12);
+}
+
+.section-header--center {
+  text-align: center;
+}
+
+.section-header--center .section-subtitle {
+  margin-inline: auto;
+}
+
+/* Eyebrow / overline */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--font-body);
+  font-size: var(--text-micro);
+  font-weight: var(--w-semibold);
+  letter-spacing: var(--track-widest);
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+  margin-bottom: var(--sp-5);
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  font-weight: var(--w-semibold);
+  letter-spacing: var(--track-tight);
+  line-height: var(--lh-display);
+  color: var(--color-text-primary);
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: var(--w-regular);
+  color: var(--color-text-supporting);
+  line-height: var(--lh-body);
+  max-width: 60ch;
+  margin-top: var(--sp-5);
+}
+
+/* ═══ TEXT UTILITIES ═════════════════════════════════════════ */
+
+.text-accent   { color: var(--color-accent-gold); }
+.text-green    { color: var(--color-accent-green); }
+.text-muted    { color: var(--color-text-muted); }
+.text-tertiary { color: var(--color-text-tertiary); }
+
+.font-display  { font-family: var(--font-display); }
+.font-body     { font-family: var(--font-body); }
+
+/* ═══ DIVIDER ════════════════════════════════════════════════ */
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border-subtle);
+  border: none;
+}
+
+.divider--gold {
+  background: var(--color-border-gold);
+}
+
+/* ═══ ACCESSIBILITY ══════════════════════════════════════════ */
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* #02 §15: Gold focus ring on dark backgrounds */
+:focus-visible {
+  outline: 2px solid rgba(228, 191, 98, 0.80);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ═══ SKIP LINK ══════════════════════════════════════════════ */
+
+.skip-link {
+  position: fixed;
+  top: var(--sp-4);
+  left: var(--sp-4);
+  z-index: var(--z-system);
+  padding: var(--sp-3) var(--sp-6);
+  background: var(--color-accent-gold);
+  color: var(--color-text-on-gold);
+  font-weight: var(--w-semibold);
+  font-size: var(--text-label-md);
+  border-radius: var(--radius-md);
+  transform: translateY(-150%);
+  transition: transform var(--dur-micro) var(--ease-emphasized);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ═══ REDUCED MOTION ═════════════════════════════════════════ */
+/* #43 §37: All cinematic effects are optional                 */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

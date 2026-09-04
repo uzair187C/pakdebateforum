@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050505" />
+  <title>Program — Pak Debate Forum</title>
+  <script>
+    (function(){
+      var t = localStorage.getItem('pdf_theme') || 'dark';
+      var l = localStorage.getItem('pdf_lang') || 'en';
+      document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="app-nav"></header>
+  <div id="app-drawer"></div>
+
+  <main id="main-content">
+    <section class="section" style="padding-top: calc(var(--nav-height) + var(--sp-10));">
+      <div class="container">
+        <div id="root"><div class="state-loading"><div class="spinner"></div></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="app-footer"></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    const id = new URLSearchParams(location.search).get('id');
+
+    let loadedProgram = null;
+
+    function levelBadge(level) {
+      const map = { beginner: 'badge--green', intermediate: 'badge--accent', advanced: 'badge--blue', all: 'badge--muted' };
+      const translatedLevel = window.I18N ? window.I18N.t(`level.${level}`) : level;
+      return `<span class="badge ${map[level] || 'badge--muted'}" data-i18n="level.${level}">${translatedLevel}</span>`;
+    }
+
+    function renderProgramDetails(p) {
+      loadedProgram = p;
+      const title = window.I18N ? window.I18N.db(p.slug, 'title', p.title) : p.title;
+      const desc = window.I18N ? window.I18N.db(p.slug, 'desc', p.description) : p.description;
+      document.title = `${title} — Pak Debate Forum`;
+
+      let curriculum = [];
+      try { curriculum = JSON.parse(p.curriculum || '[]'); } catch {}
+
+      const translatedCat = window.I18N ? window.I18N.t(`category.${p.category}`) : p.category.replace('_', ' ');
+      const translatedMode = window.I18N ? window.I18N.t(`mode.${p.delivery_mode}`) : p.delivery_mode.replace('_', ' ');
+      const translatedLevel = window.I18N ? window.I18N.t(`level.${p.level}`) : p.level;
+      const isZh = window.I18N && window.I18N.lang === 'zh';
+      const ageText = (p.age_min || p.age_max) ? `${p.age_min || ''}${p.age_max ? '–' + p.age_max + (isZh ? ' 岁' : ' years') : ''}` : '';
+      const priceVal = p.price ? 'PKR ' + p.price.toLocaleString() : (window.I18N ? window.I18N.t('program.contact_price') : 'Contact us for pricing');
+
+      document.getElementById('root').innerHTML = `
+        <a href="/programs.html" style="font-size: var(--text-body-sm); color: var(--color-text-muted); display: inline-flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-8); text-decoration: none;" data-i18n="program.back_all">← All Programs</a>
+
+        <div class="detail-layout">
+          <div>
+            <p class="eyebrow" data-i18n="category.${p.category}">${translatedCat}</p>
+            <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: var(--track-tight); margin-bottom: var(--sp-4); color: var(--color-text-primary);">${title}</h1>
+            <div style="display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-bottom: var(--sp-8);">
+              ${levelBadge(p.level)}
+              <span class="badge badge--muted" data-i18n="mode.${p.delivery_mode}">${translatedMode}</span>
+              ${p.duration ? `<span class="badge badge--muted">${p.duration}</span>` : ''}
+            </div>
+
+            <h2 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--w-semibold); margin-bottom: var(--sp-4); color: var(--color-text-primary);" data-i18n="program.about_title">About this Programme</h2>
+            <p style="color: var(--color-text-supporting); line-height: 1.8; margin-bottom: var(--sp-10);">${desc}</p>
+
+            ${curriculum.length ? `
+            <h2 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--w-semibold); margin-bottom: var(--sp-4); color: var(--color-text-primary);" data-i18n="program.curriculum_title">Curriculum</h2>
+            <ol class="curriculum-list" style="margin-bottom: var(--sp-10);">
+              ${curriculum.map(m => `<li>${m}</li>`).join('')}
+            </ol>` : ''}
+
+            ${p.coach_name ? `
+            <h2 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--w-semibold); margin-bottom: var(--sp-4); color: var(--color-text-primary);" data-i18n="program.coach_title">Your Coach</h2>
+            <div class="sidebar-card" style="margin-bottom: var(--sp-10);">
+              <div style="font-weight: var(--w-semibold); color: var(--color-text-primary); margin-bottom: var(--sp-1);">${p.coach_name}</div>
+              <div style="font-size: var(--text-body-sm); color: var(--color-accent-gold); margin-bottom: var(--sp-3);">${p.coach_title || ''}</div>
+              ${p.coach_bio ? `<p style="font-size: var(--text-body-sm); color: var(--color-text-supporting);">${p.coach_bio}</p>` : ''}
+            </div>` : ''}
+          </div>
+
+          <div>
+            <div class="sidebar-card">
+              <h3 style="font-family: var(--font-display); font-size: var(--text-heading-sm); font-weight: var(--w-semibold); margin-bottom: var(--sp-6); color: var(--color-text-primary);" data-i18n="program.details">Programme Details</h3>
+              <ul class="info-list">
+                ${ageText ? `<li><span class="info-label" data-i18n="program.age_range">Age Range</span><span class="info-val">${ageText}</span></li>` : ''}
+                ${p.duration ? `<li><span class="info-label" data-i18n="program.duration">Duration</span><span class="info-val">${p.duration}</span></li>` : ''}
+                ${p.schedule ? `<li><span class="info-label" data-i18n="program.schedule">Schedule</span><span class="info-val">${p.schedule}</span></li>` : ''}
+                <li><span class="info-label" data-i18n="program.delivery">Delivery</span><span class="info-val" data-i18n="mode.${p.delivery_mode}">${translatedMode}</span></li>
+                <li><span class="info-label" data-i18n="program.level">Level</span><span class="info-val" data-i18n="level.${p.level}">${translatedLevel}</span></li>
+                <li><span class="info-label" data-i18n="program.fee">Fee</span><span class="info-val" style="color: var(--color-accent-gold);">${priceVal}</span></li>
+              </ul>
+              <div style="margin-top: var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-3);">
+                <a href="/register.html?type=program&id=${p.id}&name=${encodeURIComponent(title)}" class="btn btn--primary" data-i18n="program.apply_btn">Apply for this Programme →</a>
+                <a href="/contact.html" class="btn btn--ghost" data-i18n="program.ask_btn">Ask a Question</a>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
+    }
+
+    async function init() {
+      if (!id) {
+        document.getElementById('root').innerHTML = '<div class="state-error">No program ID specified. <a href="/programs.html" data-i18n="btn.view_programs">Browse programs →</a></div>';
+        if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
+        return;
+      }
+      try {
+        const { program: p } = await API.programs.get(id);
+        renderProgramDetails(p);
+      } catch(e) {
+        document.getElementById('root').innerHTML = `<div class="state-error">${e.message}. <a href="/programs.html" data-i18n="btn.view_programs">Browse programs →</a></div>`;
+        if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
+      }
+    }
+
+    window.onLangChange = function() {
+      if (loadedProgram) {
+        renderProgramDetails(loadedProgram);
+      }
+    };
+
+    init();
+  </script>
+</body>
+</html>

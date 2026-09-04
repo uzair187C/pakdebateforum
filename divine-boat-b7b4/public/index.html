@@ -1,32 +1,528 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Hello, World!</title>
-	</head>
-	<body>
-		<h1 id="heading"></h1>
-		<p>This page comes from a static asset stored at `public/index.html` as configured in `wrangler.jsonc`.</p>
-		<button id="button" type="button">Fetch a random UUID</button>
-		<output id="random" for="button"></output>
-		<script>
-			fetch('/message')
-				.then((resp) => resp.text())
-				.then((text) => {
-					const h1 = document.getElementById('heading');
-					h1.textContent = text;
-				});
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pak Debate Forum (巴基斯坦辩论论坛) — 国际顶尖辩论学院与赛事平台。提供世界学校辩论赛(WSDC)及英国议会制(BP)辩论培训、国际辩论赛事、学术指南及裁判认证课程。" />
+  <meta name="keywords" content="debating, debate academy, pak debate forum, pak debate, world schools debate format, WSDC 2026, british parliamentary debate, online debate classes, public speaking course, adjudication workshop, debate coaching, debate competitions, 辩论赛, 世界学校辩论赛, BP辩论, 辩论培训学院, 演讲与辩论课程, 国际辩论教练, 辩论指南, 辩题集, 华语辩论" />
+  <meta name="author" content="Pak Debate Forum" />
+  <meta name="theme-color" content="#C9A24A" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-			const button = document.getElementById("button");
-			button.addEventListener("click", () => {
-				fetch('/random')
-					.then((resp) => resp.text())
-					.then((text) => {
-						const random = document.getElementById('random');
-						random.textContent = text;
-					});
-			});
-		</script>
-	</body>
+  <!-- Chinese Search Engine & Mobile Compatibility -->
+  <meta name="baidu-site-verification" content="codeva-pdf-academy" />
+  <meta name="360-site-verification" content="pdf-360-search-verification" />
+  <meta name="sogou_site_verification" content="pdf-sogou-verification" />
+  <meta name="renderer" content="webkit" />
+  <meta name="force-rendering" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <link rel="canonical" href="https://pakdebateforum.org/" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/pdf-logo.png" />
+  <link rel="icon" type="image/svg+xml" href="/assets/brand/pdf-logo.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/pdf-logo.png" />
+  <link rel="shortcut icon" href="/assets/brand/pdf-logo.png" />
+  <link rel="alternate" hreflang="en" href="https://pakdebateforum.org/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://pakdebateforum.org/?lang=zh" />
+  <link rel="alternate" hreflang="x-default" href="https://pakdebateforum.org/" />
+
+  <!-- Open Graph / Social Media / WeChat / Weibo -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Pak Debate Forum" />
+  <meta property="og:title" content="Pak Debate Forum — Premier International Debate Academy &amp; Tournaments" />
+  <meta property="og:description" content="Train your voice. Sharpen your mind. Compete with purpose. Premier debate academy offering WSDC &amp; BP training and global competitions." />
+  <meta property="og:url" content="https://pakdebateforum.org/" />
+  <meta property="og:image" content="https://pakdebateforum.org/assets/brand/pdf-logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="zh_CN" />
+
+  <!-- WeChat & Mobile App Sharing Metadata -->
+  <meta name="wechat:title" content="Pak Debate Forum 国际辩论学院" />
+  <meta name="wechat:description" content="WSDC与BP辩论课程培训、国际赛事报名及专业学术资源下载。" />
+  <meta name="wechat:image" content="https://pakdebateforum.org/assets/brand/pdf-logo.png" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@PakDebateForum" />
+  <meta name="twitter:creator" content="@PakDebateForum" />
+  <meta name="twitter:title" content="Pak Debate Forum — Premier International Debate Academy &amp; Competitions" />
+  <meta name="twitter:description" content="Train your voice. Sharpen your mind. Compete on the global debating stage with Pak Debate Forum." />
+  <meta name="twitter:image" content="https://pakdebateforum.org/assets/brand/pdf-logo.png" />
+
+  <title data-i18n="title.home">Pak Debate Forum — Premier International Debate Academy &amp; Tournaments</title>
+
+  <!-- Meta Pixel Script Placeholder for Meta Ads -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    if (window.location.hostname !== 'localhost') {
+      fbq('init', 'PDF_META_PIXEL_ID_PLACEHOLDER');
+      fbq('track', 'PageView');
+    }
+  </script>
+
+  <!-- JSON-LD Structured Data for Search Engines & AI Overviews (GEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalOrganization",
+        "@id": "https://pakdebateforum.org/#organization",
+        "name": "Pak Debate Forum",
+        "alternateName": ["PDF", "PDF Academy", "Pakistan Debate Forum"],
+        "url": "https://pakdebateforum.org/",
+        "logo": "https://pakdebateforum.org/assets/brand/pdf-logo.png",
+        "image": "https://pakdebateforum.org/assets/brand/pdf-logo.png",
+        "description": "Pak Debate Forum is an international debate organization and academy offering structured training, national opens, preparatory events, and adjudication certification.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Islamabad",
+          "addressCountry": "PK"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "pakdebateforum@gmail.com",
+          "contactType": "customer support",
+          "availableLanguage": ["English", "Chinese"]
+        },
+        "sameAs": [
+          "https://github.com/uzair187C/pakdebateforum"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://pakdebateforum.org/#website",
+        "url": "https://pakdebateforum.org/",
+        "name": "Pak Debate Forum",
+        "publisher": { "@id": "https://pakdebateforum.org/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://pakdebateforum.org/search.html?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://pakdebateforum.org/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Pak Debate Forum (PDF)? / 什么是巴基斯坦辩论论坛 (PDF)？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pak Debate Forum (巴基斯坦辩论论坛) 是一所国际顶尖辩论学院与赛事平台，提供WSDC与BP赛制培训、国际赛事报名、学术指南下载及裁判认证体系。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What debate formats does Pak Debate Forum teach? / PDF学院教授哪些辩论赛制？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "学院重点教授世界学校辩论赛 (WSDC) 和英国议会制 (BP) 赛制，涵盖立论构思、驳论技巧、高级政策分析及公共演讲。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can students outside Pakistan join Pak Debate Forum programs? / 中国和海外学员可以参加PDF的课程吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "是的，Pak Debate Forum 提供面向全球学员的线上与混合制课程，欢迎来自中国及世界各地的辩手、教练与裁判报名。"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- FOUC Prevention & Auto-Locale Script -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('pdf_theme') || 'dark';
+      var l = localStorage.getItem('pdf_lang');
+      if (!l) {
+        try {
+          var langs = navigator.languages || [navigator.language || ''];
+          var hasZh = langs.some(function(lang){ return String(lang || '').toLowerCase().startsWith('zh'); });
+          var tz = typeof Intl !== 'undefined' && Intl.DateTimeFormat ? Intl.DateTimeFormat().resolvedOptions().timeZone || '' : '';
+          var chinaTz = ['Asia/Shanghai', 'Asia/Chongqing', 'Asia/Urumqi', 'Asia/Harbin', 'Asia/Hong_Kong', 'Asia/Macau', 'Asia/Taipei'];
+          if (hasZh || chinaTz.indexOf(tz) !== -1) { l = 'zh'; }
+        } catch(e){}
+      }
+      l = l === 'zh' ? 'zh' : 'en';
+      document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
+    })();
+  </script>
+
+  <!-- Preconnect fonts (#03 §2: Cormorant Garamond + Manrope) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/page.css?v=4" />
+  <link rel="stylesheet" href="/css/animations.css" />
+</head>
+
+<body>
+
+  <!-- Skip to content (#33 §37) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ═══ GLOBAL HEADER ═══════════════════════════════════════ -->
+  <header id="app-nav"></header>
+  <div id="app-drawer"></div>
+
+  <!-- ═══ MAIN CONTENT ════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ─── HERO ──────────────────────────────────────────── -->
+    <section class="hero" id="hero">
+      <div class="hero__content hero-entrance">
+        <p class="hero__eyebrow" data-i18n="home.hero_eyebrow">Pak Debate Forum</p>
+
+        <h1 class="hero__title">
+          <span data-i18n="home.hero_title_1">Compete.</span> <span data-i18n="home.hero_title_2">Train.</span><br><span class="text-accent" data-i18n="home.hero_title_3">Connect.</span>
+        </h1>
+
+        <p class="hero__subtitle" data-i18n="home.hero_subtitle">
+          An international debate organization and academy — founded in Pakistan, open to the world. We run tournaments, train speakers, develop adjudicators, and build access to the global debating circuit.
+        </p>
+
+        <div class="hero__actions">
+          <a href="/academy.html" class="btn btn--primary btn--lg" data-i18n="btn.explore_academy">Explore Academy</a>
+          <a href="/events.html" class="btn btn--secondary btn--lg" data-i18n="btn.view_all_events">View Events</a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ─── WHY PDF EXISTS ───────────────────────────────────── -->
+    <section class="section" id="mission">
+      <div class="container">
+        <div class="split" data-reveal>
+          <div class="split__content">
+            <p class="eyebrow" data-i18n="home.why_eyebrow">Why PDF Exists</p>
+            <h2 class="section-title" data-i18n="home.why_title">Making the International Circuit Accessible</h2>
+            <p style="margin-top: var(--sp-5); color: var(--color-text-supporting); line-height: var(--lh-body);" data-i18n="home.why_p1">
+              Pak Debate Forum was founded to increase Pakistani representation at major international tournaments and make world-class debate training accessible regardless of geography or institutional backing.
+            </p>
+            <p style="margin-top: var(--sp-4); color: var(--color-text-supporting); line-height: var(--lh-body);" data-i18n="home.why_p2">
+              We organise tournaments that attract delegations from across the globe, run structured training programmes, develop adjudicators to international standards, and fund access where financial barriers exist.
+            </p>
+          </div>
+          <div class="split__media">
+            <div class="founding-quote">
+              <p class="founding-quote__text" data-i18n="home.quote_text_1">
+                "Debate is not about winning arguments. It is about sharpening minds, fostering truth, and giving voice to conviction."
+              </p>
+              <p class="founding-quote__author" data-i18n="home.quote_author_1">
+                Pak Debate Forum Founding Principle
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── VERIFIED SCALE ───────────────────────────────────── -->
+    <section class="section--sm stats-section home-stats-bg" aria-label="PDF verified scale">
+      <div class="container">
+        <p class="stats-eyebrow" data-reveal data-i18n="badge.scale">Verified Scale</p>
+        <div class="stats-row stats-row--editorial" data-reveal-stagger>
+          <div class="stat stat--editorial">
+            <p class="stat__number stat__number--display">37</p>
+            <p class="stat__label" data-i18n="home.stat_nations">Nations</p>
+            <p class="stat__context" data-i18n="home.stat_nations_sub">2026 Pre-WSDC</p>
+          </div>
+          <div class="stat__divider" aria-hidden="true"></div>
+          <div class="stat stat--editorial">
+            <p class="stat__number stat__number--display">60</p>
+            <p class="stat__label" data-i18n="home.stat_teams">Teams</p>
+            <p class="stat__context" data-i18n="home.stat_teams_sub">2026 Pre-WSDC</p>
+          </div>
+          <div class="stat__divider" aria-hidden="true"></div>
+          <div class="stat stat--editorial">
+            <p class="stat__number stat__number--display">$2,200</p>
+            <p class="stat__label" data-i18n="home.stat_waivers">Fee Waivers</p>
+            <p class="stat__context" data-i18n="home.stat_waivers_sub">Awarded at Pre-WSDC</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ─── FROM PAKISTAN TO THE WORLD ──────────────────────── -->
+    <section class="section section--alt" id="case-study">
+      <div class="container">
+        <div class="split" data-reveal>
+          <div class="split__content">
+            <p class="eyebrow" data-i18n="home.sofia_eyebrow">From Pakistan to the World</p>
+            <h2 class="section-title" data-i18n="home.sofia_title">WUDC Sofia — Scholarship Support</h2>
+            <p style="margin-top: var(--sp-5); color: var(--color-text-supporting); line-height: var(--lh-body);" data-i18n="home.sofia_p1">
+              PDF committed partial sponsorship of 20–40% of cost toward the LUMS team's trip to the World Universities Debating Championship in Sofia. Ahmad Bin Tahir and Daud Ali Kharal of LUMS received the scholarship.
+            </p>
+            <p style="margin-top: var(--sp-4); color: var(--color-text-supporting); line-height: var(--lh-body);" data-i18n="home.sofia_p2">
+              PDF raised $1,200 through the Pak Debate Forum Open to support the journey — demonstrating what a community-driven organisation can achieve when access is the mission.
+            </p>
+            <div style="margin-top: var(--sp-6);">
+              <a href="/results.html" class="btn btn--ghost" data-i18n="home.results_btn">View All Results →</a>
+            </div>
+          </div>
+          <div class="split__media">
+            <div class="sidebar-card" style="text-align: center;">
+              <div style="font-family: var(--font-display); font-size: var(--text-display-sm); font-weight: var(--w-bold); color: var(--color-accent-gold);">$1,200</div>
+              <div style="font-size: var(--text-body-sm); color: var(--color-text-muted); margin-top: var(--sp-1);" data-i18n="home.sofia_stat_1_lbl">Raised through PDF Open</div>
+              <div style="margin-top: var(--sp-6); font-family: var(--font-display); font-size: var(--text-display-sm); font-weight: var(--w-bold); color: var(--color-accent-gold);">$700</div>
+              <div style="font-size: var(--text-body-sm); color: var(--color-text-muted); margin-top: var(--sp-1);" data-i18n="home.sofia_stat_2_lbl">FLTRP Community Scholarship</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── WHAT PDF BUILDS (Pathways) ───────────────────── -->
+    <section class="section" id="pathways">
+      <div class="container">
+        <div class="section-header section-header--center" data-reveal>
+          <p class="eyebrow" style="justify-content: center;" data-i18n="home.builds_eyebrow">What PDF Builds</p>
+          <h2 class="section-title" data-i18n="home.builds_title">Four Ways to Engage</h2>
+        </div>
+
+        <div class="feature-grid feature-grid--4" data-reveal-stagger>
+          <a href="/events.html" class="feature-card feature-card--link">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+            </div>
+            <h3 class="feature-card__title" data-i18n="home.compete_title">Compete</h3>
+            <p class="feature-card__text" data-i18n="home.compete_desc">Tournaments across formats — BP, AP, World Schools — at national and international level.</p>
+          </a>
+          <a href="/academy.html" class="feature-card feature-card--link">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+            </div>
+            <h3 class="feature-card__title" data-i18n="home.train_title">Train</h3>
+            <p class="feature-card__text" data-i18n="home.train_desc">Structured Academy programmes and community workshops from beginner to competitive level.</p>
+          </a>
+          <a href="/resources.html" class="feature-card feature-card--link">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/></svg>
+            </div>
+            <h3 class="feature-card__title" data-i18n="home.learn_title">Learn</h3>
+            <p class="feature-card__text" data-i18n="home.learn_desc">Guides, motion packs, adjudication resources, and training materials — open to all.</p>
+          </a>
+          <a href="/contact.html" class="feature-card feature-card--link">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="feature-card__title" data-i18n="home.connect_title">Connect</h3>
+            <p class="feature-card__text" data-i18n="home.connect_desc">Institutional partnerships, international collaborations, and a growing community of debaters.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── ACADEMY PREVIEW ─────────────────────────────────── -->
+    <section class="section section--alt" id="academy-preview">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <p class="eyebrow" data-i18n="home.acad_prev_eyebrow">PDF Academy</p>
+          <h2 class="section-title" data-i18n="home.acad_prev_title">Training That Builds Competitiveness</h2>
+          <p class="section-subtitle" data-i18n="home.acad_prev_sub">
+            From the September 2024 Academy cohort to 2026 Community Workshops at UoL, UCP, and CMH Lahore — PDF's training programmes develop speakers, debaters, and adjudicators at every level.
+          </p>
+        </div>
+
+        <div class="card-grid card-grid--3" id="homepage-programs" data-reveal-stagger>
+          <!-- Static fallback — replaced by API data when available -->
+          <div class="card card--interactive">
+            <div class="card__body">
+              <p class="card__eyebrow">Beginner</p>
+              <h3 class="card__title">Introduction to Debate</h3>
+              <p class="card__description">Build your foundation. Learn argument structure, refutation techniques, and confident delivery from the ground up.</p>
+            </div>
+            <div class="card__footer">
+              <a href="/programs.html" class="btn btn--ghost btn--sm" data-i18n="btn.view_program">View Program →</a>
+            </div>
+          </div>
+
+          <div class="card card--interactive">
+            <div class="card__body">
+              <p class="card__eyebrow" data-i18n="register.exp_intermediate">Intermediate</p>
+              <h3 class="card__title">Competitive Debate Training</h3>
+              <p class="card__description">Tournament-focused training across BP, AP, and World Schools formats under experienced coaching.</p>
+            </div>
+            <div class="card__footer">
+              <a href="/programs.html" class="btn btn--ghost btn--sm" data-i18n="btn.view_program">View Program →</a>
+            </div>
+          </div>
+
+          <div class="card card--interactive">
+            <div class="card__body">
+              <p class="card__eyebrow" data-i18n="register.exp_advanced">Advanced</p>
+              <h3 class="card__title">Adjudication Development</h3>
+              <p class="card__description">Develop judging skills to international standards. PDF's adjudicator pathway has produced judges who broke at WSDC and Oxford.</p>
+            </div>
+            <div class="card__footer">
+              <a href="/programs.html" class="btn btn--ghost btn--sm" data-i18n="btn.view_program">View Program →</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: var(--sp-10);" data-reveal>
+          <a href="/academy.html" class="btn btn--secondary" data-i18n="btn.explore_academy">Explore the Academy</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── UPCOMING EVENTS ───────────────────────────────── -->
+    <section class="section section--alt" id="events-preview">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <p class="eyebrow" data-i18n="nav.events">Events</p>
+          <h2 class="section-title" data-i18n="home.upcoming_events">Upcoming Events</h2>
+          <p class="section-subtitle" data-i18n="home.upcoming_sub">
+            Tournaments, workshops, and seminars designed to challenge and inspire.
+          </p>
+        </div>
+
+        <div class="card-grid" id="homepage-events" data-reveal-stagger>
+          <!-- Populated dynamically from API -->
+          <div class="state-message" id="events-loading">
+            <div class="skeleton" style="height: 200px; width: 100%;"></div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: var(--sp-10);" data-reveal>
+          <a href="/events.html" class="btn btn--secondary" data-i18n="btn.view_all_events">View All Events</a>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ─── INSTITUTIONAL NETWORK ─────────────────────────── -->
+    <section class="section section--alt" id="network">
+      <div class="container">
+        <div class="section-header section-header--center" data-reveal>
+          <p class="eyebrow" style="justify-content: center;" data-i18n="home.network_eyebrow">Institutional Network</p>
+          <h2 class="section-title" data-i18n="home.network_title">Who We Work With</h2>
+        </div>
+        <div class="network-grid" data-reveal-stagger>
+          <div class="network-item" data-reveal>
+            <span class="network-item__name">Blackstone School of Law & Business</span>
+            <span class="network-item__role" data-i18n="network.collaboration">Collaboration</span>
+          </div>
+          <div class="network-item" data-reveal>
+            <span class="network-item__name">FLTRP</span>
+            <span class="network-item__role" data-i18n="network.partner">Scholarship Partner</span>
+          </div>
+          <div class="network-item" data-reveal>
+            <span class="network-item__name">UMT Debating Club</span>
+            <span class="network-item__role" data-i18n="network.host">Workshop Host</span>
+          </div>
+          <div class="network-item" data-reveal>
+            <span class="network-item__name">University of Lahore Debating Society</span>
+            <span class="network-item__role" data-i18n="network.host">Workshop Host</span>
+          </div>
+          <div class="network-item" data-reveal>
+            <span class="network-item__name">University of Central Punjab</span>
+            <span class="network-item__role" data-i18n="network.host">Workshop Host</span>
+          </div>
+          <div class="network-item" data-reveal>
+            <span class="network-item__name">CMH Lahore Medical College</span>
+            <span class="network-item__role" data-i18n="network.host">Workshop Host</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── FINAL CTA ─────────────────────────────────────── -->
+    <section class="cta-block academy-cta-bg" id="join">
+      <div class="container" data-reveal>
+        <h2 class="cta-block__title" data-i18n="home.join_title">Join the Circuit</h2>
+        <p class="cta-block__text" data-i18n="home.join_text">
+          Whether you're a first-time speaker, a competitive veteran, or an institution looking to collaborate — there is a place for you at Pak Debate Forum.
+        </p>
+        <div class="cta-block__actions">
+          <a href="/academy.html" class="btn btn--primary btn--lg" data-i18n="btn.explore_academy">Explore Academy</a>
+          <a href="/contact.html" class="btn btn--secondary btn--lg" data-i18n="btn.get_in_touch">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ GLOBAL FOOTER ═══════════════════════════════════════ -->
+  <footer id="app-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="/js/i18n.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    // Fetch upcoming events for homepage preview
+    (async function() {
+      try {
+        const res = await fetch('/api/events?status=upcoming');
+        const data = await res.json();
+        const container = document.getElementById('homepage-events');
+        if (!container) return;
+
+        if (!data.events || data.events.length === 0) {
+          container.innerHTML = `
+            <div class="state-message" style="grid-column: 1 / -1;">
+              <p class="state-message__title" data-i18n="search.empty_title">No upcoming events</p>
+              <p class="state-message__text">Check back soon for new tournaments, workshops, and seminars.</p>
+            </div>`;
+          if (window.I18N) window.I18N.translateDOM(container);
+          return;
+        }
+
+        container.innerHTML = data.events.slice(0, 4).map(e => `
+          <div class="card card--interactive">
+            <div class="card__body">
+              <p class="card__eyebrow">${e.type || 'Event'}</p>
+              <h3 class="card__title">${e.title}</h3>
+              <p class="card__description">${e.description || ''}</p>
+              <div class="card__meta">
+                ${e.date_start ? `<span>${new Date(e.date_start).toLocaleDateString('en-PK', { day: 'numeric', month: 'short', year: 'numeric' })}</span>` : ''}
+                ${e.venue ? `<span>${e.venue}</span>` : ''}
+                ${e.city ? `<span>${e.city}</span>` : ''}
+              </div>
+            </div>
+            <div class="card__footer">
+              <span class="badge badge--${e.status === 'open' ? 'green' : 'gold'}">${e.status}</span>
+              <a href="/event.html?id=${e.id}" class="btn btn--ghost btn--sm" data-i18n="btn.view_details">View Details →</a>
+            </div>
+          </div>`).join('');
+        if (window.I18N) window.I18N.translateDOM(container);
+      } catch (err) {
+        console.warn('Events fetch:', err);
+      }
+    })();
+  </script>
+
+</body>
 </html>

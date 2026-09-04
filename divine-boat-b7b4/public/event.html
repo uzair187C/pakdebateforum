@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050505" />
+  <title>Event — Pak Debate Forum</title>
+  <script>
+    (function(){
+      var t = localStorage.getItem('pdf_theme') || 'dark';
+      var l = localStorage.getItem('pdf_lang') || 'en';
+      document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/page.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="app-nav"></header>
+  <div id="app-drawer"></div>
+
+  <main id="main-content">
+    <section class="section" style="padding-top: calc(var(--nav-height) + var(--sp-10));">
+      <div class="container">
+        <div id="root"><div class="state-loading"><div class="spinner"></div></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="app-footer"></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    const id = new URLSearchParams(location.search).get('id');
+    const STATUS_BADGE = { upcoming: 'badge--accent', open: 'badge--green', closed: 'badge--red', completed: 'badge--blue' };
+
+    let loadedEvent = null;
+
+    function renderEventDetails(ev) {
+      loadedEvent = ev;
+      const title = window.I18N ? window.I18N.db(ev.slug, 'title', ev.title) : ev.title;
+      const desc = window.I18N ? window.I18N.db(ev.slug, 'desc', ev.description) : ev.description;
+      document.title = `${title} — Pak Debate Forum`;
+      const canRegister = ev.status === 'open';
+      const typeTranslated = window.I18N ? window.I18N.t(`type.${ev.type}`) : ev.type;
+      const statusTranslated = window.I18N ? window.I18N.t(`status.${ev.status}`) : ev.status;
+      const freeText = window.I18N ? window.I18N.t('event.free') : 'Free';
+      const feeVal = ev.fee === 0 ? freeText : 'PKR ' + (ev.fee || 0).toLocaleString();
+      const isZh = window.I18N && window.I18N.lang === 'zh';
+      const capacityText = ev.max_participants ? `${ev.max_participants} ${isZh ? '人' : 'participants'}${ev.registration_count ? ` (${isZh ? '已报名' : 'registered'}: ${ev.registration_count})` : ''}` : '';
+      const notOpenText = window.I18N ? window.I18N.t('event.not_open') : 'Not Open Yet';
+      const closedText = window.I18N ? window.I18N.t('event.closed') : 'Closed';
+      const buttonDisabledLabel = `Registration ${ev.status === 'upcoming' ? notOpenText : closedText}`;
+
+      document.getElementById('root').innerHTML = `
+        <a href="/events.html" style="font-size: var(--text-body-sm); color: var(--color-text-muted); display: inline-flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-8); text-decoration: none;" data-i18n="event.back_all">← All Events</a>
+
+        <div class="detail-layout">
+          <div>
+            <div style="display: flex; gap: var(--sp-2); align-items: center; margin-bottom: var(--sp-5); flex-wrap: wrap;">
+              <span class="badge badge--accent" data-i18n="type.${ev.type}">${typeTranslated}</span>
+              <span class="badge ${STATUS_BADGE[ev.status] || 'badge--muted'}" data-i18n="status.${ev.status}">${statusTranslated}</span>
+              ${ev.fee === 0 ? `<span class="badge badge--green" data-i18n="event.free">${freeText}</span>` : ''}
+            </div>
+            <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: var(--track-tight); margin-bottom: var(--sp-8); color: var(--color-text-primary);">${title}</h1>
+            <p style="color: var(--color-text-supporting); line-height: 1.8; margin-bottom: var(--sp-8);">${desc || '<span data-i18n="event.no_desc">No description available.</span>'}</p>
+
+            ${ev.program_title ? `
+            <div class="sidebar-card" style="margin-bottom: var(--sp-6);">
+              <p style="font-size: var(--text-meta); color: var(--color-text-tertiary); letter-spacing: var(--track-wide); text-transform: uppercase; margin-bottom: var(--sp-2);" data-i18n="event.related_program">Related Programme</p>
+              <p style="color: var(--color-text-primary);">${ev.program_title}</p>
+            </div>` : ''}
+
+            ${!canRegister && ev.status !== 'upcoming' ? `
+            <div class="alert alert--info">
+              <span data-i18n="event.reg_status_msg">Registration for this event is currently</span> <strong data-i18n="status.${ev.status}">${statusTranslated}</strong>.
+            </div>` : ''}
+          </div>
+
+          <div>
+            <div class="sidebar-card">
+              <h3 style="font-family: var(--font-display); font-size: var(--text-heading-sm); font-weight: var(--w-semibold); margin-bottom: var(--sp-6); color: var(--color-text-primary);" data-i18n="event.details">Event Details</h3>
+              <ul class="info-list">
+                <li><span class="info-label" data-i18n="event.date">Date</span><span class="info-val">${ev.date_start}${ev.date_end && ev.date_end !== ev.date_start ? ' — ' + ev.date_end : ''}</span></li>
+                ${ev.venue ? `<li><span class="info-label" data-i18n="event.venue">Venue</span><span class="info-val">${ev.venue}</span></li>` : ''}
+                ${ev.city ? `<li><span class="info-label" data-i18n="event.city">City</span><span class="info-val">${ev.city}</span></li>` : ''}
+                ${ev.registration_deadline ? `<li><span class="info-label" data-i18n="event.deadline">Deadline</span><span class="info-val" style="color: var(--color-error);">${ev.registration_deadline}</span></li>` : ''}
+                ${ev.max_participants ? `<li><span class="info-label" data-i18n="event.capacity">Capacity</span><span class="info-val">${capacityText}</span></li>` : ''}
+                <li><span class="info-label" data-i18n="event.fee">Entry Fee</span><span class="info-val" style="color: var(--color-accent-gold);">${feeVal}</span></li>
+                <li><span class="info-label" data-i18n="event.status">Status</span><span class="info-val" data-i18n="status.${ev.status}">${statusTranslated}</span></li>
+              </ul>
+
+              <div style="margin-top: var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-3);">
+                ${canRegister
+                  ? `<a href="/register.html?type=event&id=${ev.id}&name=${encodeURIComponent(title)}" class="btn btn--primary" data-i18n="btn.register_now">Register Now →</a>`
+                  : `<button class="btn btn--ghost" disabled style="opacity: .5; cursor: not-allowed;">${buttonDisabledLabel}</button>`}
+                <a href="/contact.html" class="btn btn--ghost" data-i18n="btn.contact_us">Contact Us</a>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
+    }
+
+    async function init() {
+      if (!id) {
+        document.getElementById('root').innerHTML = '<div class="state-error">No event ID. <a href="/events.html" data-i18n="btn.view_all_events">Browse events →</a></div>';
+        if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
+        return;
+      }
+      try {
+        const { event: ev } = await API.events.get(id);
+        renderEventDetails(ev);
+      } catch(e) {
+        document.getElementById('root').innerHTML = `<div class="state-error">${e.message}. <a href="/events.html" data-i18n="btn.view_all_events">Browse events →</a></div>`;
+        if (window.I18N) window.I18N.translateDOM(document.getElementById('root'));
+      }
+    }
+
+    window.onLangChange = function() {
+      if (loadedEvent) {
+        renderEventDetails(loadedEvent);
+      }
+    };
+
+    init();
+  </script>
+</body>
+</html>

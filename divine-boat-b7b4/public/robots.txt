@@ -1,0 +1,52 @@
+# Pak Debate Forum — Robots.txt
+# Optimized for Global Search Engines (Google, Bing, DuckDuckGo), Chinese Search Engines (Baidu, Sogou, 360, Shenma), and AI Search Engines (ChatGPT, Perplexity, Claude, Gemini, Qwen)
+
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /api/admin/
+
+# Chinese Search Engine Crawlers
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Baiduspider-render
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: Sogou inst spider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: YisouSpider
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# AI & LLM Search Crawlers (GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap Locations
+Sitemap: https://pakdebateforum.org/sitemap.xml
+Sitemap: https://pakdebateforum.org/sitemap-zh.xml

@@ -1,0 +1,275 @@
+/**
+ * PAK DEBATE FORUM — Design Tokens
+ * Source of truth: #02 COLOR-SYSTEM, #03 TYPOGRAPHY, #35 DESIGN-TOKENS
+ * ────────────────────────────────────────────────────────────────
+ * ALL visual decisions live here.
+ * Never hardcode colors, spacing, or type scales elsewhere.
+ */
+
+:root {
+
+  /* ═══ MASTER PALETTE ═══════════════════════════════════════ */
+  /* Raw palette values — consumed via semantic tokens below    */
+
+  /* Black foundation */
+  --pbf-black-950: #030404;
+  --pbf-black-900: #050505;
+  --pbf-black-850: #090A09;
+  --pbf-black-800: #0D0E0D;
+  --pbf-black-750: #121313;
+  --pbf-black-700: #181A18;
+
+  /* Warm whites */
+  --pbf-white-100: #F7F5EF;
+  --pbf-white-200: #EEECE5;
+  --pbf-white-300: #D8D6CF;
+
+  /* Neutral grays */
+  --pbf-gray-400: #A8A7A1;
+  --pbf-gray-500: #7E7D78;
+
+  /* Gold family */
+  --pbf-gold-100: #F1D48A;
+  --pbf-gold-200: #E4BF62;
+  --pbf-gold-300: #C9A24A;
+  --pbf-gold-400: #A97F2E;
+  --pbf-gold-500: #76561E;
+
+  /* Green family */
+  --pbf-green-100: #4BAA85;
+  --pbf-green-200: #13815F;
+  --pbf-green-300: #087A58;
+  --pbf-green-400: #064C39;
+  --pbf-green-500: #032F25;
+
+  /* ═══ SEMANTIC: BACKGROUNDS ════════════════════════════════ */
+
+  --color-bg-page:             var(--pbf-black-900);
+  --color-bg-deep:             var(--pbf-black-950);
+  --color-bg-section:          var(--pbf-black-850);
+  --color-bg-surface:          var(--pbf-black-800);
+  --color-bg-surface-elevated: var(--pbf-black-750);
+  --color-bg-surface-hover:    var(--pbf-black-700);
+
+  /* ═══ SEMANTIC: TEXT ════════════════════════════════════════ */
+
+  --color-text-primary:    var(--pbf-white-100);
+  --color-text-secondary:  var(--pbf-white-200);
+  --color-text-supporting: var(--pbf-white-300);
+  --color-text-muted:      var(--pbf-gray-400);
+  --color-text-tertiary:   var(--pbf-gray-500);
+  --color-text-on-gold:    var(--pbf-black-950);
+  --color-text-on-green:   var(--pbf-white-100);
+
+  /* ═══ SEMANTIC: ACCENTS ════════════════════════════════════ */
+
+  --color-accent-gold:           var(--pbf-gold-300);
+  --color-accent-gold-bright:    var(--pbf-gold-200);
+  --color-accent-gold-highlight: var(--pbf-gold-100);
+  --color-accent-gold-deep:      var(--pbf-gold-400);
+  --color-accent-gold-darkest:   var(--pbf-gold-500);
+
+  --color-accent-green:        var(--pbf-green-300);
+  --color-accent-green-active: var(--pbf-green-200);
+  --color-accent-green-deep:   var(--pbf-green-400);
+
+  /* ═══ SEMANTIC: BORDERS ════════════════════════════════════ */
+
+  --color-border-subtle: rgba(247, 245, 239, 0.10);
+  --color-border-strong: rgba(247, 245, 239, 0.18);
+  --color-border-gold:   rgba(201, 162, 74, 0.55);
+  --color-border-green:  rgba(8, 122, 88, 0.55);
+
+  /* ═══ SEMANTIC: STATUS ═════════════════════════════════════ */
+
+  --color-success:  #2E9E6A;
+  --color-warning:  #D4A843;
+  --color-error:    #C94A4A;
+  --color-info:     #5B8DB8;
+
+  /* ═══ SEMANTIC: OVERLAY / GLOW ═════════════════════════════ */
+
+  --color-overlay:    rgba(3, 4, 4, 0.72);
+  --color-overlay-heavy: rgba(3, 4, 4, 0.88);
+  --color-glow-gold:  rgba(201, 162, 74, 0.18);
+  --color-glow-green: rgba(8, 122, 88, 0.14);
+
+  /* ═══ TYPOGRAPHY: FAMILIES ═════════════════════════════════ */
+  /* #03 §2.1: Cormorant Garamond (display) + Manrope (UI)    */
+
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body:    "Manrope", Arial, Helvetica, sans-serif;
+
+  /* ═══ TYPOGRAPHY: SCALE ════════════════════════════════════ */
+  /* #03 §5: Canonical desktop scale                           */
+
+  --text-display-xl: clamp(3.25rem, 6vw, 5.5rem);    /* 52–88px */
+  --text-display-lg: clamp(3rem, 5vw, 4.5rem);       /* 48–72px */
+  --text-display-md: clamp(2.5rem, 4vw, 3.5rem);     /* 40–56px */
+  --text-display-sm: clamp(2.125rem, 3.2vw, 2.75rem);/* 34–44px */
+  --text-heading-lg: clamp(1.875rem, 2.6vw, 2.25rem);/* 30–36px */
+  --text-heading-md: clamp(1.625rem, 2.2vw, 1.875rem);/* 26–30px */
+  --text-heading-sm: clamp(1.375rem, 1.8vw, 1.5rem); /* 22–24px */
+  --text-body-lg:    1.25rem;   /* 20px */
+  --text-body-md:    1.0625rem; /* 17px */
+  --text-body-sm:    0.9375rem; /* 15px */
+  --text-label-lg:   0.875rem;  /* 14px */
+  --text-label-md:   0.8125rem; /* 13px */
+  --text-meta:       0.75rem;   /* 12px */
+  --text-micro:      0.6875rem; /* 11px */
+
+  /* ═══ TYPOGRAPHY: WEIGHTS ══════════════════════════════════ */
+
+  --w-regular:  400;
+  --w-medium:   500;
+  --w-semibold: 600;
+  --w-bold:     700;
+  --w-extrabold: 800;
+
+  /* ═══ TYPOGRAPHY: LINE HEIGHTS ═════════════════════════════ */
+
+  --lh-display:  0.96;
+  --lh-heading:  1.12;
+  --lh-body:     1.65;
+  --lh-label:    1.20;
+  --lh-meta:     1.30;
+
+  /* ═══ TYPOGRAPHY: TRACKING ═════════════════════════════════ */
+
+  --track-tight:   -0.02em;
+  --track-normal:   0em;
+  --track-wide:     0.04em;
+  --track-wider:    0.12em;
+  --track-widest:   0.16em;
+
+  /* ═══ SPACING SCALE ════════════════════════════════════════ */
+  /* #35 §47: Global spacing, 4px base                         */
+
+  --sp-1:  0.25rem;   /* 4px  */
+  --sp-2:  0.5rem;    /* 8px  */
+  --sp-3:  0.75rem;   /* 12px */
+  --sp-4:  1rem;      /* 16px */
+  --sp-5:  1.25rem;   /* 20px */
+  --sp-6:  1.5rem;    /* 24px */
+  --sp-8:  2rem;      /* 32px */
+  --sp-10: 2.5rem;    /* 40px */
+  --sp-12: 3rem;      /* 48px */
+  --sp-16: 4rem;      /* 64px */
+  --sp-20: 5rem;      /* 80px */
+  --sp-24: 6rem;      /* 96px */
+  --sp-32: 8rem;      /* 128px */
+  --sp-40: 10rem;     /* 160px */
+
+  /* Section rhythm */
+  --section-y:    clamp(3.5rem, 7vw, 5.5rem);
+  --section-y-sm: clamp(2rem, 4vw, 3rem);
+
+  /* ═══ LAYOUT ═══════════════════════════════════════════════ */
+
+  --container-max:    1280px;
+  --container-wide:   1440px;
+  --container-narrow: 720px;
+  --container-pad:    clamp(1.25rem, 5vw, 3rem);
+  --nav-height:       72px;
+
+  /* ═══ BORDER RADIUS ════════════════════════════════════════ */
+  /* #35 §61: Architectural, not bubbly                        */
+
+  --radius-none: 0;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   10px;
+  --radius-xl:   16px;
+  --radius-pill: 9999px;
+
+  /* ═══ SHADOWS ══════════════════════════════════════════════ */
+  /* #35 §64: Cinematic light, not generic UI elevation        */
+
+  --shadow-soft:      0 2px 8px rgba(0, 0, 0, 0.45);
+  --shadow-medium:    0 4px 20px rgba(0, 0, 0, 0.55);
+  --shadow-deep:      0 8px 40px rgba(0, 0, 0, 0.65);
+  --shadow-cinematic: 0 16px 64px rgba(0, 0, 0, 0.78);
+  --shadow-gold-glow: 0 0 24px rgba(201, 162, 74, 0.18),
+                      0 0 80px rgba(201, 162, 74, 0.08);
+
+  /* ═══ MOTION ═══════════════════════════════════════════════ */
+  /* #35 §130–134: Controlled, cinematic                       */
+
+  --ease-standard:  cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-entrance:  cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit:      cubic-bezier(0.4, 0, 1, 1);
+
+  --dur-instant: 100ms;
+  --dur-micro:   160ms;
+  --dur-short:   250ms;
+  --dur-medium:  400ms;
+  --dur-long:    600ms;
+  --dur-cinematic: 1000ms;
+
+  /* ═══ Z-INDEX / LAYERS ═════════════════════════════════════ */
+
+  --z-base:     1;
+  --z-sticky:   100;
+  --z-dropdown: 200;
+  --z-overlay:  300;
+  --z-modal:    400;
+  --z-system:   500;
+
+  /* ═══ BREAKPOINTS (reference — use in @media) ══════════════ */
+  /* sm: 480px  md: 768px  lg: 1024px  xl: 1280px  2xl: 1440px */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT EXPERIENCE THEME TOKENS ([data-theme="light"])
+   Warm Ivory, Dark Charcoal, Restrained Gold, Clean Academic Surfaces
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="light"] {
+  /* Backgrounds */
+  --color-bg-page:             #FAF8F5;
+  --color-bg-deep:             #F3EFEA;
+  --color-bg-section:          #EFECE6;
+  --color-bg-surface:          #FFFFFF;
+  --color-bg-surface-elevated: #FFFFFF;
+  --color-bg-surface-hover:    #F6F4EE;
+
+  /* Text */
+  --color-text-primary:    #1C1C1A;
+  --color-text-secondary:  #2D2D2A;
+  --color-text-supporting: #4A4A46;
+  --color-text-muted:      #73726C;
+  --color-text-tertiary:   #8E8D86;
+  --color-text-on-gold:    #FFFFFF;
+  --color-text-on-green:   #FFFFFF;
+
+  /* Accents — Restrained accessible gold for light mode (WCAG AA compliant) */
+  --color-accent-gold:           #8C6A21;
+  --color-accent-gold-bright:    #76561E;
+  --color-accent-gold-highlight: #5A4012;
+  --color-accent-gold-deep:      #8C6A21;
+  --color-accent-gold-darkest:   #45320D;
+
+  --color-accent-green:        #087A58;
+  --color-accent-green-active: #065F44;
+  --color-accent-green-deep:   #044431;
+
+  /* Borders */
+  --color-border-subtle: rgba(28, 28, 26, 0.10);
+  --color-border-strong: rgba(28, 28, 26, 0.18);
+  --color-border-gold:   rgba(140, 106, 33, 0.45);
+  --color-border-green:  rgba(8, 122, 88, 0.45);
+
+  /* Overlays & Shadows */
+  --color-overlay:       rgba(250, 248, 245, 0.85);
+  --color-overlay-heavy: rgba(250, 248, 245, 0.95);
+  --color-glow-gold:     rgba(140, 106, 33, 0.10);
+  --color-glow-green:    rgba(8, 122, 88, 0.10);
+
+  --shadow-soft:      0 2px 8px rgba(28, 28, 26, 0.05);
+  --shadow-medium:    0 4px 16px rgba(28, 28, 26, 0.08);
+  --shadow-deep:      0 8px 32px rgba(28, 28, 26, 0.10);
+  --shadow-cinematic: 0 12px 48px rgba(28, 28, 26, 0.12);
+  --shadow-gold-glow: 0 0 16px rgba(140, 106, 33, 0.12);
+}
+

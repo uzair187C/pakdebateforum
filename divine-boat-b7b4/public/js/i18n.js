@@ -449,7 +449,21 @@ const I18N = {
     'feedback.success_title': 'Thank You!',
     'feedback.success_msg': 'Your feedback has been received. We appreciate you taking the time.',
     'btn.submit_feedback': 'Submit Feedback →',
-    'nav.back': '← Back'
+    'nav.back': '← Back',
+
+    /* ── Page Titles (EN) ───────────────────── */
+    'title.home': 'Pak Debate Forum — Premier International Debate Academy & Tournaments',
+    'title.academy': 'PDF Academy — World-Class Debate Training & Adjudicator Certification',
+    'title.programs': 'Debate Training Programs — Pak Debate Forum',
+    'title.events': 'Debate Events & Tournaments — Pak Debate Forum',
+    'title.resources': 'Debate Resources & Handbooks — Pak Debate Forum',
+    'title.coaches': 'Faculty & Adjudication Team — Pak Debate Forum',
+    'title.about': 'About Pak Debate Forum — Empowering Voices Globally',
+    'title.contact': 'Contact Us — Pak Debate Forum',
+    'title.results': 'Results & Competitive Record — Pak Debate Forum',
+    'title.search': 'Search Site — Pak Debate Forum',
+    'title.register': 'Online Registration — Pak Debate Forum',
+    'title.feedback': 'Feedback — Pak Debate Forum'
   },
 
   /* ══════════════════════════════════════════════════════════
@@ -894,7 +908,21 @@ const I18N = {
     'feedback.success_title': '反馈已收到！',
     'feedback.success_msg': '感谢您抽空向我们提出宝贵建议。',
     'btn.submit_feedback': '提交反馈 →',
-    'nav.back': '← 返回'
+    'nav.back': '← 返回',
+
+    /* ── Page Titles (ZH) ───────────────────── */
+    'title.home': 'Pak Debate Forum (巴基斯坦辩论论坛) — 国际顶尖辩论学院与赛事平台',
+    'title.academy': 'PDF 辩论学院 — 国际辩论培训与裁判认证 (Debate Academy)',
+    'title.programs': 'PDF 辩论培训课程 — 基础班至国际精进班 (Training Programs)',
+    'title.events': 'PDF 辩论赛事日程 — 国际辩论锦标赛与公开赛 (Debate Events)',
+    'title.resources': 'PDF 辩论学术资源库 — WSDC与BP赛制指南、辩题集与裁判教程',
+    'title.coaches': 'PDF 辩论导师与裁判团队 — WSDC与牛津决赛评委 (Coaches & Faculty)',
+    'title.about': '关于 PDF 巴基斯坦辩论论坛 — 品牌故事与国际代表战绩',
+    'title.contact': '联系 PDF 巴基斯坦辩论论坛 — 课程咨询与赛事合作',
+    'title.results': 'PDF 辩论战报与国际代表记录 — WSDC、牛津与WUDC赛事成绩',
+    'title.search': 'PDF 全站智能搜索 — 课程与学术资源检索 (Search Intelligence)',
+    'title.register': 'PDF 在线报名系统 — 辩论课程与赛事 (Online Registration)',
+    'title.feedback': 'PDF 意见与反馈中心 — 反馈表单 (Feedback & Suggestions)'
   },
 
   /* ══════════════════════════════════════════════════════════
@@ -930,10 +958,23 @@ const I18N = {
 
   translateDOM(container = document) {
     const scope = container || document;
+
+    /* Translate document title */
+    const titleEl = document.querySelector('title[data-i18n]');
+    if (titleEl) {
+      const key = titleEl.getAttribute('data-i18n');
+      if (key) {
+        const val = this.t(key);
+        if (val && val !== key) {
+          document.title = val;
+        }
+      }
+    }
+
     /* Translate elements with data-i18n */
     scope.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if (key) {
+      if (key && el.tagName.toLowerCase() !== 'title') {
         const val = this.t(key);
         if (val !== key || !el.textContent.trim()) {
           el.textContent = val;
