@@ -127,8 +127,8 @@ async function getProgram(env, id) {
     SELECT p.*, c.name AS coach_name, c.title AS coach_title, c.bio AS coach_bio
     FROM programs p
     LEFT JOIN coaches c ON p.coach_id = c.id
-    WHERE p.id = ?
-  `).bind(id).first();
+    WHERE p.id = ? OR p.slug = ?
+  `).bind(id, id).first();
   if (!row) return err('Program not found', 404);
   return json({ program: row });
 }
@@ -159,13 +159,13 @@ async function getEvent(env, id) {
     SELECT e.*, p.title AS program_title
     FROM events e
     LEFT JOIN programs p ON e.program_id = p.id
-    WHERE e.id = ?
-  `).bind(id).first();
+    WHERE e.id = ? OR e.slug = ?
+  `).bind(id, id).first();
   if (!row) return err('Event not found', 404);
   const rc = await env.DB.prepare(
     'SELECT COUNT(*) AS cnt FROM registrations WHERE type = ? AND reference_id = ?'
-  ).bind('event', id).first();
-  return json({ event: { ...row, registration_count: rc.cnt } });
+  ).bind('event', row.id).first();
+  return json({ event: { ...row, registration_count: rc ? rc.cnt : 0 } });
 }
 
 async function listResources(env, url) {
@@ -529,7 +529,17 @@ export default {
     }
 
     if (!path.startsWith('/api/')) {
-      return env.ASSETS.fetch(request);
+      let res = await env.ASSETS.fetch(request);
+      if (res.status === 404 && !path.includes('.')) {
+        const cleanUrl = new URL(request.url);
+        cleanUrl.pathname = path === '/' ? '/index.html' : path + '.html';
+        const htmlReq = new Request(cleanUrl.toString(), request);
+        const htmlRes = await env.ASSETS.fetch(htmlReq);
+        if (htmlRes.status < 400) {
+          return htmlRes;
+        }
+      }
+      return res;
     }
 
     try {
