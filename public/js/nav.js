@@ -35,8 +35,10 @@
   /* ── Helper: active route ──────────────────────────────── */
   function active(href) {
     const p = location.pathname;
-    if (href === '/') return p === '/' || p === '/index.html' ? 'is-active' : '';
-    return p.startsWith(href.replace('.html', '')) ? 'is-active' : '';
+    if (href === '/' || href === '/index.html') return (p === '/' || p === '/index.html') ? 'is-active' : '';
+    const cleanHref = href.replace(/\.html$/, '');
+    const cleanP = p.replace(/\.html$/, '');
+    return (cleanP === cleanHref || cleanP.startsWith(cleanHref + '/')) ? 'is-active' : '';
   }
 
   /* ── Render: Header ───────────────────────────────────── */
