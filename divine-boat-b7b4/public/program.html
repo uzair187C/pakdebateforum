@@ -42,7 +42,7 @@
   <script src="/js/nav.js"></script>
   <script src="/js/main.js"></script>
   <script>
-    const id = new URLSearchParams(location.search).get('id');
+    const id = new URLSearchParams(location.search).get('id') || new URLSearchParams(location.search).get('slug');
 
     let loadedProgram = null;
 

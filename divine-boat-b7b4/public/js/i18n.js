@@ -463,7 +463,9 @@ const I18N = {
     'title.results': 'Results & Competitive Record — Pak Debate Forum',
     'title.search': 'Search Site — Pak Debate Forum',
     'title.register': 'Online Registration — Pak Debate Forum',
-    'title.feedback': 'Feedback — Pak Debate Forum'
+    'title.feedback': 'Feedback — Pak Debate Forum',
+    'title.404': '404 Page Not Found — Pak Debate Forum',
+    'title.error': 'System Error — Pak Debate Forum'
   },
 
   /* ══════════════════════════════════════════════════════════
@@ -922,7 +924,9 @@ const I18N = {
     'title.results': 'PDF 辩论战报与国际代表记录 — WSDC、牛津与WUDC赛事成绩',
     'title.search': 'PDF 全站智能搜索 — 课程与学术资源检索 (Search Intelligence)',
     'title.register': 'PDF 在线报名系统 — 辩论课程与赛事 (Online Registration)',
-    'title.feedback': 'PDF 意见与反馈中心 — 反馈表单 (Feedback & Suggestions)'
+    'title.feedback': 'PDF 意见与反馈中心 — 反馈表单 (Feedback & Suggestions)',
+    'title.404': '404 页面未找到 — Pak Debate Forum',
+    'title.error': '系统错误 — Pak Debate Forum'
   },
 
   /* ══════════════════════════════════════════════════════════

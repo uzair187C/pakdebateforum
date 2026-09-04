@@ -184,7 +184,7 @@
           <h3 class="card__title">${escapeHtml(title)}</h3>
           <p class="card__description">${escapeHtml(desc)}</p>
           <div class="card__footer margin-top-4">
-            <a href="/program.html?id=${encodeURIComponent(item.id)}" class="btn btn--secondary btn--sm" data-i18n="btn.view_program">${btnText}</a>
+            <a href="/program.html?id=${encodeURIComponent(item.slug || item.id)}" class="btn btn--secondary btn--sm" data-i18n="btn.view_program">${btnText}</a>
           </div>
         </div>
       `;
@@ -201,7 +201,7 @@
           <h3 class="card__title">${escapeHtml(title)}</h3>
           <p class="card__description">${escapeHtml(desc)}</p>
           <div class="card__footer margin-top-4">
-            <a href="/event.html?id=${encodeURIComponent(item.id)}" class="btn btn--secondary btn--sm" data-i18n="btn.view_details">${btnText}</a>
+            <a href="/event.html?id=${encodeURIComponent(item.slug || item.id)}" class="btn btn--secondary btn--sm" data-i18n="btn.view_details">${btnText}</a>
           </div>
         </div>
       `;
