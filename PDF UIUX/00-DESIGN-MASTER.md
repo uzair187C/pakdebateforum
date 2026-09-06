@@ -5,7 +5,7 @@
 **Authority:** Governing visual and UX specification  
 **Purpose:** Define the design philosophy, system boundaries, decision hierarchy, shared experience rules, and implementation contract for the complete Pak Debate Forum website redesign.
 
----
+--
 
 ## 0. How This Document Must Be Used
 
