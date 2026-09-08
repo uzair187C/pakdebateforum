@@ -4,7 +4,7 @@
 
 About is the institutional credibility room.
 
-It should answer:
+It should answer: 
 ```text
 Why PDF exists
 What PDF has built
