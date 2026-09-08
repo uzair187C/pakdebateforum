@@ -100,7 +100,7 @@
                 <li><span class="info-label" data-i18n="event.fee">Entry Fee</span><span class="info-val" style="color: var(--color-accent-gold);">${feeVal}</span></li>
                 <li><span class="info-label" data-i18n="event.status">Status</span><span class="info-val" data-i18n="status.${ev.status}">${statusTranslated}</span></li>
               </ul>
-
+ 
               <div style="margin-top: var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-3);">
                 ${canRegister
                   ? `<a href="/register.html?type=event&id=${ev.id}&name=${encodeURIComponent(title)}" class="btn btn--primary" data-i18n="btn.register_now">Register Now →</a>`
