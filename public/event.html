@@ -51,7 +51,7 @@
       loadedEvent = ev;
       const title = window.I18N ? window.I18N.db(ev.slug, 'title', ev.title) : ev.title;
       const desc = window.I18N ? window.I18N.db(ev.slug, 'desc', ev.description) : ev.description;
-      document.title = `${title} — Pak Debate Forum`;
+      document.title = `${title} — Pak Debate Forum`; 
       const canRegister = ev.status === 'open';
       const typeTranslated = window.I18N ? window.I18N.t(`type.${ev.type}`) : ev.type;
       const statusTranslated = window.I18N ? window.I18N.t(`status.${ev.status}`) : ev.status;
