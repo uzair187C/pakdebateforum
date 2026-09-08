@@ -53,7 +53,7 @@
       const desc = window.I18N ? window.I18N.db(ev.slug, 'desc', ev.description) : ev.description;
       document.title = `${title} — Pak Debate Forum`; 
       const canRegister = ev.status === 'open';
-      const typeTranslated = window.I18N ? window.I18N.t(`type.${ev.type}`) : ev.type;
+      const typeTranslated = window.I18N ? window.I18N.t(`type.${ev.type}`) : ev.type; 
       const statusTranslated = window.I18N ? window.I18N.t(`status.${ev.status}`) : ev.status;
       const freeText = window.I18N ? window.I18N.t('event.free') : 'Free';
       const feeVal = ev.fee === 0 ? freeText : 'PKR ' + (ev.fee || 0).toLocaleString();
