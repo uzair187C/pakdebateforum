@@ -1,4 +1,4 @@
--- PAK DEBATE FORUM — Seed Data (dummy content for development)
+-- PAK DEBATE FORUM — Seed Data (dummy content for development) 
 -- Apply with: wrangler d1 execute DB --local --file=seed.sql
 
 -- Coaches
