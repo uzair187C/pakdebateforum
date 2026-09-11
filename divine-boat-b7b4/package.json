@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "Pak Debate Forum — Official Web Worker & Application API",
 	"private": true,
-	"scripts": {
+	"scripts": { 
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
